@@ -8,7 +8,7 @@ targets:
     type: application
     platform: iOS
     sources:
-      - path: TKO
+  - path: TKO-iOS/TKO
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.tinwinko.tko.ios
