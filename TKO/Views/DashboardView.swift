@@ -28,10 +28,25 @@ struct DashboardView: View {
                     Text("\(store.entries.count) total").font(.caption).foregroundStyle(.secondary)
                 }
                 if store.entries.isEmpty {
-                    ContentUnavailableView("No entries yet", systemImage: "tray", description: Text("Tap New Entry to add your first record."))
-                } else {
-                    ForEach(store.entries.prefix(5)) { entry in EntryRow(entry: entry) }
-                }
+    VStack(spacing: 12) {
+        Image(systemName: "tray")
+            .font(.system(size: 40))
+            .foregroundStyle(.secondary)
+
+        Text("No entries yet")
+            .font(.headline)
+
+        Text("Tap New Entry to add your first record.")
+            .font(.subheadline)
+            .foregroundStyle(.secondary)
+    }
+    .frame(maxWidth: .infinity)
+    .padding(.vertical, 30)
+} else {
+    ForEach(store.entries.prefix(5)) { entry in
+        EntryRow(entry: entry)
+    }
+}
             }.padding()
         }
         .navigationBarHidden(true)
