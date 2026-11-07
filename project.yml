@@ -1,0 +1,22 @@
+name: TKO
+options:
+  bundleIdPrefix: com.tinwinko
+  deploymentTarget:
+    iOS: "16.0"
+targets:
+  TKO:
+    type: application
+    platform: iOS
+    sources:
+      - path: TKO
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.tinwinko.tko.ios
+        PRODUCT_NAME: TKO
+        SWIFT_VERSION: 5.0
+        TARGETED_DEVICE_FAMILY: "1"
+        INFOPLIST_KEY_CFBundleDisplayName: TKO
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIUserInterfaceStyle: Automatic
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGN_STYLE: Automatic
