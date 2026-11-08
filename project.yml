@@ -14,9 +14,34 @@ targets:
     sources:
       - path: TKO/App
 
-    resources:
-      - path: TKO/WebApp
-        type: folder
+    postBuildScripts:
+      - name: Copy TKO WebApp into App Bundle
+        script: |
+          set -e
+
+          WEB_SOURCE="${SRCROOT}/TKO/WebApp"
+          WEB_DEST="${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/WebApp"
+
+          echo "Checking TKO WebApp..."
+
+          if [ ! -f "${WEB_SOURCE}/index.html" ]; then
+            echo "ERROR: Source index.html is missing!"
+            exit 1
+          fi
+
+          mkdir -p "$(dirname "${WEB_DEST}")"
+          rm -rf "${WEB_DEST}"
+          mkdir -p "${WEB_DEST}"
+
+          cp -R "${WEB_SOURCE}/." "${WEB_DEST}/"
+
+          if [ ! -f "${WEB_DEST}/index.html" ]; then
+            echo "ERROR: index.html copy failed!"
+            exit 1
+          fi
+
+          echo "SUCCESS: TKO WebApp copied."
+          ls -la "${WEB_DEST}"
 
     settings:
       base:
