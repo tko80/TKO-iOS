@@ -15,10 +15,8 @@ targets:
       - path: TKO/App
 
     resources:
-      - path: TKO/WebApp/index.html
-      - path: TKO/WebApp/script.js
-      - path: TKO/WebApp/style.css
-      - path: TKO/WebApp/night-background.png
+      - path: TKO/WebApp
+        type: folder
 
     settings:
       base:
