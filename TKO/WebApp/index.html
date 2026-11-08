@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <!-- Android backup bridge is supplied by MainActivity.kt v38. -->
 
@@ -472,9 +474,21 @@ button[onclick="showTodoPopup()"] {
 
     /* ============ FIX FOR SPECIFIC ELEMENTS ============ */
     /* Ensure all icon containers have proper sizing */
-    i.fas, i.far, i.fab {
+    /* Font Awesome 6.4: keep solid, regular and brand icon fonts separate. */
+    i.fas, i.fa-solid, .fas, .fa-solid {
       font-family: "Font Awesome 6 Free" !important;
-      font-style: normal;
+      font-style: normal !important;
+      font-weight: 900 !important;
+    }
+    i.far, i.fa-regular, .far, .fa-regular {
+      font-family: "Font Awesome 6 Free" !important;
+      font-style: normal !important;
+      font-weight: 400 !important;
+    }
+    i.fab, i.fa-brands, .fab, .fa-brands {
+      font-family: "Font Awesome 6 Brands" !important;
+      font-style: normal !important;
+      font-weight: 400 !important;
     }
 
     /* Fix for logo text */
@@ -7373,11 +7387,6 @@ document.addEventListener('DOMContentLoaded', function() {
       <div id="companyContentView" style="max-height: 70vh; overflow-y: auto;"></div>
   </div>
 </div>
-
-
-<!-- Add this to your HTML -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 <style>
 /* Compact button sizes */
 .company-wise-btn {
@@ -14148,6 +14157,35 @@ button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
   });
 })();
 </script>
+
+
+<!-- iOS WebView compatibility: Myanmar Unicode font fallback and Font Awesome font separation. -->
+<style id="tko-ios-font-icon-fix">
+  :root {
+    --tko-myanmar-font: "Myanmar Sangam MN", "Noto Sans Myanmar",
+      "Pyidaungsu", "Tharlon", "Myanmar Text", sans-serif;
+  }
+  html, body,
+  body :not(i):not(svg):not(path):not(.fa):not(.fas):not(.far):not(.fab):not(.fa-solid):not(.fa-regular):not(.fa-brands) {
+    font-family: var(--tko-myanmar-font) !important;
+  }
+  input, select, textarea, button, option,
+  input::placeholder, textarea::placeholder {
+    font-family: var(--tko-myanmar-font) !important;
+  }
+  i.fas, i.fa-solid, .fas, .fa-solid {
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+  }
+  i.far, i.fa-regular, .far, .fa-regular {
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 400 !important;
+  }
+  i.fab, i.fa-brands, .fab, .fa-brands {
+    font-family: "Font Awesome 6 Brands" !important;
+    font-weight: 400 !important;
+  }
+</style>
 
 </body>
 </html>
