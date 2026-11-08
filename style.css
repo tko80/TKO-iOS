@@ -1,0 +1,7125 @@
+/* ============================================
+   MODERN TEXT COLOR SCHEME
+   ============================================ */
+
+body {
+    background: 
+        radial-gradient(ellipse at center, rgba(49, 47, 47, 0) 0%, rgba(8,7,42,1) 100%),
+        linear-gradient(135deg, #3e3e87 0%, #8676b4 100%) !important;
+    background-attachment: fixed !important;
+    position: relative !important;
+    color: #ffffff !important; /* Clean white for main text */
+    overflow-x: hidden !important;
+}
+
+/* ========== HEADINGS & TITLES ========== */
+h1, h2, h3, h4, h5, h6 {
+    color: #ffd166 !important; /* Warm gold for headings */
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* ========== SPECIAL HEADER STYLES ========== */
+.town-wise-header {
+    color: #ff6b6b !important; /* Coral red */
+    text-shadow: 0 2px 12px rgba(255, 107, 107, 0.4);
+}
+
+.company-wise-header {
+    color: #4ecdc4 !important; /* Teal */
+    text-shadow: 0 2px 12px rgba(78, 205, 196, 0.4);
+}
+
+/* ========== LABELS & FORM TEXT ========== */
+label {
+    color: #a8e6cf !important; /* Mint green */
+    font-weight: 600;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== SPECIAL TEXT CLASSES ========== */
+.red-bold {
+    color: #ff6b6b !important; /* Modern coral red */
+    text-shadow: 0 1px 6px rgba(255, 107, 107, 0.3);
+}
+
+.blue-text {
+    color: #74b9ff !important; /* Soft blue */
+    text-shadow: 0 1px 6px rgba(116, 185, 255, 0.3);
+}
+
+.big-red-bold {
+    color: #ff9e7d !important; /* Warm orange-red */
+    text-shadow: 0 2px 10px rgba(255, 158, 125, 0.4);
+}
+
+/* ========== TABLE TEXT ========== */
+th {
+    color: #ffeaa7 !important; /* Light gold */
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+td {
+    color: #dfe6e9 !important; /* Light gray */
+}
+
+/* ========== BUTTON TEXT ========== */
+button {
+    color: #2d3436 !important; /* Dark gray for contrast */
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+/* Special button text colors */
+.delete-btn {
+    color: white !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.refresh-btn {
+    color: white !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* ========== INPUT & SELECT TEXT ========== */
+input, select, textarea {
+    color: #2d3436 !important; /* Dark text for readability */
+    font-weight: 500;
+}
+
+/* ========== LIST ITEMS ========== */
+li {
+    color: #e0e0e0 !important; /* Light gray */
+}
+
+/* ========== MODERN GRADIENT TEXT EFFECTS ========== */
+.gradient-text {
+    background: linear-gradient(135deg, #ffd166 0%, #ff9e7d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+/* ========== GLOWING TEXT EFFECT ========== */
+.glow-text {
+    color: #74b9ff !important;
+    text-shadow: 
+        0 0 10px rgba(116, 185, 255, 0.7),
+        0 0 20px rgba(116, 185, 255, 0.5),
+        0 0 30px rgba(116, 185, 255, 0.3);
+}
+
+/* ========== ANIMATED TEXT ========== */
+.wave-text span {
+    color: #a8e6cf !important;
+    text-shadow: 0 2px 8px rgba(168, 230, 207, 0.4);
+}
+
+/* ========== MODAL & POPUP TEXT ========== */
+.modal-box, .shield-content, .calculator-box {
+    color: #2d3436 !important; /* Dark text for readability on light backgrounds */
+}
+
+.modal-box h3, .shield-content h3 {
+    color: #3e3e87 !important; /* Matching your gradient */
+}
+
+/* ========== QUANTITY & NUMBERS ========== */
+#total-quantity, .town-qty, .company-quantity {
+    color: #ff6b6b !important; /* Coral red for numbers */
+    font-weight: 700;
+    text-shadow: 0 1px 4px rgba(255, 107, 107, 0.3);
+}
+
+/* ========== DATE DISPLAY ========== */
+#date {
+    color: white !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    font-weight: 600;
+}
+
+/* ========== SIGNATURE & FOOTER TEXT ========== */
+.signature-section {
+    color: #b2bec3 !important; /* Subtle gray */
+}
+
+/* ========== DARK MODE TEXT OVERRIDES ========== */
+body.dark-mode {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+    color: #ffd166 !important; /* Keep warm gold in dark mode */
+}
+
+body.dark-mode label {
+    color: #a8e6cf !important; /* Keep mint green in dark mode */
+}
+
+/* ========== RESPONSIVE TEXT COLORS ========== */
+@media (max-width: 768px) {
+    body {
+        color: #ffffff !important;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* ========== ACCESSIBILITY ENHANCEMENTS ========== */
+@media (prefers-contrast: high) {
+    body {
+        color: #ffffff !important;
+    }
+    
+    .red-bold, .big-red-bold {
+        color: #ff4757 !important; /* Higher contrast red */
+    }
+    
+    .blue-text {
+        color: #3742fa !important; /* Higher contrast blue */
+    }
+}
+
+/* ============================================
+   BOLD WHITE BUTTON TEXT STYLES
+   ============================================ */
+
+/* ========== ALL BUTTONS - BOLD WHITE TEXT ========== */
+button {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.5),
+        0 1px 1px rgba(255, 255, 255, 0.1) !important;
+    letter-spacing: 0.3px;
+}
+
+/* ========== PRIMARY ACTION BUTTONS ========== */
+.preferred-buttons button:nth-child(1) { /* Add */
+    color: white !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+}
+
+.preferred-buttons button:nth-child(2) { /* Edit */
+    color: white !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+}
+
+.preferred-buttons button:nth-child(3) { /* Delete */
+    color: white !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ========== TOP BUTTONS ROW ========== */
+.top-buttons button {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+.top-buttons button:nth-child(1) { /* Town Wise */
+    color: white !important;
+}
+
+.top-buttons button:nth-child(2) { /* New Company */
+    color: white !important;
+}
+
+.top-buttons button:nth-child(3) { /* Notes */
+    color: white !important;
+}
+
+/* ========== EXPORT & PRINT BUTTONS ========== */
+.export-print-row button {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+.export-print-row button:nth-child(1) { /* Export */
+    color: white !important;
+}
+
+.export-print-row button:nth-child(2) { /* Print */
+    color: white !important;
+}
+
+.export-print-row button:nth-child(3) { /* Other */
+    color: white !important;
+}
+
+.export-print-row button:nth-child(4) { /* Other */
+    color: white !important;
+}
+
+/* ========== ACTION BUTTON ROW ========== */
+/* ဒီ CSS ကို ရှာပြီး ပြင်ရန် */
+.action-button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+    align-items: center; /* ဒီ line ထည့်ရန် */
+}
+
+.action-button-row button {
+    display: flex;
+    align-items: center; /* ဒီ line ထည့်ရန် */
+    justify-content: center; /* ဒီ line ထည့်ရန် */
+    height: 40px; /* Height သတ်မှတ်ပါ */
+}
+
+/* ========== SIDE BY SIDE BUTTONS ========== */
+.side-by-side-row button {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ========== NOTES BUTTONS ========== */
+.notes-buttons button {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+.notes-buttons button:nth-child(1) { /* Save */
+    color: white !important;
+}
+
+.notes-buttons button:nth-child(2) { /* Close */
+    color: white !important;
+}
+
+/* ========== COMPANY NAVIGATION BUTTONS ========== */
+.company-navigation button {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ========== SPECIAL FUNCTION BUTTONS ========== */
+.delete-btn {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7) !important;
+}
+
+.refresh-btn {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7) !important;
+}
+
+.close-btn, .close-btn-soft {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ========== CALCULATOR BUTTONS ========== */
+.calc-buttons button {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;
+}
+
+.num-btn {
+    color: white !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;
+}
+
+.op-btn {
+    color: white !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;
+}
+
+.equal-btn {
+    color: white !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;
+}
+
+.clear-btn {
+    color: white !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;
+}
+
+.sci-btn {
+    color: white !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* ========== TOWN BUTTONS ========== */
+.town-button-list button {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ========== COMPANY BUTTONS ========== */
+#companyButtonList button {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+}
+
+.company-wise-btn {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
+}
+/* Company Wise View Buttons */
+#companyButtonList button {
+    padding: 12px 18px !important;
+    margin: 6px !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    background: linear-gradient(135deg, #3a7bd5, #00d2ff) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 10px rgba(58, 123, 213, 0.3) !important;
+    transition: all 0.3s ease !important;
+    min-width: 120px !important;
+    min-height: 45px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+#companyButtonList button:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 6px 15px rgba(58, 123, 213, 0.5) !important;
+    background: linear-gradient(135deg, #00d2ff, #3a7bd5) !important;
+}
+
+/* Redmi Pad SE အတွက် */
+@media (min-width: 600px) and (max-width: 1200px) {
+    #companyButtonList button {
+        padding: 10px 15px !important;
+        font-size: 13px !important;
+        min-width: 110px !important;
+        min-height: 40px !important;
+        margin: 5px !important;
+    }
+}
+
+/* Modal အတွင်းရှိ Company buttons */
+.companyWise-button {
+    padding: 10px 16px !important;
+    margin: 4px !important;
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    min-width: 100px !important;
+}
+
+.companyWise-button:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4) !important;
+}
+
+/* Company Wise Modal အတွက် */
+#companyWiseModal .modal-content button {
+    padding: 10px 15px !important;
+    margin: 5px !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    background: linear-gradient(135deg, #4facfe, #00f2fe) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    min-width: 100px !important;
+    min-height: 40px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.income-btn {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ========== MENU & DROPDOWN BUTTONS ========== */
+.menu-icon {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+}
+
+.dropdown-menu button {
+    color: white !important;
+    font-weight: 600 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ========== TAB BUTTONS ========== */
+.tab-buttons button {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+}
+
+.tab-active {
+    color: white !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* ========== POPUP BUTTONS ========== */
+.popup-buttons button {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ========== MODERN BUTTON TEXT EFFECTS ========== */
+button:hover {
+    color: white !important;
+    text-shadow: 
+        0 1px 4px rgba(0, 0, 0, 0.8),
+        0 0 10px rgba(255, 255, 255, 0.3) !important;
+}
+
+button:active {
+    color: white !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* ========== DARK MODE BUTTON TEXT ========== */
+body.dark-mode button {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+}
+
+body.dark-mode .dropdown-menu button {
+    color: white !important;
+}
+
+/* ========== ACCESSIBILITY ENHANCEMENT ========== */
+@media (prefers-contrast: high) {
+    button {
+        color: white !important;
+        font-weight: 800 !important;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9) !important;
+    }
+}
+
+/* ========== RESPONSIVE BUTTON TEXT ========== */
+@media (max-width: 768px) {
+    button {
+        color: white !important;
+        font-weight: 700 !important;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+    }
+}
+
+/* ========== SMOOTH TRANSITIONS ========== */
+button {
+    transition: all 0.2s ease-in-out !important;
+}
+/* ============================================
+   COMPANY WISE VIEW TEXT VISIBILITY FIX
+   ============================================ */
+
+/* ✅ Company Content View - Make Text Visible */
+#companyContentView {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    color: #2d3436 !important;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-top: 10px;
+}
+
+/* ✅ Company Entry Styling */
+.company-entry {
+    margin: 12px 0;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    background: rgba(248, 249, 250, 0.8);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.company-entry:hover {
+    background: rgba(233, 236, 239, 0.9);
+    transform: translateX(5px);
+}
+
+/* ✅ Company Town - Make Visible */
+.company-town {
+    color: #007bff !important;
+    font-weight: bold !important;
+    font-size: 16px !important;
+    background-color: #e6f0ff !important;
+    padding: 6px 12px !important;
+    border-radius: 4px !important;
+    margin: 5px 0 !important;
+    display: inline-block !important;
+    border-left: 4px solid #007bff !important;
+    text-shadow: none !important;
+}
+
+/* ✅ Company Name - Make Visible */
+.company-name {
+    color: #28a745 !important;
+    font-weight: bold !important;
+    font-size: 15px !important;
+    margin: 3px 0 !important;
+    padding: 4px 8px !important;
+    background: rgba(40, 167, 69, 0.1) !important;
+    border-radius: 3px !important;
+    display: inline-block !important;
+}
+
+/* ✅ Company Quantity - Make Visible */
+.company-quantity {
+    color: #dc3545 !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    background: rgba(220, 53, 69, 0.1) !important;
+    padding: 3px 8px !important;
+    border-radius: 3px !important;
+    margin-left: 8px !important;
+    display: inline-block !important;
+}
+
+/* ✅ Company Section Headers */
+.company-section {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.company-section h4 {
+    color: #007bff !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+    margin-bottom: 10px !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1) !important;
+}
+
+/* ✅ Total Quantity Display */
+.company-total {
+    color: #dc3545 !important;
+    font-weight: bold !important;
+    font-size: 16px !important;
+    background: rgba(220, 53, 69, 0.15) !important;
+    padding: 8px 15px !important;
+    border-radius: 6px !important;
+    margin: 10px 0 !important;
+    border-left: 4px solid #dc3545 !important;
+}
+
+/* ✅ Individual Name Items */
+.name-item {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 6px 10px !important;
+    margin: 4px 0 !important;
+    background: rgba(255, 255, 255, 0.7) !important;
+    border-radius: 4px !important;
+    border-left: 3px solid #28a745 !important;
+}
+
+.name-text {
+    color: #495057 !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    flex: 1 !important;
+}
+
+.quantity-badge {
+    color: #dc3545 !important;
+    font-weight: bold !important;
+    font-size: 13px !important;
+    background: rgba(220, 53, 69, 0.1) !important;
+    padding: 2px 8px !important;
+    border-radius: 12px !important;
+    min-width: 30px !important;
+    text-align: center !important;
+}
+
+/* ✅ Town Group Styling */
+.town-group {
+    background: rgba(0, 123, 255, 0.05) !important;
+    padding: 12px !important;
+    border-radius: 6px !important;
+    margin: 10px 0 !important;
+    border: 1px solid rgba(0, 123, 255, 0.2) !important;
+}
+
+.town-group-header {
+    color: #007bff !important;
+    font-weight: bold !important;
+    font-size: 16px !important;
+    margin-bottom: 8px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+/* ✅ Dark Mode Support */
+body.dark-mode #companyContentView {
+    background-color: rgba(30, 30, 30, 0.95) !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .company-entry {
+    background: rgba(50, 50, 50, 0.8) !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .company-town {
+    color: #74b9ff !important;
+    background-color: rgba(116, 185, 255, 0.1) !important;
+}
+
+body.dark-mode .company-name {
+    color: #55efc4 !important;
+    background: rgba(85, 239, 196, 0.1) !important;
+}
+
+body.dark-mode .name-item {
+    background: rgba(60, 60, 60, 0.8) !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .name-text {
+    color: #e0e0e0 !important;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
+    #companyContentView {
+        padding: 10px !important;
+    }
+    
+    .company-entry {
+        padding: 8px !important;
+        margin: 8px 0 !important;
+    }
+    
+    .company-town {
+        font-size: 14px !important;
+        padding: 4px 8px !important;
+    }
+    
+    .company-name {
+        font-size: 13px !important;
+    }
+}
+
+/* ✅ Animation for Better Visibility */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.company-entry {
+    animation: fadeInUp 0.4s ease-out;
+}
+
+/* ✅ Ensure Text Contrast */
+#companyContentView * {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ✅ Fix for Hidden Text */
+#companyContentView .company-town,
+#companyContentView .company-name,
+#companyContentView .company-quantity,
+#companyContentView .name-text {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+/* ============================================
+   QUANTITY TEXT STYLES - RED BOLD
+   ============================================ */
+
+/* ✅ Company Wise View Quantities */
+.company-quantity-full {
+    color: #dc3545 !important;
+    font-weight: 800 !important;
+    font-size: 14px !important;
+    background: rgba(220, 53, 69, 0.15) !important;
+    padding: 4px 10px !important;
+    border-radius: 20px !important;
+    border: 2px solid #dc3545 !important;
+    margin-left: 8px !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+    display: inline-block !important;
+    min-width: 30px !important;
+    text-align: center !important;
+}
+
+/* ✅ Customer Entry Quantities */
+.customer-quantity {
+    color: #dc3545 !important;
+    font-weight: 800 !important;
+    font-size: 16px !important;
+    background: rgba(220, 53, 69, 0.2) !important;
+    padding: 6px 14px !important;
+    border-radius: 25px !important;
+    border: 2px solid #dc3545 !important;
+    min-width: 45px !important;
+    text-align: center !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3) !important;
+}
+
+/* ✅ Town Total Quantities */
+.town-total {
+    color: #dc3545 !important;
+    font-weight: 800 !important;
+    font-size: 16px !important;
+    background: rgba(220, 53, 69, 0.25) !important;
+    padding: 6px 16px !important;
+    border-radius: 25px !important;
+    border: 2px solid #dc3545 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 2px 10px rgba(220, 53, 69, 0.3) !important;
+}
+
+/* ✅ Company Total Quantities */
+.company-total {
+    color: #dc3545 !important;
+    font-weight: 800 !important;
+    font-size: 20px !important;
+    background: rgba(220, 53, 69, 0.3) !important;
+    padding: 8px 20px !important;
+    border-radius: 30px !important;
+    border: 3px solid #dc3545 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4) !important;
+}
+
+/* ✅ Quantity Badge in Lists */
+.quantity-badge {
+    color: #dc3545 !important;
+    font-weight: 800 !important;
+    font-size: 14px !important;
+    background: rgba(220, 53, 69, 0.2) !important;
+    padding: 4px 10px !important;
+    border-radius: 20px !important;
+    border: 2px solid #dc3545 !important;
+    min-width: 35px !important;
+    text-align: center !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+    display: inline-block !important;
+}
+
+/* ✅ Main Table Quantities */
+table .quantity-cell {
+    color: #dc3545 !important;
+    font-weight: 800 !important;
+    font-size: 16px !important;
+    background: rgba(220, 53, 69, 0.15) !important;
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+    border: 2px solid #dc3545 !important;
+    text-align: center !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ✅ Input Field Quantity Display */
+#quantity {
+    color: #f9f6f6 !important;
+    font-weight: 800 !important;
+    font-size: 18px !important;
+    background: rgba(220, 53, 69, 0.1) !important;
+    border: 3px solid #dc3545 !important;
+    text-align: center !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ✅ Total Quantity Display */
+#total-quantity {
+    color: #dc3545 !important;
+    font-weight: 800 !important;
+    font-size: 22px !important;
+    background: rgba(220, 53, 69, 0.2) !important;
+    padding: 10px 20px !important;
+    border-radius: 10px !important;
+    border: 3px solid #dc3545 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3) !important;
+}
+
+/* ✅ Hover Effects for Quantities */
+.customer-quantity:hover,
+.quantity-badge:hover,
+.company-quantity-full:hover {
+    background: rgba(220, 53, 69, 0.3) !important;
+    transform: scale(1.05) !important;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.5) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* ✅ Animation for Quantity Updates */
+@keyframes quantityPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.quantity-updated {
+    animation: quantityPulse 0.5s ease-in-out;
+}
+
+/* ✅ Dark Mode Quantity Styles */
+body.dark-mode .customer-quantity,
+body.dark-mode .quantity-badge,
+body.dark-mode .company-quantity-full,
+body.dark-mode .town-total,
+body.dark-mode .company-total {
+    color: #ff6b6b !important;
+    border-color: #ff6b6b !important;
+    background: rgba(255, 107, 107, 0.2) !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+}
+
+body.dark-mode table .quantity-cell {
+    color: #ff6b6b !important;
+    border-color: #ff6b6b !important;
+    background: rgba(255, 107, 107, 0.15) !important;
+}
+
+/* ✅ Mobile Responsive Quantities */
+@media (max-width: 768px) {
+    .customer-quantity {
+        font-size: 14px !important;
+        padding: 4px 10px !important;
+        min-width: 40px !important;
+    }
+    
+    .company-quantity-full {
+        font-size: 12px !important;
+        padding: 3px 8px !important;
+        min-width: 25px !important;
+    }
+    
+    .quantity-badge {
+        font-size: 12px !important;
+        padding: 3px 8px !important;
+        min-width: 30px !important;
+    }
+    
+    .town-total {
+        font-size: 14px !important;
+        padding: 4px 12px !important;
+    }
+    
+    .company-total {
+        font-size: 18px !important;
+        padding: 6px 16px !important;
+    }
+}
+
+/* ✅ Emergency Override for All Quantities */
+.quantity-text,
+.qty,
+.amount,
+.total-qty {
+    color: #dc3545 !important;
+    font-weight: 800 !important;
+    background: rgba(220, 53, 69, 0.15) !important;
+    padding: 2px 8px !important;
+    border-radius: 12px !important;
+    border: 1px solid #dc3545 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ✅ Print Styles for Quantities */
+@media print {
+    .customer-quantity,
+    .quantity-badge,
+    .company-quantity-full,
+    .town-total,
+    .company-total {
+        color: #b30000 !important;
+        border-color: #b30000 !important;
+        background: rgba(179, 0, 0, 0.1) !important;
+    }
+}
+/* ============================================
+   COMPANY WISE POPUP CLOSE BUTTON FIX
+   ============================================ */
+
+/* ✅ Company Wise Popup Close Button */
+#company-wise-popup .close-btn,
+#company-wise-modal .close-btn,
+.company-wise-modal .close-btn {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: absolute !important;
+    top: 10px !important;
+    right: 15px !important;
+    z-index: 1001 !important;
+    background: #dc3545 !important;
+    color: rgb(244, 4, 4) !important;
+    border: 2px solid white !important;
+    border-radius: 50% !important;
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+
+/* ✅ Hover Effect */
+#company-wise-popup .close-btn:hover,
+#company-wise-modal .close-btn:hover,
+.company-wise-modal .close-btn:hover {
+    background: #c82333 !important;
+    transform: scale(1.1) !important;
+}
+
+/* ✅ Dark Mode Support */
+body.dark-mode #company-wise-popup .close-btn,
+body.dark-mode #company-wise-modal .close-btn,
+body.dark-mode .company-wise-modal .close-btn {
+    background: #ff6b6b !important;
+    color: #2d3436 !important;
+    border-color: #2d3436 !important;
+}
+
+/* ✅ Ensure Popup Container is Properly Positioned */
+#company-wise-popup,
+#company-wise-modal,
+.company-wise-modal {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 10000 !important;
+    background: rgb(119, 114, 114) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
+    padding: 20px !important;
+    min-width: 300px !important;
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    overflow: auto !important;
+}
+
+/* ✅ Backdrop Overlay */
+#company-wise-popup::before,
+#company-wise-modal::before,
+.company-wise-modal::before {
+    content: '' !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(0,0,0,0.5) !important;
+    z-index: -1 !important;
+}
+
+
+
+/* ✅ Mobile Responsive */
+@media (max-width: 768px) {
+    #company-wise-popup .close-btn,
+    #company-wise-modal .close-btn,
+    .company-wise-modal .close-btn {
+        top: 5px !important;
+        right: 10px !important;
+        width: 25px !important;
+        height: 25px !important;
+        font-size: 16px !important;
+    }
+}
+/* ============================================
+   COMPANY WISE POPUP CLOSE BUTTON FIX
+   ============================================ */
+
+/* ✅ Company Wise Popup Close Button - Enhanced Visibility */
+#company-wise-popup .close-btn,
+#company-wise-modal .close-btn,
+.company-wise-modal .close-btn {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: absolute !important;
+    top: 15px !important;
+    right: 20px !important;
+    z-index: 1001 !important;
+    background: #dc3545 !important;
+    color: white !important;
+    border: 2px solid white !important;
+    border-radius: 50% !important;
+    width: 35px !important;
+    height: 35px !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.4) !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5) !important;
+    line-height: 1 !important;
+}
+
+/* ✅ Hover Effect */
+#company-wise-popup .close-btn:hover,
+#company-wise-modal .close-btn:hover,
+.company-wise-modal .close-btn:hover {
+    background: #c82333 !important;
+    transform: scale(1.1) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+}
+
+/* ✅ Active State */
+#company-wise-popup .close-btn:active,
+#company-wise-modal .close-btn:active,
+.company-wise-modal .close-btn:active {
+    transform: scale(0.95) !important;
+}
+
+/* ✅ Ensure Popup Container is Properly Positioned */
+#company-wise-popup,
+#company-wise-modal,
+.company-wise-modal {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 10000 !important;
+    background: white !important;
+    border-radius: 15px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4) !important;
+    padding: 25px !important;
+    min-width: 400px !important;
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    overflow: auto !important;
+    border: 3px solid #007bff !important;
+}
+
+/* ✅ Backdrop Overlay */
+#company-wise-popup::before,
+#company-wise-modal::before,
+.company-wise-modal::before {
+    content: '' !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(0,0,0,0.7) !important;
+    z-index: -1 !important;
+}
+
+/* ✅ Popup Header Styling */
+#company-wise-popup .modal-header,
+#company-wise-modal .modal-header,
+.company-wise-modal .modal-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 20px !important;
+    padding-bottom: 15px !important;
+    border-bottom: 2px solid #007bff !important;
+}
+
+#company-wise-popup h3,
+#company-wise-modal h3,
+.company-wise-modal h3 {
+    color: #007bff !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+    margin: 0 !important;
+    text-align: center !important;
+    flex: 1 !important;
+}
+
+/* ✅ Dark Mode Support */
+body.dark-mode #company-wise-popup .close-btn,
+body.dark-mode #company-wise-modal .close-btn,
+body.dark-mode .company-wise-modal .close-btn {
+    background: #ff6b6b !important;
+    color: white !important;
+    border-color: white !important;
+}
+
+body.dark-mode #company-wise-popup,
+body.dark-mode #company-wise-modal,
+body.dark-mode .company-wise-modal {
+    background: #2d3436 !important;
+    color: white !important;
+    border-color: #74b9ff !important;
+}
+
+/* ✅ Mobile Responsive */
+@media (max-width: 768px) {
+    #company-wise-popup .close-btn,
+    #company-wise-modal .close-btn,
+    .company-wise-modal .close-btn {
+        top: 10px !important;
+        right: 15px !important;
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 18px !important;
+    }
+    
+    #company-wise-popup,
+    #company-wise-modal,
+    .company-wise-modal {
+        min-width: 300px !important;
+        padding: 20px !important;
+    }
+}
+
+/* ✅ Emergency Override for Any Close Button in Popups */
+.modal-box .close-btn,
+.shield-content .close-btn,
+.popup-box .close-btn {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 1001 !important;
+}
+
+/* ✅ Animation for Popup */
+@keyframes popupFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+#company-wise-popup,
+#company-wise-modal,
+.company-wise-modal {
+    animation: popupFadeIn 0.3s ease-out !important;
+}
+
+h3 {
+    text-align: center;
+    color: #333;
+}
+
+input, select, button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* ✅ New Name, New Town, New Company ကို Gray Background ပြောင်း */
+#new-company, #new-name, #new-town {
+    background-color: lightgray;
+}
+
+.preferred-row {
+    display: flex;
+    align-items: center; /* ဒီ line အတိုင်း ထားပါ */
+    gap: 8px;
+    margin: 5px 0;
+}
+
+.preferred-input-group {
+    display: flex;
+    align-items: center; /* ဒီ line ထည့်ရန် */
+    gap: 8px;
+    flex: 1;
+}
+
+select,
+input[type="text"] {
+    height: 42px;          /* ပိုကြီးအောင် */
+    padding: 8px 12px;     /* အတွင်း margin တိုး */
+    font-size: 16px;       /* စာလုံးနည်းနည်းကြီး */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+/* Buttons ကိုလည်း တူအောင် ညှိ */
+.preferred-buttons button {
+    height: 42px;          /* box နဲ့တူအောင် */
+    padding: 0 14px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+    background: #f5f5f5;
+    cursor: pointer;
+}
+
+.preferred-buttons button:hover {
+    background: #e0e0e0;
+}
+
+/* ✅ Refresh Button Style */
+.refresh-btn {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+}
+
+.refresh-btn:hover {
+    background-color: #218838;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+.delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.delete-btn:hover {
+    background-color: darkred;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* 👍 လက်မ Effect */
+.thumb-up {
+    font-size: 120px;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: fadeOut 2s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(1.5); }
+}
+.check-container {
+    display: flex;
+    align-items: center; /* Checkbox, Name, Quantity တန်းညီစေမယ် */
+    gap: 10px; /* Checkbox နဲ့စာတွေအကွာအဝေးညီညီဖြစ်စေမယ် */
+}
+
+.check-container {
+    display: flex;
+    justify-content: space-between; /* Checkbox ကို Name နောက်ဆုံးမှာထားမယ် */
+    align-items: center; /* Text နဲ့ Checkbox တန်းညီစေမယ် */
+    padding: 5px 0; /* Layout ကို ပိုညီစေရန် */
+}
+
+.check-container input[type="checkbox"] {
+    width: 18px; /* Checkbox အရွယ်အစား */
+    height: 18px;
+    margin-left: 10px; /* Name နဲ့ Checkbox အကွာအဝေး */
+}
+.text {
+    font-size: 16px; /* Text အရွယ်အစားကို စာလုံးချင်းမတူဘဲ တူအောင်ပြင် */
+}
+
+input[type="checkbox"] {
+    transform: scale(1.2); /* Checkbox ကို ချုံ့ညှင်း */
+}
+.row {
+    display: flex;
+    align-items: center; /* Checkbox နဲ့ Text ကို တန်းညီစေမယ် */
+    gap: 10px; /* Checkbox နဲ့ Text ကြား အကွာအဝေး */
+    padding: 5px 0;
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+/* Labels (Date, Company, Name, Town) - Bold & Stylish */
+label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #FF4500; /* Orange Red */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Date Box */
+#date {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    color: rgb(246, 246, 248);
+    background: linear-gradient(135deg, #4e4b4b, #e70c0c); /* Red - Orange Gradient */
+    box-shadow: 4px 4px 10px rgba(208, 80, 80, 0.3);
+    outline: none;
+}
+
+/* ✅ Input Boxes ကို Color ထည့်ရန် */
+#company, #name, #town, #quantity {
+    background-color: #DFF6FF; /* Light Blue */
+    border: 2px solid #007BFF; /* Blue Border */
+    color: black;
+    font-weight: bold;
+}
+
+/* ✅ Preferred Name တွေကို ခဲရောင်နောက်ခံ + အနက်ရောင်စာသား */
+#new-company, #new-name, #new-town {
+    background-color: lightgray !important;
+    color: black !important;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ✅ CheckBox Design */
+.name-checkbox {
+    margin-right: 8px;
+    transform: scale(1.2); /* ✅ Checkbox ကို ကြီးအောင် ပြမယ် */
+    cursor: pointer;
+}
+
+/* ✅ Selected Name Box Red Background */
+.selected {
+    background-color: red !important;
+    color: white !important;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+/* ✅ Town Wise Header */
+.town-wise-header {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 3px solid red;
+    padding-bottom: 5px;
+}
+
+/* ✅ Town Wise Box */
+.town-box {
+    background: #fff5f5;
+    padding: 15px;
+    border: 2px solid red;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* ✅ Company Wise Header */
+.company-wise-header {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 20px;
+    border-bottom: 3px solid green;
+    padding-bottom: 5px;
+}
+
+/* ✅ Company Wise Box */
+.company-box {
+    background: #f0fdf4;
+    padding: 15px;
+    border: 2px solid green;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* ✅ Red Bold Text */
+.red-bold {
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* ✅ Blue Bold Text */
+.blue-text {
+    color: blue;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* ✅ Big Red Bold */
+.big-red-bold {
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* ✅ List Styling */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    font-size: 16px;
+    color: black;
+    font-weight: normal;
+    padding: 3px 0;
+    display: flex;
+    align-items: center;
+}
+#wave-text {
+    display: flex;
+    font-size: 24px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+#wave-text span {
+    display: inline-block;
+    animation: wave 1.5s infinite ease-in-out;
+}
+
+@keyframes wave {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+
+/* ✅ Header အောက်မှာ Buttons ကို တစ်ကြောင်းတည်း row တန်းတူအောင် */
+.top-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* ✅ Buttons Style */
+.top-buttons button {
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    min-width: 120px; /* ✅ Button Size ကို တူအောင် */
+}
+
+/* ✅ Button Colors */
+.top-buttons button:nth-child(1) { background-color: #28a745; color: white; } /* Town Wise */
+.top-buttons button:nth-child(2) { background-color: #007bff; color: white; } /* New Company */
+top-buttons button:nth-child(3) { background-color: #ffc107; color: black; } /* Notes */
+/* ✅ Save Notes & Back Button ကို တစ်တန်းတည်း row အနေနဲ့ ထားမယ် */
+.notes-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+
+.notes-buttons button:nth-child(2):hover {
+    background-color: #c82333; /* ✅ Hover Effect */
+}
+/* ✅ Shield Box (Popup) */
+.shield-box {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+
+
+
+
+/* ✅ Navigation Buttons */
+.company-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+
+
+
+/* ✅ Notes Popup Box */
+.shield-box {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* ✅ Shield Box Content */
+.shield-content {
+    background: white;
+    padding: 20px;
+    width: 400px;
+    max-width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+}
+
+
+
+/* ✅ Save & Close Buttons */
+.notes-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.notes-buttons button {
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    min-width: 120px;
+}
+
+.notes-buttons button:nth-child(1) { background-color: #28a745; color: white; } /* Save */
+.notes-buttons button:nth-child(2) { background-color: #dc3545; color: white; } /* Close */
+/* ✅ Notes Textarea ကို ချဲ့မယ် */
+#popup-notes {
+    width: 100%; /* ✅ Parent Div ကို အပြည့်ယူမယ် */
+    height: 200px; /* ✅ Height ကို ချဲ့မယ် */
+    font-size: 18px; /* ✅ စာလုံးအရွယ်ကို ကြီးစေမယ် */
+    padding: 10px; /* ✅ အတွင်း Margin ပိုထားမယ် */
+    border: 2px solid #007bff; /* ✅ Blue Border */
+    border-radius: 8px; /* ✅ အနားတွေ Rounded */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* ✅ Shadow ထည့် */
+    resize: vertical; /* ✅ User က လိုချင်သလို ချဲ့နိုင် */
+}
+/* ✅ Notes Popup Box ကို အလယ်ကျစေမယ် */
+.shield-box {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* ✅ အလယ်ကို ပြောင်းမယ် */
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* ✅ Shield Box Content (Popup Box) */
+.shield-content {
+    background: white;
+    padding: 20px;
+    width: 450px; /* ✅ Popup Box အကျယ် */
+    max-width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+}
+
+/* ✅ Notes Box (Textarea) */
+#popup-notes {
+    width: 100%; /* ✅ Parent Div ကို အပြည့်ယူမယ် */
+    height: 250px; /* ✅ Height ကို ပိုကြီးစေမယ် */
+    font-size: 18px; /* ✅ Font အရွယ်ကို ကြီးစေမယ် */
+    padding: 10px;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    resize: vertical; /* ✅ User က လိုချင်သလို ချဲ့နိုင် */
+}
+
+/* ✅ Close Button */
+.close-btn {
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+/* ✅ Menu Icon */
+.menu-container {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    background: #007bff;
+    color: rgb(232, 8, 8);
+}
+
+
+
+/* ✅ Dropdown Menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background: rgb(121, 65, 65);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    width: 160px;
+    padding: 5px;
+}
+
+.dropdown-menu button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.dropdown-menu button:hover {
+    background: #bfc215;
+}
+
+/* ✅ Dark Mode */
+body.dark-mode {
+    background-color: #121212;
+    color: rgb(235, 24, 24);
+}
+
+.dark-mode .menu-icon {
+    background: #444;
+}
+
+.dark-mode .dropdown-menu {
+    background: #222;
+}
+
+.dark-mode .dropdown-menu button {
+    color: white;
+}
+
+.dark-mode .dropdown-menu button:hover {
+    background: #444;
+}
+
+/* ✅ Preferred Name Buttons */
+.preferred-buttons {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.preferred-buttons button {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+}
+
+.preferred-buttons button:nth-child(1) { background-color: #28a745; color: white; } /* Add */
+.preferred-buttons button:nth-child(2) { background-color: #ffc107; color: black; } /* Edit */
+.preferred-buttons button:nth-child(3) { background-color: #dc3545; color: white; } /* Delete */
+/* ✅ Preferred Name Row Layout */
+.preferred-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.preferred-row select {
+    flex: 1;
+    min-width: 150px;
+}
+
+.preferred-input-group {
+    display: flex;
+    flex: 2;
+    gap: 5px;
+}
+
+.preferred-input-group input {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+/* ✅ Preferred Name Buttons */
+/* ဒီ CSS ကို ရှာပြီး ပြင်ရန် */
+.preferred-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.preferred-buttons button {
+    height: 30px; /* Height သတ်မှတ်ပါ */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+}
+
+
+
+.preferred-buttons button:nth-child(1) { 
+    background-color: #28a745; 
+    color: white; 
+} /* Add */
+.preferred-buttons button:nth-child(2) { 
+    background-color: #ffc107; 
+    color: black; 
+} /* Edit */
+.preferred-buttons button:nth-child(3) { 
+    background-color: #dc3545; 
+    color: white; 
+} /* Delete */
+/* ✅ Export & Print Row */
+.export-print-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.export-print-row button {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.export-print-row button:nth-child(1) {
+    background-color: #17a2b8; /* Teal for Export */
+    color: white;
+}
+
+.export-print-row button:nth-child(2) {
+    background-color: #6f42c1; /* Purple for Print */
+    color: white;
+}
+/* 🌞 Light Mode */
+.light-mode {
+    background-color: #f8f9fa;
+    color: black;
+}
+
+/* 🌙 Dark Mode */
+.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+/* 🌈 Colorful Mode */
+.colorful-mode {
+    background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    color: #1a1a1a;
+}
+
+/* 📺 Retro Mode */
+.retro-mode {
+    background-color: #fef7e0;
+    color: #3e2723;
+    font-family: 'Courier New', monospace;
+}
+
+.retro-mode button {
+    background-color: #795548;
+    color: #fff8e1;
+}
+
+/* ⚡ Neon Mode */
+.neon-mode {
+    background-color: #000000;
+    color: #39ff14;
+}
+
+.neon-mode h2, 
+.neon-mode h3, 
+.neon-mode label {
+    color: #ff00ff;
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;
+}
+
+.neon-mode button {
+    background-color: #ff00ff;
+    color: black;
+    text-shadow: 0 0 5px #fff;
+}
+.company-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.company-navigation button {
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    background-color: #007bff;
+    color: white;
+}
+
+.company-navigation button:hover {
+    background-color: #0056b3;
+}
+.export-print-row button:nth-child(3) {
+    background-color: #ff5733; /* Orange */
+    color: white;
+}
+
+.export-print-row button:nth-child(3):hover {
+    background-color: #e03d00;
+}
+.export-print-row button:nth-child(4) {
+    background-color: #6c757d; /* Gray */
+    color: white;
+}
+
+.export-print-row button:nth-child(4):hover {
+    background-color: #495057;
+}
+.copy-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 4px 6px;
+    margin-left: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.copy-btn:hover {
+    background-color: #388e3c;
+}
+.action-button-row button {
+    flex: 1;
+    padding: 8px 12px;
+    min-width: 120px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.3s ease;
+}
+
+.action-button-row button:hover {
+    background-color: #0056b3;
+}
+/* ✅ Side-by-side horizontal button row */
+.side-by-side-row {
+    display: flex;
+    flex-direction: row;         /* ➜ တစ်ကြောင်းတည်း */
+    align-items: center;         /* Center Vertically */
+    gap: 10px;                   /* Item ကြားအကွာအဝေး */
+    margin: 15px 0;
+    flex-wrap: wrap;             /* Screen ကျဉ်းရင် အလိုအလျောက် အောက်ဆင်း */
+}
+
+.side-by-side-row button {
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.side-by-side-row button:hover {
+    background-color: #0056b3;
+}
+
+.side-by-side-row input[type="text"] {
+    padding: 8px;
+    font-size: 14px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    min-width: 200px;
+    flex-grow: 1;
+}
+
+  .main-button:hover {
+    background-color: #d4d4d4;
+    color: red;
+    border-color: #aaa;
+  }
+  /* ✅ Menu Icon in Button Row */
+.top-buttons .menu-container {
+    position: relative;
+    display: inline-block;
+    margin-left: auto; /* Pushes menu to the right */
+}
+
+.top-buttons .menu-icon {
+    font-size: 12px;
+    cursor: pointer;
+    padding: 8px 8px;
+    border-radius: 6px;
+    background: #6c757d; /* Gray to match other buttons */
+    color: white;
+    min-width: 10px;
+    text-align: center;
+    display: inline-block;
+}
+
+.top-buttons .menu-icon:hover {
+    background: #5a6268;
+}
+
+/* ✅ Adjust dropdown position */
+.top-buttons .dropdown-menu {
+    right: 0;
+    left: auto;
+}
+.marquee-header {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    border-bottom: 0px solid #ccc;
+    padding: 5px 0;
+    background: #f9f9f9;
+    text-align: center;
+    position: relative;
+  }
+  
+  .marquee-text {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 10s linear infinite;
+    font-weight: bold;
+    color: #007bff;
+    font-size: 16px;
+  }
+  
+  @keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+  /* ✅ Smooth Floating Animation for Thumb Up */
+@keyframes floatUp {
+    0% { 
+      transform: translate(-50%, -50%) scale(0.8);
+      opacity: 0;
+    }
+    20% { 
+      transform: translate(-50%, -60%) scale(1.1);
+      opacity: 1;
+    }
+    80% { 
+      transform: translate(-50%, -70%) scale(1.1);
+      opacity: 1;
+    }
+    100% { 
+      transform: translate(-50%, -80%) scale(1.5);
+      opacity: 0;
+    }
+  }
+  
+  .thumb-up {
+    animation: floatUp 1.5s ease-out forwards;
+    z-index: 1000;
+  }
+  
+  /* ✅ Button Click Animation */
+  button {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  button:active {
+    transform: scale(0.95);
+  }
+  
+  button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255,255,255,0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+  }
+  
+  button:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+  }
+  
+  @keyframes ripple {
+    0% {
+      transform: scale(0, 0);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(20, 20);
+      opacity: 0;
+    }
+  }
+  
+  /* ✅ Smooth Fade-in for Popups */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .shield-box[style*="display: flex"] .shield-content {
+    animation: fadeIn 0.4s ease-out;
+  }
+  
+  /* ✅ Marquee Animation Enhancement */
+  @keyframes smoothMarquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+  
+  .marquee-text {
+    animation: smoothMarquee 15s linear infinite;
+    padding-left: 0;
+    display: inline-block;
+    white-space: nowrap;
+    will-change: transform;
+  }
+  
+  
+  .modal-box {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    max-height: 85vh;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .close-btn-soft {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .town-button-list {
+    display: flex;
+    flex-wrap: wrap; /* ✅ Side by side wrap */
+    gap: 8px;
+    padding: 10px;
+    margin-top: 10px;
+    max-height: 120px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #f8f9fa;
+  }
+  
+  .town-button-list button {
+    padding: 6px 12px;
+    font-size: 14px;
+    border: 1px solid #007bff;
+    border-radius: 6px;
+    background: #e6f0ff;
+    color: #f80808;
+    cursor: pointer;
+    white-space: nowrap; /* ✅ Prevent line break */
+  }
+  
+  .town-button-list button:hover {
+    background: #868b92;
+  }
+  
+  .town-content-scroll {
+    flex: 1;
+    overflow-y: auto;
+    margin-top: 10px;
+    font-size: 15px;
+  }
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-box {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    max-height: 85vh;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+  }
+  
+  .close-btn-soft {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .close-btn-soft:hover {
+    background-color: #fee;
+    color: red;
+  }
+  .town-content-scroll {
+    flex: 1;
+    overflow-y: auto;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    font-size: 15px;
+    max-height: 200px;
+  }
+  .modal-box {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    max-height: 85vh; /* ✅ Modal box size များလာမည်မဟုတ် */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+ /* Town Wise Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: auto;
+  }
+  
+  .modal-box {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  }
+  
+  /* Town Button List */
+  .town-button-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    margin-top: 10px;
+    max-height: 40vh;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #f8f9fa;
+  }
+  
+  .town-button-list button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #007bff;
+    border-radius: 6px;
+    background: #e6f0ff;
+    color: #007bff;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-grow: 1;
+    min-width: 120px;
+    text-align: center;
+    transition: 0.2s ease;
+  }
+  
+  .town-button-list button:hover {
+    background: #d0e0ff;
+  }
+  
+  /* Town Content View */
+  .town-content-scroll {
+    flex: 1;
+    overflow-y: auto;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    max-height: 40vh;
+    min-height: 100px;
+    background-color: #fff;
+    color: #222;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  
+  /* Name in blue, Quantity in red */
+  .town-name {
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  .town-qty {
+    color: red;
+    font-weight: bold;
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .modal-box {
+      width: 95%;
+      padding: 10px;
+    }
+  
+    .town-button-list button {
+      min-width: 100px;
+      padding: 6px 8px;
+      font-size: 13px;
+    }
+  }
+  /* ✅ Calculator Popup Box */
+.calculator-box {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    width: 280px;
+    z-index: 10000;
+    flex-direction: column;
+    align-items: center;
+    animation: zoomIn 0.3s ease;
+}
+
+/* ✅ Calculator Display */
+#calc-display {
+    width: 100%;
+    font-size: 24px;
+    text-align: right;
+    margin-bottom: 15px;
+    padding: 12px;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 5px rgba(0,0,0,0.1);
+    background: #eaf6ff;
+    font-weight: bold;
+    color: #333;
+}
+
+/* ✅ Calculator Buttons Grid */
+.calc-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    width: 100%;
+}
+
+/* ✅ Individual Buttons */
+.calc-buttons button {
+    padding: 12px;
+    font-size: 18px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ✅ Close Button */
+.calculator-box .close-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    color: red;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* ✅ Zoom Effect */
+@keyframes zoomIn {
+    from { transform: scale(0.5) translate(-50%, -50%); opacity: 0; }
+    to { transform: scale(1) translate(-50%, -50%); opacity: 1; }
+}
+#debt-popup .shield-content {
+    resize: both;
+    overflow: auto;
+}
+
+#date {
+  background-color: red;   /* Box background */
+  color: white;            /* Text color */
+  border: 2px solid blue;  /* Blue border */
+  padding: 6px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+
+/* ✅ Quantity Box တိုအောင် */
+#quantity {
+    max-width: 120px;
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #DFF6FF;
+    border: 2px solid #007BFF;
+    color: black;
+    border-radius: 6px;
+}
+#quantity {
+    max-width: 250px;           /* ✅ Dropdown နဲ့ Width တူအောင် */
+    width: 100%;
+    padding: 10px;              /* ✅ Dropdown နဲ့ height/padding တူ */
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #DFF6FF;  /* ✅ Light Blue Background (Dropdown style) */
+    border: 2px solid #007BFF;  /* ✅ Blue Border */
+    color: black;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+#company, #name, #town {
+    background-color: #DFF6FF;
+    border: 2px solid #007BFF;
+    color: black;
+    font-weight: bold;
+}
+/* ✅ Number Buttons */
+.num-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.num-btn:hover {
+    background-color: #0056b3;
+}
+
+/* ✅ Operator Buttons (+ − × ÷) */
+.op-btn {
+    background-color: #ff9800;
+    color: white;
+}
+
+
+
+/* ✅ Equal Button (=) */
+.equal-btn {
+    background-color: #4caf50;
+    color: white;
+}
+
+
+
+/* ✅ Clear Button (C) */
+.clear-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+
+.num-btn {
+    background-color: #007bff !important;
+    color: white !important;
+}
+.op-btn {
+    background-color: #ff9800 !important;
+    color: white !important;
+}
+.equal-btn {
+    background-color: #4caf50 !important;
+    color: white !important;
+}
+.clear-btn {
+    background-color: #f44336 !important;
+    color: white !important;
+}
+body {
+    font-size: 17px;   /* ✅ Base font size နည်းနည်းကြီး */
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* ✅ Label, Title, h3/h4 */
+label, h3, h4, h5 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* ✅ Buttons တွေကလည်း ကြီးသွားအောင် */
+button {
+    font-size: 16px;
+    padding: 8px 12px;
+    font-weight: bold;
+}
+
+/* ✅ Preferred Input & Select Dropdown */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+    font-size: 16px;
+    padding: 8px 10px;
+}
+table th, table td {
+    font-size: 16px;
+    padding: 10px;
+}
+#total-quantity {
+    font-size: 16px;
+}
+#total-quantity h3,
+#total-quantity h4 {
+    font-size: 18px;
+}
+#calc-display {
+    font-size: 22px;
+}
+
+.calc-buttons button {
+    font-size: 18px;
+}
+/* Increase base font sizes */
+body {
+    font-size: 18px;   /* Increased from 17px */
+}
+
+/* Larger labels and headings */
+label, h3, h4, h5 {
+    font-size: 20px;   /* Increased from 18px */
+}
+
+/* Larger buttons */
+button {
+    font-size: 18px;   /* Increased from 16px */
+    padding: 10px 14px; /* Slightly larger padding */
+}
+
+/* Larger input fields */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+    font-size: 18px;   /* Increased from 16px */
+    padding: 10px 12px;
+}
+
+/* Larger table text */
+table th, table td {
+    font-size: 18px;   /* Increased from 16px */
+    padding: 12px;     /* More padding for better spacing */
+}
+
+/* Larger calculator display */
+#calc-display {
+    font-size: 28px;   /* Increased from 24px */
+}
+
+/* Larger calculator buttons */
+.calc-buttons button {
+    font-size: 22px;   /* Increased from 18px */
+    padding: 15px;     /* Larger buttons */
+}
+.resizable-box {
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    background: #fff;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    padding: 15px;
+    z-index: 10000;
+    width: 80%;
+    max-width: 600px;
+    min-width: 300px;
+    min-height: 250px;
+    resize: both;
+    overflow: auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tab-buttons button {
+    margin-left: 5px;
+    padding: 6px 12px;
+    border: none;
+    background: #e0e0e0;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tab-active {
+    background: #007bff;
+    color: white;
+    border-radius: 4px;
+}
+
+.popup-buttons {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.popup-buttons button {
+    margin-left: 5px;
+}
+#debt-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    padding: 15px;
+    z-index: 10000;
+    width: 90%;
+    max-width: 600px;
+    min-width: 300px;
+    min-height: 250px;
+    resize: both;
+    overflow: auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4); /* ✅ Semi-transparent black */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .resizable-box {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    width: 90%;
+    max-width: 600px;
+    min-width: 300px;
+    min-height: 250px;
+    resize: both;
+    overflow: auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  .tab-buttons button {
+    margin-right: 5px;
+    padding: 6px 12px;
+    background: #eee;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .tab-active {
+    background: #007bff;
+    color: white;
+    border-radius: 4px;
+  }
+  .tab-buttons {
+    margin: 10px 0;
+    text-align: center;
+  }
+  
+  .tab-buttons button {
+    padding: 10px 18px;
+    margin: 0 5px;
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .tab-buttons button:hover {
+    background-color: #ddd;
+    border-color: #999;
+  }
+  
+  .tab-buttons .tab-active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
+  }
+  :root {
+    --app-font-size: 16px;
+  }
+  
+  body, input, button, select, textarea, label {
+    font-size: var(--app-font-size);
+  }
+  .date-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 10px 0;
+  }
+  
+  .scroll-to-bottom {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    padding: 4px;
+    border-radius: 6px;
+  }
+  
+  .scroll-to-bottom:hover {
+    transform: translateY(4px);
+    background-color: #eef6ff;
+  }
+  .town-content-scroll {
+  max-height: 50vh;
+  overflow-y: auto;
+  padding: 10px;
+}
+/* ==== Animation Effects Added ==== */
+
+.fade-in {
+    animation: fadeIn 0.5s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  
+  button:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+  }
+  
+  input[type="checkbox"]:checked {
+    animation: bounce 0.3s ease;
+  }
+  @keyframes bounce {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.4); }
+    100% { transform: scale(1); }
+  }
+  
+  .modal-box {
+    animation: zoomIn 0.3s ease;
+  }
+  @keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+  #total-quantity {
+    display: none;
+  }
+  /* Add these styles to your existing CSS */
+
+.name-town-content {
+    white-space: nowrap;
+    margin-right: auto; /* Push everything else to the right */
+    display: flex;
+    align-items: center;
+}
+
+.delivered-time {
+    color: #007bff;
+    font-size: 12px;
+    margin-left: 8px;
+    font-style: italic;
+}
+
+.checkbox-container {
+    min-width: 20px;
+}
+.name-town-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+    gap: 10px;
+}
+
+.name-town-checkbox input[type="checkbox"] {
+    transform: scale(1.3);
+    cursor: pointer;
+}
+/* Default Button Size Fix */
+.calc-buttons button {
+    height: 60px;
+    width: 100%;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Number */
+.num-btn {
+    background-color: #007bff;
+    color: white;
+}
+.num-btn:hover {
+    background-color: #005fcc;
+}
+
+/* Operator */
+.op-btn {
+    background-color: #ff9800;
+    color: white;
+}
+.op-btn:hover {
+    background-color: #e68900;
+}
+
+/* Clear/Back */
+.clear-btn {
+    background-color: #f44336;
+    color: white;
+}
+.clear-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Equal */
+.equal-btn {
+    background-color: #4caf50;
+    color: white;
+}
+.equal-btn:hover {
+    background-color: #388e3c;
+}
+
+/* Scientific */
+.sci-btn {
+    background-color: #9c27b0;
+    color: white;
+}
+.sci-btn:hover {
+    background-color: #7b1fa2;
+}
+/* Entry Box Styling */
+.entry-box {
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.entry-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Signature Section */
+.signature-section {
+    transition: all 0.3s ease;
+}
+
+/* Town Content Area */
+.town-content-scroll {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+/* Modal Styling */
+.modal-box {
+    background: white;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.town-button-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+.town-box {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+}
+
+.entry-box {
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 8px;
+    margin: 5px 0;
+    background-color: #fff;
+}
+
+.town-box h3 {
+    margin-top: 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+/* Style for all select dropdowns */
+select {
+    background-color: #333 !important;
+    color: white !important;
+    font-weight: bold !important;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #555;
+}
+
+/* Style for dropdown options */
+select option {
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+}
+
+/* Hover/focus states */
+select:hover, select:focus {
+    border-color: #777;
+    outline: none;
+}
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+body {
+    background-color: #f8f9fa;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 8px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: white;
+  width: 90%;
+  max-height: 90%;
+  overflow-y: auto;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 10px; right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.company-content {
+  margin-top: 20px;
+}
+
+.company-section {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+/* Add to your existing CSS */
+#restore-month-section {
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#restore-month-section h4 {
+    margin-top: 0;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+#month-backup-file {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#restore-month-section button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+/* Company Wise View Styling */
+/* ✅ Company Wise View Button - Brown + Black Gradient */
+#companyButtonList button {
+  background: linear-gradient(135deg, #5C4033, #000000);
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* ✅ Hover Effect - Reverse Gradient + Glow */
+#companyButtonList button:hover {
+  background: linear-gradient(135deg, #000000, #5C4033);
+  box-shadow: 0 0 10px rgba(92, 64, 51, 0.8);
+  transform: scale(1.05);
+}
+
+/* ✅ Active Button */
+#companyButtonList button.active-company {
+  background: linear-gradient(135deg, #8B4513, #000000);
+  color: #fff;
+}
+
+#companyContentView {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.company-town {
+    color: #4114bcdf;
+    font-weight: bold;
+    background-color: #e9f5ff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin: 5px 0;
+    display: inline-block;
+    transition: all 0.3s;
+}
+
+.company-town:hover {
+    background-color: #d0e7ff;
+    transform: scale(1.02);
+}
+
+.company-quantity {
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.company-entry {
+    margin: 8px 0;
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.company-entry:hover {
+    background-color: #f1f1f1;
+}
+
+
+/* ✅ Company Content View */
+#companyContentView {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-top: 10px;
+}
+
+/* ✅ Highlight Active Company Button */
+#companyButtonList button.active-company {
+    background-color: #e1e6ec;
+    color: white;
+    border-color: #007bff;
+}
+/* Menu Icon အတွက် Style */
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    background: #007bff;
+    color: white;
+}
+
+.menu-icon:hover {
+    background: #0056b3;
+}
+
+/* Dropdown Menu အတွက် Style */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    width: 160px;
+    padding: 5px;
+}
+
+.dropdown-menu button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+    font-size: 16px;
+}
+
+.dropdown-menu button:hover {
+    background: #f0f0f0;
+}
+
+/* Calculator Display အတွက် Style */
+#calc-display {
+    width: 100%;
+    font-size: 28px;
+    text-align: right;
+    margin-bottom: 15px;
+    padding: 12px;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 5px rgba(0,0,0,0.1);
+    background: #eaf6ff;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Calculator Buttons Grid */
+.calc-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    width: 100%;
+}
+#menu-dropdown {
+  background-color: #8B4513; /* SaddleBrown */
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  min-width: 160px;
+  z-index: 1000;
+}
+/* 🔶 Drop-down Box Styling */
+select {
+  background-color: #5C4033;      /* Dark Brown Background */
+  color: #ffffff;                 /* White Text */
+  padding: 10px 12px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  appearance: none;              /* Remove default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='292.4' height='292.4'%3E%3Cpath fill='%23ffffff' d='M287 69.4c5 5 5 13 0 18L159 215.4c-5 5-13 5-18 0L5 87.4c-5-5-5-13 0-18 5-5 13-5 18 0L150 177.4 269 69.4c5-5 13-5 18 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+  background-size: 12px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+select:hover {
+  background-color: #4B3621;      /* Hover Darker Brown */
+}
+
+select:focus {
+  outline: none;
+  box-shadow: 0 0 5px 2px rgba(92, 64, 51, 0.5);
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #666666; /* အညိုရောင် */
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+/* ✅ Company Button List Container */
+#companyButtonList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px;
+  margin-bottom: 15px;
+  max-height: 300px; /* ပိုမြင့်သော container */
+  overflow-y: auto;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  align-items: flex-start;
+}
+
+/* ✅ Company Button Styling - Full Text Visible */
+#companyButtonList button {
+  min-width: 120px; /* အနည်းဆုံး width */
+  max-width: 100%; /* အများဆုံး width */
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: #e6f0ff;
+  border: 1px solid #007bff;
+  color: #007bff;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: normal; /* စာသားအလိုက် wrap လုပ်မည် */
+  text-align: left;
+  word-break: break-word; /* ရှည်လျားသော စာသားများအတွက် */
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+/* ✅ Active Company Button */
+#companyButtonList button.active-company {
+  background: #007bff;
+  color: white;
+}
+
+/* ✅ Company Name & Quantity Layout */
+.company-btn-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.company-name-full {
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.company-quantity-full {
+  font-size: 13px;
+  color: #dc3545;
+  background: rgba(220, 53, 69, 0.1);
+  padding: 2px 5px;
+  border-radius: 4px;
+  align-self: flex-start;
+}
+
+/* ✅ Responsive Adjustments */
+@media (max-width: 768px) {
+  #companyButtonList {
+    max-height: 250px;
+  }
+  
+  #companyButtonList button {
+    min-width: 100px;
+    padding: 6px 10px;
+  }
+  
+  .company-name-full {
+    font-size: 13px;
+  }
+  
+  .company-quantity-full {
+    font-size: 12px;
+  }
+}
+/* ✅ Company Wise View Button - Brown + Black Gradient */
+#companyButtonList button {
+  background: linear-gradient(135deg, #f2f3ef, #686565);
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* ✅ Hover Effect - Reverse Gradient + Glow */
+#companyButtonList button:hover {
+  background: linear-gradient(135deg, #bed645, #881818);
+  box-shadow: 0 0 10px rgba(92, 64, 51, 0.8);
+  transform: scale(1.05);
+}
+
+/* ✅ Active Button */
+#companyButtonList button.active-company {
+  background: linear-gradient(135deg, #d3bcab, #000000);
+  color: #fff;
+}
+/* Add to your existing CSS */
+#income-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+#income-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#income-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#income-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+.company-wise-btn {
+    background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.income-btn {
+    background: linear-gradient(135deg, #4CAF50, #8BC34A);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.company-wise-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    background: linear-gradient(135deg, #2a6bc5, #00c2ff);
+}
+
+.income-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    background: linear-gradient(135deg, #3e9f42, #7bb33a);
+}
+
+.company-wise-btn:active {
+    transform: translateY(1px);
+}
+
+.income-btn:active {
+    transform: translateY(1px);
+}
+/* ============================================ */
+/*   BEAUTIFUL FONT FOR NEW INPUT FIELDS       */
+/* ============================================ */
+
+/* ✅ New Company, New Name, New Town - Beautiful Font Styling */
+#new-company, #new-name, #new-town {
+    font-family: 'Segoe UI', 'Poppins', 'Roboto', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    letter-spacing: 0.3px !important;
+    color: #2d3436 !important;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* ✅ Hover Effect */
+#new-company:hover, #new-name:hover, #new-town:hover {
+    color: #007bff !important;
+    text-shadow: 0 1px 2px rgba(0, 123, 255, 0.2) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* ✅ Focus Effect */
+#new-company:focus, #new-name:focus, #new-town:focus {
+    color: #0056b3 !important;
+    text-shadow: 0 1px 3px rgba(0, 86, 179, 0.3) !important;
+    outline: none !important;
+    border-color: #007bff !important;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1) !important;
+}
+
+/* ✅ Placeholder Styling */
+#new-company::placeholder, #new-name::placeholder, #new-town::placeholder {
+    color: #6c757d !important;
+    font-style: italic !important;
+    font-weight: 500 !important;
+    opacity: 0.8 !important;
+    font-family: 'Segoe UI', sans-serif !important;
+}
+
+/* ✅ Dark Mode Support */
+body.dark-mode #new-company,
+body.dark-mode #new-name,
+body.dark-mode #new-town {
+    color: #e0e0e0 !important;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5) !important;
+    background-color: #2d3436 !important;
+    border-color: #444 !important;
+}
+
+body.dark-mode #new-company:hover,
+body.dark-mode #new-name:hover,
+body.dark-mode #new-town:hover {
+    color: #74b9ff !important;
+}
+
+body.dark-mode #new-company:focus,
+body.dark-mode #new-name:focus,
+body.dark-mode #new-town:focus {
+    color: #0984e3 !important;
+    border-color: #74b9ff !important;
+    box-shadow: 0 0 0 3px rgba(116, 185, 255, 0.2) !important;
+}
+
+body.dark-mode #new-company::placeholder,
+body.dark-mode #new-name::placeholder,
+body.dark-mode #new-town::placeholder {
+    color: #b2bec3 !important;
+}
+
+/* ✅ Responsive Adjustments */
+@media (max-width: 768px) {
+    #new-company, #new-name, #new-town {
+        font-size: 14px !important;
+        letter-spacing: 0.2px !important;
+    }
+}
+
+/* ✅ Animation for Text Entry */
+@keyframes textGlow {
+    0%, 100% { 
+        text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+    }
+    50% { 
+        text-shadow: 0 1px 3px rgba(0, 123, 255, 0.3), 
+                     0 0 10px rgba(0, 123, 255, 0.1);
+    }
+}
+
+#new-company:focus, #new-name:focus, #new-town:focus {
+    animation: textGlow 2s infinite ease-in-out;
+}
+
+/* ✅ Gradient Text Effect for Active State */
+.text-gradient {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+/* ✅ Beautiful Typography Enhancements */
+.beautiful-font {
+    font-family: 'Georgia', 'Times New Roman', serif !important;
+    font-style: italic !important;
+    text-transform: capitalize !important;
+    font-weight: 700 !important;
+}
+/* Only target main form select boxes */
+#company, #name, #town, #date {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23007bff'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 10px center !important;
+    background-size: 20px !important;
+    padding-right: 35px !important;
+}
+/* ============================================ */
+/*   3D SAVE BUTTON WITH SAME SIZE AS OTHERS    */
+/* ============================================ */
+
+/* ✅ All buttons in the row - SAME SIZE */
+.button-row-3d button {
+    font-weight: bold !important;
+    padding: 10px !important;
+    border: none !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    flex: 1 !important;
+    min-width: 100px !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    margin: 0 !important;
+    min-height: 40px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+}
+
+/* ✅ Save Button - 3D EFFECT နဲ့ သိသာစွာပြ */
+.button-row-3d button[onclick="saveEntryAndroid()"] {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%) !important;
+    color: white !important;
+    box-shadow: 
+        0 5px 0 #a71d2a,
+        0 8px 15px rgba(220, 53, 69, 0.4) !important;
+    transition: all 0.15s ease !important;
+    transform: translateY(0) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3) !important;
+    border-bottom: 3px solid #a71d2a !important;
+}
+
+/* ✅ Save Button Hover - ပိုကြွလာမယ် */
+.button-row-3d button[onclick="saveEntryAndroid()"]:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 
+        0 8px 0 #a71d2a,
+        0 12px 20px rgba(220, 53, 69, 0.5) !important;
+    background: linear-gradient(135deg, #c82333 0%, #dc3545 100%) !important;
+}
+
+/* ✅ Save Button Active - နှိပ်လိုက်ရင် အောက်စိုက် */
+.button-row-3d button[onclick="saveEntryAndroid()"]:active {
+    transform: translateY(2px) !important;
+    box-shadow: 
+        0 2px 0 #a71d2a,
+        0 4px 8px rgba(220, 53, 69, 0.3) !important;
+    transition: all 0.05s ease !important;
+}
+
+/* ✅ Glowing light effect on Save Button */
+.button-row-3d button[onclick="saveEntryAndroid()"]::after {
+    content: '';
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    ) !important;
+    transition: left 0.7s ease !important;
+    pointer-events: none !important;
+}
+
+.button-row-3d button[onclick="saveEntryAndroid()"]:hover::after {
+    left: 100% !important;
+}
+
+/* ✅ တခြား Buttons - Normal Flat Design */
+.button-row-3d .refresh-btn {
+    background-color: #28a745 !important;
+    color: white !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    transition: all 0.2s ease !important;
+}
+
+.button-row-3d button[onclick="toggleEntries()"] {
+    background-color: teal !important;
+    color: white !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    transition: all 0.2s ease !important;
+}
+
+.button-row-3d button[onclick="toggleTotals()"] {
+    background-color: orange !important;
+    color: white !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    transition: all 0.2s ease !important;
+}
+
+/* ✅ တခြား Buttons Hover - Simple Hover */
+.button-row-3d .refresh-btn:hover,
+.button-row-3d button[onclick="toggleEntries()"]:hover,
+.button-row-3d button[onclick="toggleTotals()"]:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
+    opacity: 0.9 !important;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
+    .button-row-3d button {
+        padding: 12px !important;
+        min-width: 120px !important;
+        font-size: 15px !important;
+    }
+    
+    /* Save Button 3D effect ကို mobile မှာ နည်းနည်းလျှော့ */
+    .button-row-3d button[onclick="saveEntryAndroid()"] {
+        box-shadow: 
+            0 4px 0 #a71d2a,
+            0 6px 10px rgba(220, 53, 69, 0.3) !important;
+    }
+    
+    .button-row-3d button[onclick="saveEntryAndroid()"]:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 
+            0 6px 0 #a71d2a,
+            0 8px 12px rgba(220, 53, 69, 0.4) !important;
+    }
+}
+
+/* ✅ Save Button Success Animation */
+@keyframes saveSuccess3D {
+    0% { 
+        transform: translateY(0); 
+        box-shadow: 0 5px 0 #a71d2a;
+    }
+    50% { 
+        transform: translateY(-5px); 
+        box-shadow: 0 10px 0 #a71d2a;
+    }
+    100% { 
+        transform: translateY(0); 
+        box-shadow: 0 5px 0 #a71d2a;
+    }
+}
+
+.save-success-3d {
+    animation: saveSuccess3D 0.5s ease !important;
+}
+
+/* ✅ Dark Mode Support */
+body.dark-mode .button-row-3d button[onclick="saveEntryAndroid()"] {
+    background: linear-gradient(135deg, #ff6b6b 0%, #dc3545 100%) !important;
+    box-shadow: 
+        0 5px 0 #c82333,
+        0 8px 15px rgba(255, 107, 107, 0.4) !important;
+    border-bottom-color: #c82333 !important;
+}
+/* Date Display Box Styling */
+/* ============================================ */
+/* ============================================ */
+/*   DATE TEXT ALIGNMENT FIX                    */
+/* ============================================ */
+
+.date-display-box {
+    width: 100%;
+    padding: 0px;
+    background: transparent !important;
+    border: none !important;
+    font-size: 22px;
+    font-weight: 900;
+    color: #00ff9d;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: none !important;
+    font-family: 'Digital-7', 'Courier New', monospace;
+    letter-spacing: 1.5px;
+    text-shadow: 
+        0 0 5px #00ff9d,
+        0 0 10px #00ff9d,
+        0 0 15px #00ff9d;
+    position: relative;
+    overflow: hidden;
+    /* ✅ ဘေးကပ်ဖို့အတွက် */
+    display: flex !important;
+    justify-content: flex-start !important; /* left align */
+    align-items: center !important;
+    text-align: left !important;
+    padding-left: 10px !important; /* ဘေးနံရံကနေအကွာအဝေး */
+}
+
+/* Remove digital glowing effect */
+.date-display-box::before {
+    display: none !important;
+}
+
+/* Digital segment effect for numbers */
+.date-display-box .digital-date {
+    font-family: 'Digital-7 Mono', monospace;
+    font-weight: 900;
+    display: inline-block;
+    padding: 0 2px;
+}
+
+.date-display-box:hover {
+    background: transparent !important;
+    transform: none !important;
+    box-shadow: none !important;
+    color: #00ff9d;
+    text-shadow: 
+        0 0 8px #00ff9d,
+        0 0 15px #00ff9d,
+        0 0 20px #00ff9d;
+}
+
+.date-display-box:active {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Digital clock style for date format */
+.date-display-box .date-parts {
+    display: flex;
+    justify-content: flex-start !important; /* ✅ left align */
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+    width: 100%;
+}
+
+.date-display-box .date-number {
+    background: transparent !important;
+    border: none !important;
+    padding: 3px 8px;
+    border-radius: 5px;
+    margin: 0 2px;
+}
+
+.date-display-box .date-separator {
+    color: #ff6b6b;
+    font-weight: bold;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* ✅ ဘေးကပ်ဖို့အတွက် container ကိုပါ adjust */
+.date-display-container {
+    display: flex;
+    justify-content: flex-start !important;
+    align-items: center;
+    width: 100%;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .date-display-box {
+        font-size: 18px;
+        padding: 10px 0 10px 5px !important;
+    }
+    
+    .date-display-box .date-parts {
+        gap: 3px;
+    }
+}
+
+/* Dark mode support */
+body.dark-mode .date-display-box {
+    background: transparent !important;
+    border: none !important;
+    color: #00ff9d;
+}
+
+body.dark-mode .date-display-box:hover {
+    background: transparent !important;
+    color: #00ff9d;
+    text-shadow: 
+        0 0 10px #00ff9d,
+        0 0 20px #00ff9d;
+}
+
+/* ✅ အကယ်၍ Date text က ဘယ်ဘက်ကို ပိုကပ်ချင်ရင် */
+.date-left-align {
+    justify-content: flex-start !important;
+    text-align: left !important;
+    padding-left: 15px !important;
+}
+
+/* ✅ ဘေးအစွန်ဆုံးကပ်ချင်ရင် */
+.date-edge-align {
+    justify-content: flex-start !important;
+    text-align: left !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+/* Fix for select dropdown text alignment */
+.preferred-row-single-line select {
+    padding: 8px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 14px;
+    height: 36px; /* Height သတ်မှတ်ပါ */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #333;
+    background-color: white;
+    vertical-align: middle; /* ဒါက အရေးကြီး */
+}
+
+.preferred-row-single-line input {
+    padding: 8px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 14px;
+    height: 36px; /* အားလုံးတူညီတဲ့ height */
+    box-sizing: border-box;
+    color: #333;
+}
+
+.preferred-buttons-single-line button {
+    height: 36px !important; /* အားလုံးတူညီအောင် */
+    padding: 0 12px !important;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    transition: all 0.2s;
+    font-size: 13px;
+}
+
+/* Specific button styles */
+.preferred-buttons-single-line button:nth-child(1) {
+    background-color: #4CAF50 !important;
+    color: white !important;
+}
+
+.preferred-buttons-single-line button:nth-child(2) {
+    background-color: #2196F3 !important;
+    color: white !important;
+}
+
+.preferred-buttons-single-line button:nth-child(3) {
+    background-color: #ff4444 !important;
+    color: white !important;
+    min-width: 40px;
+}
+
+/* Ensure all items are aligned */
+.preferred-row-single-line {
+    display: flex;
+    align-items: center !important; /* ဒါက အရေးကြီး */
+    gap: 8px;
+    margin: 8px 0;
+    width: 100%;
+    vertical-align: middle !important;
+}
+
+/* Fix for select option text */
+select option {
+    padding: 8px;
+    font-size: 14px;
+    line-height: 1.4;
+    vertical-align: middle;
+}
+/* ============================================ */
+/*   SAMSUNG GALAXY TAB S7 FE ADAPTATION       */
+/* ============================================ */
+
+@media (min-width: 1200px) and (max-width: 1900px) and (min-height: 1500px) {
+    /* Galaxy Tab S7 FE has large screen - optimize layout */
+    
+    /* Increase font sizes for better readability */
+    body {
+        font-size: 20px !important;
+    }
+    
+    /* Larger buttons for touch */
+    button {
+        font-size: 18px !important;
+        padding: 12px 20px !important;
+        min-height: 50px !important;
+    }
+    
+    /* Larger input fields */
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select {
+        font-size: 18px !important;
+        padding: 12px 15px !important;
+        height: 50px !important;
+    }
+    
+    /* Larger labels */
+    label {
+        font-size: 18px !important;
+        margin-bottom: 8px !important;
+    }
+    
+    /* Adjust preferred rows for larger screen */
+    .preferred-row-single-line {
+        margin: 15px 0 !important;
+        gap: 12px !important;
+    }
+    
+    .preferred-row-single-line select,
+    .preferred-row-single-line input {
+        height: 45px !important;
+        font-size: 16px !important;
+    }
+    
+    .preferred-buttons-single-line button {
+        height: 45px !important;
+        min-width: 80px !important;
+        font-size: 15px !important;
+    }
+    
+    /* Adjust action button row */
+    .action-button-row button {
+        min-width: 150px !important;
+        height: 50px !important;
+        font-size: 16px !important;
+    }
+    
+    /* Larger table text */
+    table th, table td {
+        font-size: 18px !important;
+        padding: 15px !important;
+    }
+    
+    /* Adjust modal sizes */
+    .modal-box {
+        width: 80% !important;
+        max-width: 800px !important;
+        padding: 25px !important;
+    }
+    
+    /* Town button list - more buttons per row */
+    .town-button-list {
+        max-height: 200px !important;
+    }
+    
+    .town-button-list button {
+        min-width: 140px !important;
+        padding: 10px 15px !important;
+        font-size: 16px !important;
+        margin: 5px !important;
+    }
+    
+    /* Company wise buttons */
+    #companyButtonList button {
+        min-width: 160px !important;
+        min-height: 60px !important;
+        padding: 12px 18px !important;
+        font-size: 16px !important;
+        margin: 8px !important;
+    }
+    
+    /* Adjust calculator for larger screen */
+    .calculator-box {
+        width: 350px !important;
+    }
+    
+    #calc-display {
+        font-size: 32px !important;
+        padding: 15px !important;
+    }
+    
+    .calc-buttons button {
+        height: 65px !important;
+        font-size: 22px !important;
+    }
+    
+    /* Header adjustments */
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 1.4em !important;
+    }
+    
+    /* Date display box */
+    .date-display-box {
+        font-size: 26px !important;
+        padding: 15px !important;
+    }
+    
+    /* Total quantity display */
+    #total-quantity {
+        font-size: 24px !important;
+        padding: 15px 25px !important;
+    }
+    
+    /* Notes textarea */
+    #popup-notes {
+        height: 300px !important;
+        font-size: 18px !important;
+    }
+    
+    /* Export print buttons */
+    .export-print-row button {
+        min-width: 140px !important;
+        height: 50px !important;
+        font-size: 16px !important;
+    }
+    
+    /* Top buttons */
+    .top-buttons button {
+        min-width: 160px !important;
+        height: 55px !important;
+        font-size: 17px !important;
+    }
+    
+    /* Menu icon */
+    .menu-icon {
+        font-size: 28px !important;
+        padding: 15px !important;
+    }
+    
+    /* Dropdown menu */
+    .dropdown-menu {
+        width: 200px !important;
+    }
+    
+    .dropdown-menu button {
+        padding: 15px !important;
+        font-size: 16px !important;
+    }
+    
+    /* Signature section */
+    .signature-section {
+        font-size: 18px !important;
+    }
+    
+    /* Company content view */
+    #companyContentView {
+        padding: 20px !important;
+        font-size: 16px !important;
+    }
+    
+    .company-town {
+        font-size: 18px !important;
+        padding: 8px 15px !important;
+    }
+    
+    .company-name {
+        font-size: 17px !important;
+    }
+    
+    /* 3D Save button enhancements */
+    .button-row-3d button[onclick="saveEntryAndroid()"] {
+        min-width: 180px !important;
+        font-size: 18px !important;
+        box-shadow: 
+            0 8px 0 #a71d2a,
+            0 12px 20px rgba(220, 53, 69, 0.4) !important;
+    }
+    
+    /* Quantity boxes */
+    #quantity {
+        max-width: 300px !important;
+        height: 50px !important;
+        font-size: 20px !important;
+    }
+    
+    /* Town content scroll */
+    .town-content-scroll {
+        max-height: 400px !important;
+        font-size: 16px !important;
+        padding: 15px !important;
+    }
+    
+    /* Starry night effect adjustments */
+    body::before {
+        background-size: 1000px 1000px !important;
+    }
+    
+    /* Fix spacing for large screen */
+    .container {
+        max-width: 1600px !important;
+        margin: 0 auto !important;
+        padding: 20px !important;
+    }
+}
+
+/* Portrait mode for Galaxy Tab S7 FE */
+@media (min-width: 1500px) and (max-width: 1900px) and (orientation: portrait) {
+    .preferred-row-single-line {
+        flex-wrap: wrap !important;
+    }
+    
+    .preferred-row-single-line select,
+    .preferred-row-single-line input {
+        min-width: 200px !important;
+    }
+    
+    .action-button-row {
+        flex-wrap: wrap !important;
+    }
+    
+    #companyButtonList button {
+        min-width: 180px !important;
+    }
+}
+
+/* Landscape mode for Galaxy Tab S7 FE */
+@media (min-height: 1500px) and (orientation: landscape) {
+    .modal-box {
+        max-height: 80vh !important;
+    }
+    
+    .town-content-scroll {
+        max-height: 300px !important;
+    }
+    
+    .calculator-box {
+        top: 60% !important;
+    }
+}
+
+/* Specific fixes for high-resolution tablets */
+@media (min-resolution: 150dpi) and (min-width: 1200px) {
+    /* Improve clarity for high DPI screens */
+    body::before {
+        opacity: 0.6 !important;
+    }
+    
+    button {
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
+    }
+    
+    /* Sharper text shadows */
+    .glow-text {
+        text-shadow: 
+            0 0 15px rgba(116, 185, 255, 0.8),
+            0 0 25px rgba(116, 185, 255, 0.6),
+            0 0 35px rgba(116, 185, 255, 0.4) !important;
+    }
+}
+
+
+/* =========================================================
+   FINAL UI FIX — TOP MENU + PREFERRED EDIT POPUP
+   ========================================================= */
+.top-buttons {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 6px !important;
+    margin: 12px 0 !important;
+}
+
+.top-buttons > button,
+.top-buttons > .menu-container {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 46px !important;
+    min-height: 46px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.top-buttons > button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 10px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+}
+
+.top-buttons .menu-container {
+    position: relative !important;
+    display: block !important;
+    z-index: 10050 !important;
+}
+
+.top-buttons .menu-icon {
+    width: 100% !important;
+    height: 46px !important;
+    min-width: 0 !important;
+    min-height: 46px !important;
+    max-height: 46px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+}
+
+.top-buttons .dropdown-menu {
+    top: calc(100% + 7px) !important;
+    right: 0 !important;
+    margin-top: 0 !important;
+    width: min(260px, 80vw) !important;
+    min-width: 220px !important;
+    max-height: 70vh !important;
+    overflow-y: auto !important;
+    border-radius: 14px !important;
+    box-shadow: 0 14px 35px rgba(0,0,0,.28) !important;
+    border: 1px solid rgba(0,0,0,.08) !important;
+    z-index: 10060 !important;
+}
+
+.top-buttons .dropdown-menu button,
+.top-buttons .dropdown-menu > div {
+    min-height: 46px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+}
+
+/* Beautiful Preferred Edit modal */
+.preferred-edit-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 999999 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 20px !important;
+    background: rgba(8, 10, 30, .68) !important;
+    backdrop-filter: blur(7px) !important;
+    -webkit-backdrop-filter: blur(7px) !important;
+    animation: preferredEditFade .18s ease-out !important;
+}
+
+.preferred-edit-card {
+    width: min(440px, 94vw) !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    border-radius: 22px !important;
+    background: linear-gradient(145deg, #ffffff 0%, #f4f7ff 100%) !important;
+    box-shadow: 0 24px 70px rgba(0,0,0,.38), 0 5px 18px rgba(50,80,180,.18) !important;
+    animation: preferredEditUp .22s ease-out !important;
+    color: #222 !important;
+}
+
+.preferred-edit-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 18px 18px 16px !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+}
+
+.preferred-edit-icon {
+    width: 44px !important;
+    height: 44px !important;
+    flex: 0 0 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 13px !important;
+    background: rgba(255,255,255,.18) !important;
+    font-size: 21px !important;
+}
+
+.preferred-edit-title-wrap { flex: 1 !important; min-width: 0 !important; }
+.preferred-edit-title {
+    margin: 0 !important;
+    color: white !important;
+    font-size: 20px !important;
+    line-height: 1.2 !important;
+    font-weight: 800 !important;
+}
+.preferred-edit-subtitle {
+    margin-top: 4px !important;
+    color: rgba(255,255,255,.82) !important;
+    font-size: 12px !important;
+}
+.preferred-edit-close {
+    width: 38px !important;
+    height: 38px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    background: rgba(255,255,255,.16) !important;
+    color: white !important;
+    cursor: pointer !important;
+    font-size: 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.preferred-edit-close:hover { background: rgba(255,255,255,.28) !important; }
+
+.preferred-edit-body { padding: 22px !important; }
+.preferred-edit-label {
+    display: block !important;
+    margin-bottom: 8px !important;
+    color: #4b5563 !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+}
+.preferred-edit-input {
+    width: 100% !important;
+    height: 50px !important;
+    box-sizing: border-box !important;
+    padding: 0 15px !important;
+    border: 2px solid #d9def0 !important;
+    border-radius: 13px !important;
+    outline: none !important;
+    background: white !important;
+    color: #20242c !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    transition: .18s ease !important;
+}
+.preferred-edit-input:focus {
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 4px rgba(102,126,234,.14) !important;
+}
+.preferred-edit-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    margin-top: 18px !important;
+}
+.preferred-edit-actions button {
+    height: 46px !important;
+    border: 0 !important;
+    border-radius: 12px !important;
+    cursor: pointer !important;
+    font-weight: 800 !important;
+    font-size: 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 7px !important;
+}
+.preferred-edit-cancel { background: #eef1f7 !important; color: #4b5563 !important; }
+.preferred-edit-save {
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    color: white !important;
+    box-shadow: 0 7px 18px rgba(102,126,234,.28) !important;
+}
+.preferred-edit-save:hover { transform: translateY(-1px) !important; }
+
+@keyframes preferredEditFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes preferredEditUp { from { opacity: 0; transform: translateY(18px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+@media (max-width: 768px) {
+    .top-buttons { gap: 6px !important; padding: 0 3px !important; }
+    .top-buttons > button,
+    .top-buttons > .menu-container,
+    .top-buttons .menu-icon { height: 44px !important; min-height: 44px !important; }
+    .top-buttons > button { font-size: 12px !important; padding: 0 5px !important; }
+    .preferred-edit-card { width: 96vw !important; border-radius: 18px !important; }
+    .preferred-edit-body { padding: 18px !important; }
+}
+
+
+/* Preferred Edit - Android WebView safety */
+.preferred-edit-overlay {
+    touch-action: auto !important;
+    pointer-events: auto !important;
+}
+.preferred-edit-card,
+.preferred-edit-card * {
+    pointer-events: auto !important;
+}
+.preferred-edit-actions button,
+.preferred-edit-close {
+    -webkit-tap-highlight-color: transparent !important;
+    user-select: none !important;
+}
+
+
+/* ===== Show Total: Delivered / Total / Remaining boxes ===== */
+.total-town-header {
+    margin: 0 0 12px 0;
+    padding-bottom: 12px;
+    border-bottom: 2px solid rgba(255,255,255,0.45);
+}
+.total-town-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #8E44AD;
+    margin-bottom: 10px;
+}
+.total-summary-grid,
+.name-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+}
+.total-summary-box {
+    min-height: 78px;
+    border-radius: 12px;
+    padding: 9px 6px;
+    text-align: center;
+    box-sizing: border-box;
+    border: 2px solid rgba(255,255,255,0.75);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.16);
+}
+.summary-icon { font-size: 20px; line-height: 22px; }
+.summary-label { font-size: 12px; font-weight: 800; margin-top: 2px; }
+.summary-value { font-size: 23px; font-weight: 900; line-height: 27px; }
+.total-summary-box.total-box { background: #fff3cd; color: #7a5200; }
+.total-summary-box.delivered-box { background: #d1e7dd; color: #146c43; }
+.total-summary-box.remaining-box { background: #f8d7da; color: #b02a37; }
+.name-summary-grid { margin-top: 2px; }
+.mini-summary-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 5px 4px;
+    border-radius: 9px;
+    font-size: 11px;
+    font-weight: 800;
+    border: 1px solid rgba(0,0,0,0.12);
+}
+.mini-summary-box strong { font-size: 18px; line-height: 20px; }
+.mini-summary-box.total-box { background: #fff3cd; color: #7a5200; }
+.mini-summary-box.delivered-box { background: #d1e7dd; color: #146c43; }
+.mini-summary-box.remaining-box { background: #dbeafe; color: #1d4ed8; }
+
+@media (max-width: 600px) {
+    .total-summary-grid, .name-summary-grid { gap: 5px; }
+    .total-summary-box { min-height: 70px; padding: 7px 3px; }
+    .summary-value { font-size: 20px; }
+    .summary-label { font-size: 10px; }
+    .summary-icon { font-size: 17px; }
+    .mini-summary-box { font-size: 10px; min-height: 48px; }
+    .mini-summary-box strong { font-size: 16px; }
+}
+
+/* ===== VIBER SHARE / COPY PREVIEW ===== */
+#dailyModalBody .name-card {
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+#dailyModalBody .name-card:hover {
+    transform: translateY(-2px);
+}
+#previewContent {
+    word-break: break-word;
+}
+
+/* ===== VIBER READABILITY v27 ===== */
+#previewContent {
+    line-height: 2.15 !important;
+    letter-spacing: .1px;
+}
+#previewContent > div:first-child {
+    line-height: 2.15 !important;
+    padding-top: 22px !important;
+    padding-bottom: 22px !important;
+}
+
+/* ===== MODERN VIBER PREVIEW v29 ===== */
+#previewContent {
+    font-family: "Noto Sans Myanmar", "Myanmar Text", sans-serif !important;
+    line-height: 2.2 !important;
+    letter-spacing: .1px;
+}
+#previewContent > div:first-child {
+    border-left-width: 5px !important;
+    border-radius: 14px !important;
+    padding: 22px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.18);
+}
+
+/* ===== VIBER FEE SUMMARY v30 ===== */
+#previewContent {
+    line-height: 2.2 !important;
+}
+
+/* ===== HIDE TOP TKO LABEL v31 ===== */
+.tko-top-label,
+.logo-tko,
+.app-tko-title {
+    display: none !important;
+}
+
+/* ===== CREDIT POPUP STACKING FIX v33 ===== */
+/* Credit List must always appear above the Menu popup. */
+.credit-modal {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 1000000 !important;
+}
+
+.credit-modal-content {
+    position: relative !important;
+    z-index: 1000001 !important;
+}
+
+/* The dynamically-created Credit modal is a direct child of body. */
+body > #creditModal {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 1000000 !important;
+}
+
+/* ===== Remark Viewer Date Filter + Long Press Delete v47 ===== */
+.remark-viewer-filter{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 12px;background:rgba(255,255,255,.96);border-bottom:1px solid rgba(0,0,0,.08)}
+.remark-viewer-filter label{font-weight:700;font-size:14px}
+.remark-viewer-filter input[type="date"]{min-height:38px;padding:6px 9px;border:1px solid #cfd5dc;border-radius:8px;font-size:14px}
+.remark-viewer-all-date{min-height:38px;padding:6px 12px;border:0;border-radius:8px;background:#343a40;color:#fff;font-weight:700}
+.remark-viewer-item{position:relative;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.remark-delete-btn{display:none;margin-top:8px;width:100%;min-height:38px;border:0;border-radius:8px;background:#dc3545;color:#fff;font-weight:700;cursor:pointer}
+.remark-viewer-item.remark-long-pressed .remark-delete-btn{display:block}
+.remark-viewer-item.remark-long-pressed{outline:2px solid rgba(220,53,69,.35);border-radius:10px}
+@media(max-width:600px){.remark-viewer-filter{align-items:stretch}.remark-viewer-filter input[type="date"],.remark-viewer-all-date{flex:1}}
+
+/* =========================================================
+   NOTES POPUP HIGH-CONTRAST MODERN UI — v48
+   Fix white-on-white buttons/text while preserving functions.
+   ========================================================= */
+#notes-popup .modern-notes-content{
+    background:linear-gradient(145deg,#172033 0%,#24324a 100%) !important;
+    color:#f8fafc !important;
+}
+#notes-popup .modern-notes-header{
+    background:linear-gradient(135deg,#111827,#1f2937) !important;
+    color:#ffffff !important;
+}
+#notes-popup .notes-date-section h3,
+#notes-popup .modern-notes-header h3,
+#notes-popup .modern-notes-header i{
+    color:#ffffff !important;
+}
+#notes-popup .date-controls{
+    background:transparent !important;
+}
+#notes-popup .notes-date-picker{
+    background:#ffffff !important;
+    color:#172033 !important;
+    border:2px solid #60a5fa !important;
+}
+#notes-popup .delete-date-btn{
+    background:linear-gradient(135deg,#ef4444,#b91c1c) !important;
+    color:#ffffff !important;
+    border:1px solid #7f1d1d !important;
+    box-shadow:0 4px 10px rgba(0,0,0,.25) !important;
+}
+#notes-popup .modern-notes-body{
+    background:#1e293b !important;
+}
+#notes-popup .notes-toolbar{
+    background:#273449 !important;
+    border:1px solid #475569 !important;
+    box-shadow:0 5px 15px rgba(0,0,0,.18) !important;
+}
+#notes-popup .notes-toolbar button{
+    background:linear-gradient(145deg,#475569,#334155) !important;
+    color:#ffffff !important;
+    border:1px solid #64748b !important;
+    box-shadow:0 3px 7px rgba(0,0,0,.25) !important;
+}
+#notes-popup .notes-toolbar button:hover,
+#notes-popup .notes-toolbar button:focus{
+    background:linear-gradient(145deg,#3b82f6,#2563eb) !important;
+    color:#ffffff !important;
+}
+#notes-popup .notes-toolbar .clear-btn{
+    background:linear-gradient(145deg,#ef4444,#b91c1c) !important;
+    color:#ffffff !important;
+    border-color:#7f1d1d !important;
+}
+#notes-popup .modern-notes-textarea{
+    background:#f8fafc !important;
+    color:#111827 !important;
+    border:2px solid #64748b !important;
+    caret-color:#111827 !important;
+}
+#notes-popup .modern-notes-textarea::placeholder{
+    color:#64748b !important;
+    opacity:1 !important;
+}
+#notes-popup .notes-stats{
+    background:#273449 !important;
+    color:#e2e8f0 !important;
+    border:1px solid #475569 !important;
+}
+#notes-popup .modern-notes-footer{
+    background:#111827 !important;
+    border-top:1px solid #475569 !important;
+}
+#notes-popup .modern-notes-footer button{
+    color:#ffffff !important;
+    text-shadow:0 1px 2px rgba(0,0,0,.35) !important;
+}
+#notes-popup .notes-save-btn{
+    background:linear-gradient(135deg,#22c55e,#15803d) !important;
+    color:#ffffff !important;
+}
+#notes-popup .notes-copy-btn{
+    background:linear-gradient(135deg,#3b82f6,#1d4ed8) !important;
+    color:#ffffff !important;
+}
+#notes-popup .notes-export-btn{
+    background:linear-gradient(135deg,#f59e0b,#c2410c) !important;
+    color:#ffffff !important;
+}
+#notes-popup .notes-all-btn{
+    background:linear-gradient(135deg,#8b5cf6,#6d28d9) !important;
+    color:#ffffff !important;
+}
+#notes-popup .modern-notes-close{
+    background:linear-gradient(135deg,#ef4444,#b91c1c) !important;
+    color:#ffffff !important;
+    border:1px solid #7f1d1d !important;
+}
+@media(max-width:600px){
+    #notes-popup .modern-notes-footer{
+        gap:8px !important;
+        padding:12px !important;
+        flex-wrap:wrap !important;
+    }
+    #notes-popup .modern-notes-footer button{
+        min-height:44px !important;
+        flex:1 1 calc(50% - 8px) !important;
+        padding:10px 8px !important;
+    }
+}
+
+/* Remark Viewer paid status */
+.remark-paid-status{display:block;margin-top:8px;padding:7px 10px;border-radius:8px;background:#dcfce7;color:#166534;border:1px solid #86efac;font-weight:800;font-size:13px;}
+
+/* v53 — single Remark paid status */
+.remark-paid-status{
+    display:none !important;
+}
+
+/* v53 — main navigation must remain clickable */
+#creditButton, #listButton, .credit-button, .list-button{
+    pointer-events:auto !important;
+}
+
+/* v54: keep main Credit/List buttons clickable */
+button[onclick="saveCreditEntry()"],
+button[onclick="showCreditList()"]{
+    pointer-events:auto !important;
+    position:relative;
+    z-index:1200;
+}
+
+/* v54: prevent invisible Remark overlays from blocking the page */
+#remarkSelectionModal[style*="display: none"],
+#remarkSelectionBox[style*="display: none"],
+#remarkSelectionPopup[style*="display: none"],
+#remarkSelectionSection[style*="display: none"]{
+    pointer-events:none !important;
+}
+
+/* ===== v55 CALCULATOR LAYER FIX ===== */
+#calculator.calculator-box {
+    position: fixed !important;
+    z-index: 10000 !important;
+}
+#calculator.calculator-box button,
+#calculator.calculator-box input {
+    position: relative;
+    z-index: 10001;
+}
+/* Keep Credit/List normal when Calculator is closed */
+#calculator.calculator-box[style*="display: none"] {
+    pointer-events: none !important;
+}
+
+/* v64 Remark confirmation */
+#remark-save-confirm b{
+    color:#166534;
+}
+
+/* v65 — Duplicate confirmation warning text */
+#remark-save-confirm .remark-duplicate-warning,
+#remark-save-confirm .remark-save-question{
+    color:#dc2626 !important;
+    -webkit-text-fill-color:#dc2626 !important;
+    font-weight:900 !important;
+}
+#remark-save-confirm .remark-save-question{
+    font-size:20px !important;
+}
+
+/* v66 — Remark Viewer */
+#remarkViewerModal .remark-viewer-body,
+.remark-viewer-body{
+    max-height:60vh !important;
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+    -webkit-overflow-scrolling:touch !important;
+    overscroll-behavior:contain !important;
+    touch-action:pan-y !important;
+    padding-right:6px !important;
+}
+#remarkViewerModal .remark-viewer-item{
+    flex-shrink:0 !important;
+}
+#remarkViewerModal .remark-viewer-body::-webkit-scrollbar{
+    width:7px;
+}
+#remarkViewerModal .remark-viewer-body::-webkit-scrollbar-thumb{
+    background:#94a3b8;
+    border-radius:10px;
+}
+#remarkViewerModal .remark-viewer-filter{
+    position:sticky;
+    top:0;
+    z-index:5;
+}
+
+/* v67 — Remark Viewer delivery fee paid status */
+.remark-paid-status{
+    display:block !important;
+    margin:10px 0 4px !important;
+    padding:8px 12px !important;
+    border-radius:10px !important;
+    background:#dcfce7 !important;
+    color:#166534 !important;
+    font-weight:900 !important;
+    font-size:15px !important;
+    text-align:center !important;
+}
+
+/* v68 — centered Select or Add text */
+select,
+select.form-control,
+select.input-select,
+#company,
+#name,
+#town {
+    text-align: center !important;
+    text-align-last: center !important;
+    -moz-text-align-last: center !important;
+}
+select option {
+    text-align: center !important;
+}
+
+/* v68 — Now popup cleanup */
+.now-popup,
+#now-popup,
+.now-modal,
+#nowModal,
+.now-popup-overlay {
+    z-index: 100000 !important;
+}
+.now-popup-content,
+#now-popup .popup-content,
+#nowModal .modal-content {
+    position: relative !important;
+    max-width: 92vw !important;
+    max-height: 78vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    box-sizing: border-box !important;
+}
+.now-popup-content .popup-actions,
+#now-popup .popup-actions,
+#nowModal .popup-actions {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    flex-wrap: wrap !important;
+}
+.now-popup-content .popup-actions button,
+#now-popup .popup-actions button,
+#nowModal .popup-actions button {
+    min-width: 120px !important;
+}
+
+/* Keep main-page Credit/List buttons out of Now popup stacking. */
+.now-popup #creditBtn,
+.now-popup #listBtn,
+#now-popup #creditBtn,
+#now-popup #listBtn,
+#nowModal #creditBtn,
+#nowModal #listBtn {
+    display: none !important;
+}
+
+/* ===== v69 — Elegant Pink Button Text ===== */
+button,
+.btn,
+input[type="button"],
+input[type="submit"] {
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif !important;
+    font-weight: 900 !important;
+    letter-spacing: .2px !important;
+}
+
+/* Beautiful pink text with a soft raised/glow effect */
+button:not(.close):not(.cancel),
+.btn:not(.close):not(.cancel) {
+    color: #ffd6ee !important;
+    text-shadow:
+        0 1px 0 rgba(255,255,255,.45),
+        0 2px 2px rgba(80,0,45,.55),
+        0 0 8px rgba(255,105,180,.35) !important;
+}
+
+/* Keep important warning/error buttons readable */
+button.cancel,
+button.close,
+.btn.cancel,
+.btn.close,
+button.delete,
+.btn.delete {
+    text-shadow: 0 2px 3px rgba(0,0,0,.55) !important;
+}
+
+/* Popup buttons */
+#remark-save-confirm button {
+    color: #ffe1f2 !important;
+    text-shadow:
+        0 1px 0 rgba(255,255,255,.5),
+        0 2px 3px rgba(60,0,30,.55),
+        0 0 8px rgba(255,120,190,.35) !important;
+}
+
+/* Main navigation/action buttons — slightly brighter pink lettering */
+#creditBtn, #listBtn, #remarkBtn, #viewerBtn,
+#saveBtn, #refreshBtn, #entriesBtn, #totalsBtn,
+#todayBtn, #monthlyBtn, #companyBtn, #townBtn, #calculatorBtn,
+#cwiseBtn, #shareBtn, #incomeBtn {
+    color: #ffe0f1 !important;
+    font-weight: 900 !important;
+}
+
+/* Make disabled text still visible */
+button:disabled {
+    opacity: .7 !important;
+    -webkit-text-fill-color: #ffd6ea !important;
+}
+
+/* ===== v70 — Beautiful Button Font (not pink text) ===== */
+button,
+.btn,
+input[type="button"],
+input[type="submit"] {
+    font-family:
+        "Trebuchet MS",
+        "Arial Rounded MT Bold",
+        "Segoe UI Semibold",
+        "Segoe UI",
+        sans-serif !important;
+    font-weight: 800 !important;
+    letter-spacing: .15px !important;
+    line-height: 1.15 !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    text-shadow:
+        0 2px 2px rgba(0,0,0,.45),
+        0 0 5px rgba(255,255,255,.18) !important;
+}
+
+/* Main action buttons */
+#creditBtn, #listBtn, #remarkBtn, #viewerBtn,
+#saveBtn, #refreshBtn, #entriesBtn, #totalsBtn,
+#todayBtn, #monthlyBtn, #companyBtn, #townBtn, #calculatorBtn,
+#cwiseBtn, #shareBtn, #incomeBtn {
+    font-family:
+        "Trebuchet MS",
+        "Arial Rounded MT Bold",
+        "Segoe UI Semibold",
+        "Segoe UI",
+        sans-serif !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+    font-weight: 900 !important;
+    text-shadow:
+        0 2px 2px rgba(0,0,0,.5),
+        0 0 4px rgba(255,255,255,.16) !important;
+}
+
+/* Popup buttons use the same clean font */
+#remark-save-confirm button {
+    font-family:
+        "Trebuchet MS",
+        "Arial Rounded MT Bold",
+        "Segoe UI Semibold",
+        "Segoe UI",
+        sans-serif !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+    font-weight: 900 !important;
+}
+
+/* Disabled buttons remain readable */
+button:disabled {
+    -webkit-text-fill-color: #fff !important;
+}
+
+/* v71 — direct Viber share button */
+#previewSection button i.fa-viber{
+    font-size:16px;
+}
+
+/* =========================================================
+   v77 — Manchester United crest + Powered by Tin Win Ko
+   ========================================================= */
+.tko-brand-footer{
+    width:100%;
+    margin:14px auto 22px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    position:relative;
+}
+.tko-mu-crest-wrap{
+    width:112px;
+    height:118px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    animation:tkoMuFloat 3.2s ease-in-out infinite;
+}
+.tko-mu-crest-wrap::before{
+    content:"";
+    position:absolute;
+    width:94px;
+    height:94px;
+    border-radius:50%;
+    background:rgba(220,0,0,.22);
+    filter:blur(18px);
+    z-index:-1;
+    animation:tkoMuGlow 2.2s ease-in-out infinite alternate;
+}
+.tko-mu-crest{
+    width:100px;
+    max-width:100%;
+    height:auto;
+    display:block;
+    object-fit:contain;
+    filter:
+        drop-shadow(0 5px 4px rgba(0,0,0,.55))
+        drop-shadow(0 0 10px rgba(255,55,35,.35));
+    transition:transform .25s ease, filter .25s ease;
+}
+.tko-mu-crest:hover{
+    transform:scale(1.06);
+    filter:
+        drop-shadow(0 7px 5px rgba(0,0,0,.60))
+        drop-shadow(0 0 17px rgba(255,55,35,.55));
+}
+.tko-powered-by{
+    min-width:210px;
+    padding:9px 20px 10px;
+    border-radius:16px;
+    text-align:center;
+    background:linear-gradient(145deg,rgba(15,31,61,.88),rgba(4,13,29,.94));
+    border:1px solid rgba(80,180,255,.38);
+    box-shadow:
+        0 7px 18px rgba(0,0,0,.32),
+        inset 0 1px 0 rgba(255,255,255,.12),
+        0 0 16px rgba(0,135,255,.10);
+    backdrop-filter:blur(10px);
+}
+.tko-powered-label{
+    display:block;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:1.2px;
+    color:#8fd8ff;
+    text-transform:uppercase;
+}
+.tko-powered-name{
+    display:block;
+    margin-top:2px;
+    font-size:21px;
+    font-weight:1000;
+    letter-spacing:.5px;
+    color:#fff;
+    text-shadow:
+        0 -1px 0 rgba(255,255,255,.75),
+        0 2px 0 rgba(0,0,0,.42),
+        0 4px 7px rgba(0,0,0,.35),
+        0 0 10px rgba(70,190,255,.35);
+}
+@keyframes tkoMuFloat{
+    0%,100%{transform:translateY(0) rotate(0deg)}
+    50%{transform:translateY(-5px) rotate(.6deg)}
+}
+@keyframes tkoMuGlow{
+    from{opacity:.45;transform:scale(.88)}
+    to{opacity:.80;transform:scale(1.06)}
+}
+@media (max-width:600px){
+    .tko-brand-footer{margin-top:10px;margin-bottom:16px}
+    .tko-mu-crest-wrap{width:96px;height:100px}
+    .tko-mu-crest{width:86px}
+    .tko-powered-by{min-width:185px;padding:8px 16px}
+    .tko-powered-name{font-size:19px}
+}
+
+/* =========================================================
+   v78 — Floating Crest / Holographic Modern Design
+   ========================================================= */
+.tko-brand-footer{
+    width:100%;
+    margin:18px auto 24px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    position:relative;
+    overflow:visible;
+}
+.tko-mu-crest-wrap{
+    width:145px;
+    height:155px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    isolation:isolate;
+    animation:tkoCrestFloat 3.4s ease-in-out infinite;
+}
+.tko-mu-crest-wrap::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:54%;
+    width:120px;
+    height:120px;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(30,145,255,.42),rgba(0,80,255,.12) 42%,transparent 72%);
+    filter:blur(12px);
+    z-index:-2;
+    animation:tkoCrestGlow 2.4s ease-in-out infinite alternate;
+}
+.tko-mu-crest-wrap::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:-3px;
+    width:105px;
+    height:16px;
+    transform:translateX(-50%);
+    border-radius:50%;
+    background:radial-gradient(ellipse,rgba(0,180,255,.78),rgba(40,90,255,.20) 48%,transparent 74%);
+    filter:blur(5px);
+    z-index:-1;
+    animation:tkoCrestShadow 3.4s ease-in-out infinite;
+}
+.tko-mu-crest{
+    width:125px;
+    height:auto;
+    display:block;
+    object-fit:contain;
+    filter:
+        drop-shadow(0 12px 7px rgba(0,0,0,.58))
+        drop-shadow(0 0 9px rgba(255,45,45,.34))
+        drop-shadow(0 0 16px rgba(0,150,255,.28));
+    animation:tkoCrestTilt 5s ease-in-out infinite;
+}
+.tko-powered-by{
+    min-width:230px;
+    padding:8px 22px 10px;
+    border-radius:18px;
+    text-align:center;
+    background:linear-gradient(145deg,rgba(12,31,66,.92),rgba(2,12,28,.96));
+    border:1px solid rgba(74,181,255,.48);
+    box-shadow:
+        0 9px 20px rgba(0,0,0,.38),
+        inset 0 1px 0 rgba(255,255,255,.16),
+        0 0 20px rgba(0,135,255,.18);
+}
+.tko-powered-label{
+    display:block;
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:1.6px;
+    color:#9adfff;
+    text-transform:uppercase;
+}
+.tko-powered-name{
+    display:block;
+    margin-top:1px;
+    font-size:23px;
+    font-weight:1000;
+    letter-spacing:.6px;
+    color:#fff;
+    text-shadow:
+        0 -1px 0 rgba(255,255,255,.9),
+        0 2px 0 rgba(0,0,0,.45),
+        0 5px 9px rgba(0,0,0,.42),
+        0 0 12px rgba(64,190,255,.45);
+}
+@keyframes tkoCrestFloat{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-11px)}
+}
+@keyframes tkoCrestTilt{
+    0%,100%{transform:rotate(0deg) scale(1)}
+    50%{transform:rotate(.8deg) scale(1.025)}
+}
+@keyframes tkoCrestGlow{
+    from{opacity:.45;transform:translate(-50%,-50%) scale(.86)}
+    to{opacity:.9;transform:translate(-50%,-50%) scale(1.10)}
+}
+@keyframes tkoCrestShadow{
+    0%,100%{transform:translateX(-50%) scaleX(.82);opacity:.45}
+    50%{transform:translateX(-50%) scaleX(1.08);opacity:.78}
+}
+@media (max-width:600px){
+    .tko-brand-footer{margin-top:12px;margin-bottom:18px}
+    .tko-mu-crest-wrap{width:125px;height:135px}
+    .tko-mu-crest{width:108px}
+    .tko-powered-by{min-width:195px;padding:7px 17px 9px}
+    .tko-powered-name{font-size:20px}
+}
+
+/* =========================================================
+   v79 — Clean Floating Manchester United Crest
+   Fix: crest must not overlap the Share/Income row or
+   the existing background artwork.
+   ========================================================= */
+
+/* Keep the footer in normal document flow and above background art. */
+.tko-brand-footer{
+    position:relative !important;
+    z-index:20 !important;
+    isolation:isolate !important;
+    clear:both !important;
+    overflow:visible !important;
+    margin:28px auto 26px !important;
+    padding:8px 0 0 !important;
+    width:100% !important;
+}
+
+/* Smaller crest area: no giant logo and no overlap with buttons. */
+.tko-mu-crest-wrap{
+    width:118px !important;
+    height:126px !important;
+    margin:0 auto !important;
+    position:relative !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    overflow:visible !important;
+    transform:translateZ(0);
+    animation:tkoCleanFloat 3.2s ease-in-out infinite !important;
+}
+
+/* Floating hologram ring sits behind the crest. */
+.tko-mu-crest-wrap::before{
+    content:"" !important;
+    position:absolute !important;
+    left:50% !important;
+    top:56% !important;
+    width:92px !important;
+    height:92px !important;
+    transform:translate(-50%,-50%) !important;
+    border:2px solid rgba(42,174,255,.55) !important;
+    border-radius:50% !important;
+    background:radial-gradient(circle,rgba(25,135,255,.22),transparent 65%) !important;
+    box-shadow:
+        0 0 14px rgba(0,155,255,.45),
+        inset 0 0 14px rgba(0,155,255,.18) !important;
+    filter:none !important;
+    z-index:-2 !important;
+    animation:tkoRingPulse 2.5s ease-in-out infinite !important;
+}
+
+/* Thin floating platform/shadow. */
+.tko-mu-crest-wrap::after{
+    content:"" !important;
+    position:absolute !important;
+    left:50% !important;
+    bottom:3px !important;
+    width:82px !important;
+    height:10px !important;
+    transform:translateX(-50%) !important;
+    border-radius:50% !important;
+    background:radial-gradient(ellipse,rgba(0,190,255,.75),rgba(35,80,255,.18) 48%,transparent 75%) !important;
+    filter:blur(4px) !important;
+    z-index:-1 !important;
+    animation:tkoPlatformPulse 3.2s ease-in-out infinite !important;
+}
+
+.tko-mu-crest{
+    width:92px !important;
+    max-width:92px !important;
+    height:auto !important;
+    position:relative !important;
+    z-index:3 !important;
+    filter:
+        drop-shadow(0 7px 4px rgba(0,0,0,.62))
+        drop-shadow(0 0 8px rgba(255,45,45,.28))
+        drop-shadow(0 0 12px rgba(0,145,255,.30)) !important;
+    animation:tkoCrestGentle 4.5s ease-in-out infinite !important;
+}
+
+/* Powered by badge is kept below the floating crest with clean spacing. */
+.tko-powered-by{
+    position:relative !important;
+    z-index:4 !important;
+    margin:6px auto 0 !important;
+    min-width:190px !important;
+    max-width:78vw !important;
+    padding:8px 18px 9px !important;
+    border-radius:16px !important;
+}
+
+/* Remove any accidental excessive logo height on small screens. */
+@media (max-width:600px){
+    .tko-brand-footer{
+        margin:22px auto 18px !important;
+        padding-top:4px !important;
+    }
+    .tko-mu-crest-wrap{
+        width:105px !important;
+        height:112px !important;
+    }
+    .tko-mu-crest{
+        width:82px !important;
+        max-width:82px !important;
+    }
+    .tko-mu-crest-wrap::before{
+        width:78px !important;
+        height:78px !important;
+    }
+    .tko-mu-crest-wrap::after{
+        width:70px !important;
+    }
+    .tko-powered-by{
+        min-width:175px !important;
+        margin-top:4px !important;
+    }
+    .tko-powered-name{
+        font-size:19px !important;
+    }
+}
+
+@keyframes tkoCleanFloat{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
+}
+@keyframes tkoCrestGentle{
+    0%,100%{transform:rotate(0deg) scale(1)}
+    50%{transform:rotate(.7deg) scale(1.025)}
+}
+@keyframes tkoRingPulse{
+    0%,100%{opacity:.42;transform:translate(-50%,-50%) scale(.90)}
+    50%{opacity:.85;transform:translate(-50%,-50%) scale(1.04)}
+}
+@keyframes tkoPlatformPulse{
+    0%,100%{opacity:.38;transform:translateX(-50%) scaleX(.78)}
+    50%{opacity:.78;transform:translateX(-50%) scaleX(1.02)}
+}
+
+/* =========================================================
+   v80 — Text-only Powered by Tin Win Ko
+   No logo/image. Small, clean and modern.
+   ========================================================= */
+.tko-powered-only{
+    width:max-content;
+    max-width:88vw;
+    margin:14px auto 20px;
+    padding:6px 16px 7px;
+    display:flex;
+    align-items:baseline;
+    justify-content:center;
+    gap:6px;
+    border-radius:999px;
+    background:rgba(7,20,42,.62);
+    border:1px solid rgba(88,190,255,.28);
+    box-shadow:
+        0 5px 14px rgba(0,0,0,.24),
+        inset 0 1px 0 rgba(255,255,255,.10);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+}
+.tko-powered-small{
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+    color:#8edcff;
+    text-shadow:0 0 8px rgba(65,190,255,.28);
+}
+.tko-powered-brand{
+    font-size:15px;
+    font-weight:900;
+    letter-spacing:.25px;
+    color:#fff;
+    text-shadow:
+        0 1px 0 rgba(255,255,255,.65),
+        0 2px 3px rgba(0,0,0,.38),
+        0 0 8px rgba(80,190,255,.30);
+}
+@media (max-width:600px){
+    .tko-powered-only{
+        margin:10px auto 15px;
+        padding:5px 13px 6px;
+    }
+    .tko-powered-small{font-size:9px}
+    .tko-powered-brand{font-size:14px}
+}
+
+/* =========================================================
+   v81 — Tiny text-only Powered by
+   No box / no background / no border.
+   ========================================================= */
+.tko-powered-only{
+    width:auto !important;
+    max-width:none !important;
+    margin:8px auto 12px !important;
+    padding:0 !important;
+    display:block !important;
+    text-align:center !important;
+    background:transparent !important;
+    border:0 !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+}
+.tko-powered-small{
+    display:inline !important;
+    margin:0 4px 0 0 !important;
+    padding:0 !important;
+    font-size:9px !important;
+    line-height:1 !important;
+    font-weight:700 !important;
+    letter-spacing:.7px !important;
+    text-transform:none !important;
+    color:rgba(180,225,255,.82) !important;
+    text-shadow:0 1px 2px rgba(0,0,0,.45) !important;
+}
+.tko-powered-brand{
+    display:inline !important;
+    margin:0 !important;
+    padding:0 !important;
+    font-size:12px !important;
+    line-height:1 !important;
+    font-weight:800 !important;
+    letter-spacing:.2px !important;
+    color:rgba(255,255,255,.90) !important;
+    text-shadow:
+        0 1px 0 rgba(255,255,255,.35),
+        0 2px 3px rgba(0,0,0,.42) !important;
+}
+@media (max-width:600px){
+    .tko-powered-only{
+        margin:6px auto 10px !important;
+    }
+    .tko-powered-small{font-size:8px !important}
+    .tko-powered-brand{font-size:11px !important}
+}
+
+/* =========================================================
+   v82 — Single small Powered by text at the very bottom
+   ========================================================= */
+.tko-powered-only{
+    display:block !important;
+    width:auto !important;
+    max-width:none !important;
+    margin:18px auto 8px !important;
+    padding:0 !important;
+    text-align:center !important;
+    background:transparent !important;
+    border:0 !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+    color:rgba(255,255,255,.82) !important;
+    font-family:"Segoe UI","Trebuchet MS",sans-serif !important;
+    font-size:11px !important;
+    line-height:1.2 !important;
+    font-weight:700 !important;
+    letter-spacing:.35px !important;
+    text-shadow:
+        0 1px 0 rgba(255,255,255,.28),
+        0 2px 3px rgba(0,0,0,.48) !important;
+}
+@media (max-width:600px){
+    .tko-powered-only{
+        margin:14px auto 7px !important;
+        font-size:10px !important;
+    }
+}
+
+/* v83 — force ONE text-only footer, no box, at the very bottom */
+.tko-powered-only{
+    display:block !important;
+    width:100% !important;
+    box-sizing:border-box !important;
+    margin:16px 0 8px !important;
+    padding:0 !important;
+    text-align:center !important;
+    background:transparent !important;
+    border:0 !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+    color:rgba(255,255,255,.78) !important;
+    font-family:"Segoe UI","Trebuchet MS",sans-serif !important;
+    font-size:10px !important;
+    line-height:1.2 !important;
+    font-weight:700 !important;
+    letter-spacing:.3px !important;
+    text-shadow:0 1px 2px rgba(0,0,0,.45) !important;
+}
+
+/* =========================================================
+   v84 — Small animated gradient text only
+   Powered by Tin Win Ko
+   No box / no image / no background
+   ========================================================= */
+.tko-powered-only{
+    display:block !important;
+    width:100% !important;
+    margin:16px 0 8px !important;
+    padding:0 !important;
+    text-align:center !important;
+    background:transparent !important;
+    border:0 !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+
+    /* Moving premium gradient */
+    background-image:linear-gradient(
+        90deg,
+        #8fdcff 0%,
+        #ffffff 18%,
+        #72a8ff 36%,
+        #d58cff 52%,
+        #ffffff 68%,
+        #75e6ff 84%,
+        #8fdcff 100%
+    ) !important;
+    background-size:300% auto !important;
+    background-position:0% 50% !important;
+    background-clip:text !important;
+    -webkit-background-clip:text !important;
+    -webkit-text-fill-color:transparent !important;
+
+    font-family:"Segoe UI","Trebuchet MS",sans-serif !important;
+    font-size:10px !important;
+    line-height:1.2 !important;
+    font-weight:800 !important;
+    letter-spacing:.45px !important;
+    animation:tkoPoweredShimmer 3.8s linear infinite !important;
+    filter:drop-shadow(0 1px 2px rgba(0,0,0,.55)) !important;
+}
+
+@keyframes tkoPoweredShimmer{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+@media (max-width:600px){
+    .tko-powered-only{
+        margin:14px 0 7px !important;
+        font-size:9px !important;
+        letter-spacing:.35px !important;
+    }
+}
+
+/* =========================================================
+   v85 — Remark Viewer Name + Quantity Grouping
+   ========================================================= */
+.remark-name-summary{
+    padding:10px;
+    background:#f5f7fb;
+}
+.remark-name-card{
+    margin-bottom:10px;
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 3px 10px rgba(15,23,42,.07);
+}
+.remark-name-card:last-child{margin-bottom:0}
+.remark-name-card-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:11px 12px;
+    background:linear-gradient(135deg,#eef7ff,#f7f0ff);
+    border-bottom:1px solid #e2e8f0;
+}
+.remark-name-card-name{
+    font-weight:900;
+    color:#263238;
+    font-size:15px;
+    word-break:break-word;
+}
+.remark-name-card-qty{
+    flex:0 0 auto;
+    padding:5px 9px;
+    border-radius:999px;
+    background:linear-gradient(135deg,#198754,#2fbf71);
+    color:#fff;
+    font-size:12px;
+    font-weight:900;
+    white-space:nowrap;
+    box-shadow:0 3px 7px rgba(25,135,84,.22);
+}
+/* Name is already grouped in the header; details stay compact. */
+.remark-name-card .remark-viewer-item{
+    grid-template-columns:1fr 1fr 90px auto;
+}
+@media(max-width:650px){
+    .remark-name-card-header{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+    .remark-name-card-qty{
+        align-self:flex-start;
+    }
+    .remark-name-card .remark-viewer-item{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+/* =========================================================
+   v86 — Town Wise popup text colors
+   ========================================================= */
+#total-quantity .name-town-box,
+#total-quantity .name-town-box * {
+    font-weight: 800;
+}
+#total-quantity .name-town-box > div {
+    color: #1565c0 !important;
+}
+
+/* =========================================================
+   v87 — Top Town Wise popup: blue bold button/text
+   ========================================================= */
+
+/* Town Wise popup container created by the Town Wise button */
+.town-wise-popup button,
+#townWisePopup button,
+#town-wise-popup button,
+.town-wise-modal button {
+    color: #1565c0 !important;
+    font-weight: 900 !important;
+    text-shadow: 0 1px 2px rgba(21,101,192,.18) !important;
+}
+
+/* Dynamic white selection button inside Town Wise popup */
+.town-wise-popup .name-town-box,
+#townWisePopup .name-town-box,
+#town-wise-popup .name-town-box,
+.town-wise-modal .name-town-box {
+    color: #1565c0 !important;
+    font-weight: 900 !important;
+}
+
+/* Fallback for the popup shown in the screenshot:
+   force direct popup buttons and their text to blue */
+div[style*="position: fixed"] button[data-town-wise],
+div[style*="position: fixed"] .town-wise-popup-btn {
+    color: #1565c0 !important;
+    font-weight: 900 !important;
+}
+
+/* =========================================================
+   v88 — EXACT top Town Wise popup (#townWiseNewModal)
+   ========================================================= */
+#townWiseNewModal button,
+#townWiseNewModal button *,
+#townWiseNewModal button strong {
+    color: #1565c0 !important;
+    font-weight: 900 !important;
+    text-shadow: 0 1px 2px rgba(21,101,192,.20) !important;
+}
+
+/* =========================================================
+   v89 — Town Wise Remaining label
+   Remaining text = gray
+   Remaining quantity = red bold
+   ========================================================= */
+.town-wise-remaining-label {
+    color: #666666 !important;
+    font-weight: 900 !important;
+}
+.town-wise-remaining-qty {
+    color: #e51c23 !important;
+    font-weight: 900 !important;
+}
+
+/* =========================================================
+   v90 — FORCE Town Wise Remaining colors in Android WebView
+   ========================================================= */
+#total-quantity .town-wise-remaining-label,
+#total-quantity .town-wise-remaining-label * {
+    color: #4b5563 !important;
+    -webkit-text-fill-color: #4b5563 !important;
+    font-weight: 900 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+#total-quantity .town-wise-remaining-qty,
+#total-quantity .town-wise-remaining-qty * {
+    color: #dc2626 !important;
+    -webkit-text-fill-color: #dc2626 !important;
+    font-weight: 900 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+
+/* =========================================================
+   v91 — EXACT TOP "Town Wise" popup text color FIX
+   This popup is #townWiseNewModal.
+   Force BOTH normal color and Android WebView text-fill color.
+   ========================================================= */
+#townWiseNewModal .townWiseTopPopupBtn,
+#townWiseNewModal .townWiseTopPopupBtn *,
+#townWiseNewModal .townWiseTopPopupBtn strong,
+#townWiseNewModal .townWiseTopPopupClose,
+#townWiseNewModal .townWiseTopPopupClose * {
+    color: #1565c0 !important;
+    -webkit-text-fill-color: #1565c0 !important;
+    font-weight: 900 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    text-shadow: none !important;
+}
+
+/* Keep the Close button blue too */
+#townWiseNewModal .townWiseTopPopupClose {
+    color: #1565c0 !important;
+    -webkit-text-fill-color: #1565c0 !important;
+}
+
+
+/* =========================================================
+   v92 — Top Town Wise popup
+   Town name = BLUE | Quantity = RED
+   ========================================================= */
+#townWiseNewModal .townWiseTopTownText {
+    color: #1565c0 !important;
+    -webkit-text-fill-color: #1565c0 !important;
+    font-weight: 900 !important;
+}
+
+#townWiseNewModal .townWiseTopQtyText {
+    color: #dc2626 !important;
+    -webkit-text-fill-color: #dc2626 !important;
+    font-weight: 900 !important;
+}
+
+
+/* =========================================================
+   v93 — Modern colorful Remark Viewer
+   ========================================================= */
+#remarkViewerModal .remark-viewer-group{
+    border-radius:16px !important;
+    overflow:hidden !important;
+    border:1px solid rgba(124,58,237,.20) !important;
+    box-shadow:0 10px 28px rgba(30,41,59,.13) !important;
+}
+
+#remarkViewerModal .remark-viewer-group-title{
+    background:linear-gradient(135deg,#6d28d9,#9333ea) !important;
+    color:#ffffff !important;
+    font-weight:900 !important;
+    letter-spacing:.7px !important;
+    text-shadow:0 2px 5px rgba(0,0,0,.22) !important;
+}
+
+#remarkViewerModal .remark-name-summary{
+    background:linear-gradient(180deg,#f8fbff,#eef4ff) !important;
+    padding:12px !important;
+}
+
+#remarkViewerModal .remark-name-card{
+    border:1px solid #d7e3f4 !important;
+    border-radius:15px !important;
+    box-shadow:0 6px 18px rgba(37,99,235,.10) !important;
+    background:#ffffff !important;
+}
+
+#remarkViewerModal .remark-name-card-header{
+    background:linear-gradient(135deg,#e0f2fe,#ede9fe) !important;
+    padding:13px 14px !important;
+}
+
+#remarkViewerModal .remark-name-info{
+    display:flex !important;
+    align-items:center !important;
+    flex-wrap:wrap !important;
+    gap:8px !important;
+    min-width:0 !important;
+}
+
+#remarkViewerModal .remark-name-card-name{
+    color:#1e3a8a !important;
+    -webkit-text-fill-color:#1e3a8a !important;
+    font-size:18px !important;
+    font-weight:900 !important;
+    text-shadow:0 1px 1px rgba(30,58,138,.10) !important;
+}
+
+#remarkViewerModal .remark-name-paid{
+    display:inline-flex !important;
+    align-items:center !important;
+    padding:5px 9px !important;
+    border-radius:999px !important;
+    background:linear-gradient(135deg,#dcfce7,#bbf7d0) !important;
+    color:#166534 !important;
+    -webkit-text-fill-color:#166534 !important;
+    border:1px solid #86efac !important;
+    font-size:12px !important;
+    font-weight:900 !important;
+    white-space:nowrap !important;
+    box-shadow:0 3px 8px rgba(22,101,52,.12) !important;
+}
+
+#remarkViewerModal .remark-name-card-qty{
+    background:linear-gradient(135deg,#059669,#22c55e) !important;
+    color:#ffffff !important;
+    -webkit-text-fill-color:#ffffff !important;
+    font-size:13px !important;
+    font-weight:900 !important;
+    box-shadow:0 5px 12px rgba(5,150,105,.25) !important;
+}
+
+#remarkViewerModal .remark-name-card .remark-viewer-item{
+    background:linear-gradient(135deg,#ffffff,#f8fafc) !important;
+    border-top:1px solid #e2e8f0 !important;
+}
+
+#remarkViewerModal .remark-viewer-label{
+    color:#64748b !important;
+    -webkit-text-fill-color:#64748b !important;
+    font-size:12px !important;
+    font-weight:800 !important;
+    letter-spacing:.3px !important;
+}
+
+#remarkViewerModal .remark-viewer-value{
+    color:#0f172a !important;
+    -webkit-text-fill-color:#0f172a !important;
+    font-size:17px !important;
+    font-weight:900 !important;
+}
+
+#remarkViewerModal .remark-viewer-item > div:nth-child(1) .remark-viewer-value{
+    color:#7c3aed !important;
+    -webkit-text-fill-color:#7c3aed !important;
+}
+
+#remarkViewerModal .remark-viewer-item > div:nth-child(2) .remark-viewer-value{
+    color:#2563eb !important;
+    -webkit-text-fill-color:#2563eb !important;
+}
+
+#remarkViewerModal .remark-viewer-item > div:nth-child(3) .remark-viewer-value{
+    color:#dc2626 !important;
+    -webkit-text-fill-color:#dc2626 !important;
+}
+
+@media(max-width:650px){
+    #remarkViewerModal .remark-name-info{
+        width:100% !important;
+    }
+    #remarkViewerModal .remark-name-paid{
+        font-size:11px !important;
+    }
+}
+
+
+/* =========================================================
+   v95 — ONLY bottom "Powered by Tin Win Ko"
+   Top header "Tin Win Ko" is intentionally untouched.
+   ========================================================= */
+.tko-powered-only.powered-by-footer{
+    display:block !important;
+    width:100% !important;
+    max-width:none !important;
+    box-sizing:border-box !important;
+
+    /* bottom placement */
+    position:relative !important;
+    margin:30px 0 0 !important;
+    padding:14px 10px 18px !important;
+
+    /* remove old pill/box */
+    border:none !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+
+    /* modern text */
+    text-align:center !important;
+    font-size:18px !important;
+    font-weight:900 !important;
+    letter-spacing:1.3px !important;
+    color:#c9f4ff !important;
+    -webkit-text-fill-color:#c9f4ff !important;
+
+    background:linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(14,116,144,.10) 25%,
+        rgba(37,99,235,.20) 50%,
+        rgba(14,116,144,.10) 75%,
+        transparent 100%
+    ) !important;
+
+    text-shadow:
+        0 0 4px rgba(56,189,248,.80),
+        0 0 13px rgba(59,130,246,.65),
+        0 3px 7px rgba(0,0,0,.65) !important;
+
+    animation:poweredFooterGlow 3s ease-in-out infinite !important;
+}
+
+@keyframes poweredFooterGlow{
+    0%,100%{
+        transform:translateY(0);
+        filter:brightness(1);
+    }
+    50%{
+        transform:translateY(-1px);
+        filter:brightness(1.22);
+    }
+}
+
+@media(max-width:650px){
+    .tko-powered-only.powered-by-footer{
+        font-size:16px !important;
+        padding:12px 8px 16px !important;
+        letter-spacing:1px !important;
+    }
+}
+
+
+/* =========================================================
+   v96 — Select or Add text only: slightly larger
+   Button / select size is intentionally unchanged.
+   ========================================================= */
+select option:first-child,
+.company-select option:first-child,
+.name-select option:first-child,
+.town-select option:first-child {
+    font-size: 17px !important;
+    font-weight: 800 !important;
+}
+
+/* The visible "Select or Add" placeholder text */
+select:invalid,
+select option[value=""],
+select option[value="Select or Add"] {
+    font-size: 17px !important;
+    font-weight: 800 !important;
+}
+
+/* Covers custom select/dropdown implementations without resizing controls */
+.select-or-add,
+.select-placeholder,
+.dropdown-placeholder {
+    font-size: 17px !important;
+    font-weight: 800 !important;
+}
+
+
+/* =========================================================
+   v97 — Correction
+   Preferred List: remove "Select or Add".
+   Preferred list button/control size remains unchanged.
+   ========================================================= */
+.preferred-row-single-line select,
+.preferred-row-single-line select option {
+    font-size: 12px !important;
+    font-weight: normal !important;
+}
+
+
+/* =========================================================
+   v98 — MAIN Company / Name / Town "Select or Add"
+   Screenshot controls only. Control size is unchanged.
+   ========================================================= */
+#company,
+#name,
+#town {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+}
+
+/* Make the visible default Select or Add text slightly larger */
+#company option,
+#name option,
+#town option {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+}
+
+/* Keep the dropdown/button height, width and padding unchanged */
+.preferred-row-single-line select#company,
+.preferred-row-single-line select#name,
+.preferred-row-single-line select#town {
+    height: 35px !important;
+    box-sizing: border-box !important;
+}
+
+
+/* =========================================================
+   v99 — Android WebView offline icon fallback + popup stacking fix
+   Font Awesome CDN may not load inside local Android WebView.
+   These local fallbacks keep button icons visible without changing sizes.
+   ========================================================= */
+
+i.fas, i.far, i.fab {
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    font-family: inherit !important;
+    font-style: normal !important;
+    font-weight: inherit !important;
+    min-width: 1em !important;
+    line-height: 1 !important;
+    vertical-align: middle !important;
+}
+
+/* Local icon fallback rules */
+i.fa-arrow-left::before{content:"←" !important;}
+i.fa-bold::before{content:"𝐁" !important;}
+i.fa-box::before{content:"📦" !important;}
+i.fa-broom::before{content:"🧹" !important;}
+i.fa-building::before{content:"🏢" !important;}
+i.fa-calculator::before{content:"🧮" !important;}
+i.fa-calendar::before{content:"📅" !important;}
+i.fa-calendar-alt::before{content:"📅" !important;}
+i.fa-calendar-check::before{content:"🗓️" !important;}
+i.fa-calendar-day::before{content:"📆" !important;}
+i.fa-calendar-times::before{content:"📅" !important;}
+i.fa-calendar-week::before{content:"🗓️" !important;}
+i.fa-check::before{content:"✓" !important;}
+i.fa-check-circle::before{content:"✓" !important;}
+i.fa-check-double::before{content:"✓✓" !important;}
+i.fa-city::before{content:"🏙️" !important;}
+i.fa-clipboard-list::before{content:"📋" !important;}
+i.fa-clock::before{content:"🕒" !important;}
+i.fa-copy::before{content:"📋" !important;}
+i.fa-credit-card::before{content:"💳" !important;}
+i.fa-database::before{content:"🗄️" !important;}
+i.fa-download::before{content:"⇩" !important;}
+i.fa-edit::before{content:"✏️" !important;}
+i.fa-eraser::before{content:"⌫" !important;}
+i.fa-exclamation-circle::before{content:"!" !important;}
+i.fa-exclamation-triangle::before{content:"⚠️" !important;}
+i.fa-eye::before{content:"👁️" !important;}
+i.fa-history::before{content:"↶" !important;}
+i.fa-info-circle::before{content:"ⓘ" !important;}
+i.fa-italic::before{content:"𝘐" !important;}
+i.fa-layer-group::before{content:"▤" !important;}
+i.fa-list-alt::before{content:"☷" !important;}
+i.fa-list-ol::before{content:"☷" !important;}
+i.fa-list-ul::before{content:"☷" !important;}
+i.fa-map-marker-alt::before{content:"📍" !important;}
+i.fa-money-bill-wave::before{content:"💵" !important;}
+i.fa-plus::before{content:"+" !important;}
+i.fa-plus-circle::before{content:"⊕" !important;}
+i.fa-save::before{content:"💾" !important;}
+i.fa-spinner::before{content:"◌" !important;}
+i.fa-sticky-note::before{content:"📝" !important;}
+i.fa-sun::before{content:"☀️" !important;}
+i.fa-tasks::before{content:"☑️" !important;}
+i.fa-times::before{content:"×" !important;}
+i.fa-times-circle::before{content:"✕" !important;}
+i.fa-trash::before{content:"🗑️" !important;}
+i.fa-trash-alt::before{content:"🗑️" !important;}
+i.fa-truck::before{content:"🚚" !important;}
+i.fa-underline::before{content:"U̲" !important;}
+i.fa-user::before{content:"👤" !important;}
+i.fa-user-circle::before{content:"👤" !important;}
+i.fa-users::before{content:"👥" !important;}
+i.fa-viber::before{content:"📞" !important;}
+
+/* Notes / modal must always be above the header menu on Android tablets */
+.modern-notes-popup,
+#notes-popup {
+    z-index: 300000 !important;
+    isolation: isolate !important;
+}
+
+/* Other modal overlays stay above the main menu too */
+.modal-overlay,
+#remarkViewerModal,
+#townWiseModal {
+    z-index: 250000 !important;
+}
+
+/* The menu remains normal when no popup is open */
+.top-buttons .menu-container {
+    z-index: 20 !important;
+}
+.dropdown-menu {
+    z-index: 30 !important;
+}
+
+
+/* =========================================================
+   v100 — Daily To-Do List tabs moved to TOP
+   Today / Pending / Done / Expired are horizontal under header
+   ========================================================= */
+.todo-popup-body {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+}
+
+.todo-tabs {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    min-height: 72px !important;
+    padding: 10px 16px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 10px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    background: rgba(26, 26, 46, 0.94) !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255,255,255,.12) !important;
+    scrollbar-width: thin !important;
+}
+
+.todo-tab {
+    flex: 1 0 150px !important;
+    min-width: 140px !important;
+    padding: 13px 16px !important;
+    border-left: none !important;
+    border-bottom: 4px solid transparent !important;
+    border-radius: 12px !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+}
+
+.todo-tab.active {
+    border-left-color: transparent !important;
+    border-bottom-color: #8e44ad !important;
+    background: linear-gradient(135deg, rgba(123,31,162,.42), rgba(59,130,246,.16)) !important;
+}
+
+.todo-content {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+}
+
+/* Tablet/mobile: keep all four tabs clearly visible at the top */
+@media (max-width: 900px) {
+    .todo-tabs {
+        min-height: 64px !important;
+        padding: 8px 10px !important;
+        gap: 7px !important;
+    }
+
+    .todo-tab {
+        flex: 1 0 118px !important;
+        min-width: 118px !important;
+        padding: 11px 12px !important;
+        font-size: 14px !important;
+    }
+}
+
+/* Phone: horizontal top tabs can scroll rather than changing popup layout */
+@media (max-width: 600px) {
+    .todo-tabs {
+        align-items: stretch !important;
+    }
+
+    .todo-tab {
+        flex-basis: 108px !important;
+        min-width: 108px !important;
+        gap: 7px !important;
+        padding: 10px 9px !important;
+        font-size: 13px !important;
+    }
+}
+
+
+/* ============================================
+   TOWN WISE: DARK BLUE 3D NAME + RED QUANTITY
+   ============================================ */
+#total-quantity .town-wise-name-3d {
+    color: #062a78 !important;
+    -webkit-text-fill-color: #062a78 !important;
+    font-weight: 900 !important;
+    letter-spacing: .2px;
+    text-shadow: 1px 1px 0 rgba(255,255,255,.72),
+                 2px 2px 2px rgba(0,0,0,.22),
+                 0 1px 7px rgba(6,42,120,.18);
+}
+
+#total-quantity .town-wise-qty-red {
+    color: #d71920 !important;
+    -webkit-text-fill-color: #d71920 !important;
+    font-weight: 900 !important;
+    text-shadow: 1px 1px 1px rgba(255,255,255,.55),
+                 1px 2px 2px rgba(0,0,0,.20);
+}
+
+/* Slightly smaller, cleaner text on Redmi Pad / mobile */
+#total-quantity .name-town-box,
+#total-quantity .name-town-box * {
+    line-height: 1.25;
+}
+#total-quantity .name-town-box {
+    min-height: 42px !important;
+}
+
+
+/* ===== FINAL TOP ROW: Town Wise / Notes / To Do / Date / Menu ===== */
+.tko-new-top-buttons{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:6px !important;
+    width:100% !important;
+    box-sizing:border-box !important;
+    padding:8px 8px !important;
+    margin:0 0 8px !important;
+}
+.tko-top-btn{
+    border:0 !important;
+    border-radius:9px !important;
+    padding:9px 8px !important;
+    color:#fff !important;
+    font-size:12px !important;
+    font-weight:800 !important;
+    white-space:nowrap !important;
+    cursor:pointer !important;
+    box-shadow:0 2px 5px rgba(0,0,0,.18) !important;
+    transition:transform .15s ease !important;
+}
+.tko-top-btn:active{transform:translateY(1px) !important;}
+.tko-town{background:#1565c0 !important;}
+.tko-notes{background:#7c3aed !important;}
+.tko-todo{background:#059669 !important;}
+.tko-date{background:#ea580c !important;}
+.tko-menu{background:#374151 !important;}
+.tko-new-top-buttons > .tko-top-btn{flex:1 1 0 !important; min-width:0 !important;}
+.tko-menu-container{position:relative !important; flex:1 1 0 !important; min-width:0 !important;}
+.tko-menu-container .tko-menu{width:100% !important;}
+.tko-menu-container .dropdown-menu{
+    right:0 !important;
+    left:auto !important;
+    min-width:210px !important;
+}
+.tko-menu-container .dropdown-menu button{
+    display:block !important;
+    width:100% !important;
+    padding:12px 15px !important;
+    text-align:left !important;
+    background:#fff !important;
+    border:none !important;
+    border-bottom:1px solid #f0f0f0 !important;
+    color:#333 !important;
+    font-size:14px !important;
+    cursor:pointer !important;
+}
+@media(max-width:700px){
+    .tko-new-top-buttons{gap:4px !important;padding:7px 4px !important;}
+    .tko-top-btn{font-size:10px !important;padding:8px 3px !important;}
+}
+
+
+/* ===== MENU BUTTON COLORS ===== */
+.tko-menu-container .dropdown-menu button{
+    color:#fff !important;
+    font-weight:800 !important;
+    border-radius:8px !important;
+    margin:5px 7px !important;
+    width:calc(100% - 14px) !important;
+    border:none !important;
+    box-shadow:0 2px 4px rgba(0,0,0,.14) !important;
+}
+.tko-menu-container .dropdown-menu button:nth-child(1){background:#dc2626 !important;} /* Debt */
+.tko-menu-container .dropdown-menu button:nth-child(2){background:#7c3aed !important;} /* Preferred backup */
+.tko-menu-container .dropdown-menu button:nth-child(3){background:#9333ea !important;} /* Preferred restore */
+.tko-menu-container .dropdown-menu button:nth-child(4){background:#0284c7 !important;} /* Copy Day */
+.tko-menu-container .dropdown-menu button:nth-child(5){background:#0891b2 !important;} /* Restore Day */
+.tko-menu-container .dropdown-menu button:nth-child(6){background:#16a34a !important;} /* Backup File */
+.tko-menu-container .dropdown-menu button:nth-child(7){background:#f97316 !important;} /* Restore File */
+.tko-menu-container .dropdown-menu button:nth-child(8){background:#2563eb !important;} /* Google */
+
+
+/* ===== C-WISE POPUP: WHITE 3D NAME/TOWN TEXT ===== */
+#cwModal .enhanced-town-name,
+#cwModal .cw-name,
+#cwModal .cw-person-name,
+#cwModal .town-name,
+#cwModal .company-name,
+#cwModal [data-cw-name="true"],
+#cwModal .name-text,
+#cwDetails .enhanced-town-name,
+#cwDetails .cw-name,
+#cwDetails .cw-person-name,
+#cwDetails .town-name,
+#cwDetails .company-name,
+#cwDetails [data-cw-name="true"],
+#cwDetails .name-text{
+    background:transparent !important;
+    border:none !important;
+    border-radius:0 !important;
+    padding:0 !important;
+    color:#ffffff !important;
+    opacity:1 !important;
+    font-weight:800 !important;
+    text-shadow:
+        1px 1px 0 #0b1f3a,
+        2px 2px 0 #071426,
+        3px 3px 4px rgba(0,0,0,.70) !important;
+    -webkit-text-stroke:.25px rgba(255,255,255,.30) !important;
+    filter:none !important;
+}
+
+/* C-Wise popup: make text inside name rows visible even when generated without a class */
+#cwModal .cw-details > div,
+#cwModal .company-wise-details > div,
+#cwModal .company-item .name,
+#cwModal .town-item .name,
+#cwDetails .cw-details > div,
+#cwDetails .company-wise-details > div{
+    opacity:1 !important;
+}
+
+/* Explicit utility class for dynamic C-Wise names */
+.tko-cwise-white-3d{
+    color:#fff !important;
+    background:transparent !important;
+    border:none !important;
+    padding:0 !important;
+    font-weight:800 !important;
+    text-shadow:
+        1px 1px 0 #0b1f3a,
+        2px 2px 0 #071426,
+        3px 3px 4px rgba(0,0,0,.72) !important;
+    -webkit-text-stroke:.25px rgba(255,255,255,.30) !important;
+}
+
+
+/* v71 — keep Credit/List controls below all popup overlays */
+#creditBtn, #listBtn, #creditButton, #listButton {
+  position: relative !important;
+  z-index: 20 !important;
+}
+#remark-save-confirm, #dailyViberModal, .credit-modal, #creditModal,
+.now-popup, #now-popup, .now-modal, #nowModal, .modal-overlay {
+  isolation: isolate;
+}
+#remark-save-confirm, #dailyViberModal, .credit-modal, #creditModal,
+.now-popup, #now-popup, .now-modal, #nowModal {
+  z-index: 2000000 !important;
+}
+
+
+/* v72 — Credit/List can never appear above any popup or modal */
+#creditBtn, #listBtn, #creditButton, #listButton,
+.credit-btn, .list-btn {
+    z-index: 10 !important;
+}
+.modal-overlay, .modern-notes-popup, #notes-popup,
+#remarkViewerModal, #townWiseModal, #cwModal,
+#remark-save-confirm, #dailyViberModal, .credit-modal,
+#creditModal, .now-popup, #now-popup, .now-modal, #nowModal {
+    z-index: 3000000 !important;
+}
+
+/* Delivery-fee-paid Viber rows */
+.viber-paid-row .viber-paid-company,
+.viber-paid-row .viber-paid-quantity {
+    font-weight: 800;
+}
+.viber-paid-row .viber-paid-check {
+    color: #22c55e !important;
+    -webkit-text-fill-color: #22c55e !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,.25);
+    font-weight: 900;
+    margin-left: 4px;
+}
+
+
+/* FINAL POPUP LAYER FIX */
+#creditBtn, #listBtn, #creditButton, #listButton, .credit-btn, .credit-list-btn { position:relative !important; z-index:1 !important; }
+#creditModal.credit-modal { position:fixed !important; inset:0 !important; width:100vw !important; height:100vh !important; z-index:2147483647 !important; }
+#creditModal.credit-modal .credit-modal-content { position:relative !important; z-index:2147483647 !important; }
+.modal-overlay, .modern-popup-overlay, .todo-popup-overlay, #townWiseModal, #cwModal, #remarkViewerModal, #remark-save-confirm, #dailyViberModal, #notes-popup, .now-popup, #now-popup, .now-modal, #nowModal { z-index:2147483646 !important; }
+
+
+/* FINAL: Town Wise Name text = sunlight-readable vivid blue */
+.town-wise-name-3d,
+#total-quantity .name-town-box .town-wise-name-3d {
+    color: #003BFF !important;
+    -webkit-text-fill-color: #003BFF !important;
+    font-weight: 900 !important;
+    letter-spacing: .15px !important;
+    text-shadow:
+        -1px -1px 0 #ffffff,
+         1px -1px 0 #ffffff,
+        -1px  1px 0 #ffffff,
+         1px  1px 0 #ffffff,
+         0 2px 2px rgba(0,0,0,.55),
+         0 0 5px rgba(255,255,255,.75) !important;
+}
+
+/* FINAL: Select အပေါ်က Company / Name / Town label အရောင်တူ */
+label[for="company"],
+label[for="name"],
+label[for="town"] {
+    color: #7a3e00 !important;
+    -webkit-text-fill-color: #7a3e00 !important;
+}
+
+
+/* ===== Restored Viber Voucher Image Styles ===== */
+.tko-voucher-top {
+    padding: 28px 34px 24px !important;
+    background: linear-gradient(135deg, #7360f2 0%, #665cac 55%, #4b3f9f 100%) !important;
+    color: #fff !important;
+    text-align: center !important;
+}
+
+.tko-voucher-brand {
+    font-family: 'Trebuchet MS', Arial, sans-serif !important;
+    font-size: 31px !important;
+    font-weight: 900 !important;
+    letter-spacing: 2px !important;
+    color: #fff !important;
+}
+
+.tko-voucher-label {
+    margin-top: 7px !important;
+    font-family: 'Trebuchet MS', Arial, sans-serif !important;
+    font-size: 17px !important;
+    font-weight: 800 !important;
+    letter-spacing: 3px !important;
+    color: #efeaff !important;
+}
+
+.tko-voucher-date {
+    margin: 0 !important;
+    padding: 15px 34px !important;
+    text-align: right !important;
+    background: #f4f1ff !important;
+    color: #51458f !important;
+    font-size: 18px !important;
+    font-weight: 800 !important;
+}
+
+.tko-voucher-person {
+    padding: 22px 34px 18px !important;
+    background: #fff !important;
+    border-bottom: 1px dashed #c9c3ee !important;
+}
+
+.tko-voucher-name {
+    color: #073b88 !important;
+    font-size: 28px !important;
+    font-weight: 900 !important;
+    line-height: 1.3 !important;
+}
+
+.tko-voucher-town {
+    margin-top: 5px !important;
+    color: #667085 !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+}
+
+.tko-voucher-heading,
+.tko-voucher-row {
+    display: grid !important;
+    grid-template-columns: 1fr 110px !important;
+    align-items: center !important;
+    gap: 14px !important;
+}
+
+.tko-voucher-heading {
+    padding: 13px 34px !important;
+    background: #f8f9fc !important;
+    color: #667085 !important;
+    font-family: 'Trebuchet MS', Arial, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 900 !important;
+    letter-spacing: 1.2px !important;
+}
+
+.tko-voucher-heading span:last-child {
+    text-align: right !important;
+}
+
+.tko-voucher-list {
+    padding: 0 34px !important;
+    background: #fff !important;
+}
+
+.tko-voucher-row {
+    min-height: 58px !important;
+    padding: 12px 0 !important;
+    border-bottom: 1px solid #edf0f5 !important;
+}
+
+.tko-voucher-company {
+    color: #18212f !important;
+    font-size: 19px !important;
+    font-weight: 800 !important;
+    line-height: 1.45 !important;
+}
+
+.tko-voucher-qty {
+    color: #d71920 !important;
+    font-size: 23px !important;
+    font-weight: 900 !important;
+    text-align: right !important;
+}
+
+.tko-voucher-paid {
+    display: inline-block !important;
+    margin-left: 8px !important;
+    padding: 3px 8px !important;
+    border-radius: 999px !important;
+    background: #eaf9ef !important;
+    color: #15803d !important;
+    font-size: 12px !important;
+    font-weight: 900 !important;
+    vertical-align: middle !important;
+}
+
+.tko-voucher-empty {
+    padding: 24px 0 !important;
+    color: #98a2b3 !important;
+    text-align: center !important;
+}
+
+.tko-voucher-total {
+    margin: 20px 34px !important;
+    padding: 17px 20px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    border-radius: 14px !important;
+    background: linear-gradient(135deg, #fff2f2 0%, #fff8f8 100%) !important;
+    border: 2px solid #ffd0d0 !important;
+    color: #7f1d1d !important;
+    font-family: 'Trebuchet MS', Arial, sans-serif !important;
+    font-size: 17px !important;
+    font-weight: 900 !important;
+}
+
+.tko-voucher-total strong {
+    color: #d71920 !important;
+    font-size: 30px !important;
+    font-weight: 900 !important;
+}
+
+.tko-voucher-unpaid {
+    margin: -8px 34px 20px !important;
+    padding: 13px 20px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    border-radius: 12px !important;
+    background: #fff8e8 !important;
+    border: 2px solid #f5d58a !important;
+    color: #8a5a00 !important;
+    font-size: 17px !important;
+    font-weight: 900 !important;
+}
+
+.tko-voucher-unpaid strong {
+    color: #c47a00 !important;
+    font-size: 26px !important;
+    font-weight: 900 !important;
+}
+
+.tko-voucher-footer {
+    padding: 18px 34px 22px !important;
+    background: #f8f9fc !important;
+    color: #667085 !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    line-height: 1.8 !important;
+}
+
+.tko-voucher-footer div:first-child {
+    color: #15803d !important;
+    font-size: 16px !important;
+    font-weight: 900 !important;
+}
+
+/* Restored voucher footer */
+.tko-voucher-footer{
+    margin-top:16px;
+    text-align:center;
+    padding:0 8px 4px;
+}
+.tko-voucher-paid{
+    color:#198754;
+    font-size:15px;
+    font-weight:900;
+    line-height:1.6;
+}
+.tko-voucher-note{
+    margin-top:2px;
+    color:#555;
+    font-size:11px;
+    font-weight:700;
+    line-height:1.5;
+}
+
+
+
+.tko-voucher-capture .tko-voucher-unpaid-fee{color:#d32f2f!important;font-size:15px!important;font-weight:900!important;line-height:1.7!important;text-align:center!important;margin:0 auto 8px!important;}
+.tko-voucher-paid-line .paid-black {
+    color: #000000 !important;
+    font-weight: 700 !important;
+}
+
+.tko-voucher-paid-line .paid-green {
+    color: #16a34a !important;
+    font-weight: 900 !important;
+}
+
+/* =========================================================
+   TKO FINAL BACKGROUND — QUIET MOONLIT COUNTRYSIDE
+   Replaces the old starry-night CSS background.
+   ========================================================= */
+html, body {
+    background-image: url("night-background.png") !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    background-color: #071525 !important;
+}
+
+/* Remove the old star/shooting-star overlays completely. */
+body::before,
+body::after {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+}
+
+
+/* ===== Today at a Glance: readable text + hidden until Town Wise is opened ===== */
+#today-at-a-glance {
+    display: none !important;
+    color: #1f2937 !important;
+}
+#today-at-a-glance > div:first-child {
+    color: #1f2937 !important;
+}
+#today-at-a-glance th {
+    color: #1f2937 !important;
+    -webkit-text-fill-color: #1f2937 !important;
+    text-shadow: none !important;
+}
+#today-at-a-glance td {
+    color: #1f2937 !important;
+    -webkit-text-fill-color: #1f2937 !important;
+    text-shadow: none !important;
+}
+#today-at-a-glance tbody td:nth-child(2) {
+    color: #dc2626 !important;
+    -webkit-text-fill-color: #dc2626 !important;
+}
+#today-at-a-glance tbody td:nth-child(3) {
+    color: #8e44ad !important;
+    -webkit-text-fill-color: #8e44ad !important;
+}
+#today-at-a-glance.town-wise-glance-visible {
+    display: block !important;
+}
+
+
+/* FINAL: Compact Credit List Delete button only */
+.credit-delete-btn {
+    padding: 4px 8px !important;
+    min-width: 0 !important;
+    width: auto !important;
+    height: 34px !important;
+    font-size: 11px !important;
+    gap: 3px !important;
+    border-radius: 6px !important;
+    line-height: 1 !important;
+}
+.credit-delete-btn i {
+    font-size: 11px !important;
+}
+
+
+/* TKO PREMIUM UI — visual polish only */
+:root{
+  --tko-radius:18px;
+  --tko-radius-sm:14px;
+  --tko-shadow:0 12px 32px rgba(0,0,0,.16);
+}
+.card,.panel,.section,.box,.modal-box,.popup-box,.town-card,.summary-card,.dashboard-card{
+  border-radius:var(--tko-radius)!important;
+  box-shadow:var(--tko-shadow)!important;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+input,select,textarea{
+  border-radius:var(--tko-radius-sm)!important;
+  transition:box-shadow .2s ease,border-color .2s ease,transform .15s ease;
+}
+input:focus,select:focus,textarea:focus{
+  outline:none!important;
+  box-shadow:0 0 0 3px rgba(33,150,243,.16),0 8px 20px rgba(0,0,0,.08)!important;
+}
+button{
+  border-radius:var(--tko-radius-sm)!important;
+  transition:transform .15s ease,box-shadow .2s ease,filter .2s ease!important;
+}
+button:active{transform:scale(.975)!important}
+button:hover{filter:brightness(1.025)}
+button:not(.close-btn-soft){box-shadow:0 5px 14px rgba(0,0,0,.10)}
+.modal-overlay{
+  backdrop-filter:blur(5px);
+  -webkit-backdrop-filter:blur(5px);
+}
+h1,h2,h3,h4{letter-spacing:-.01em}
+*{scrollbar-width:thin}
+*::-webkit-scrollbar{width:6px;height:6px}
+*::-webkit-scrollbar-thumb{border-radius:20px;background:rgba(100,116,139,.38)}
+*::-webkit-scrollbar-track{background:transparent}
+.townWiseTopPopupBtn,.town-button-list button{
+  border-radius:15px!important;
+  box-shadow:0 5px 14px rgba(0,0,0,.08)!important;
+}
+#today-glance-body,#todayGlance,.today-glance{
+  border-radius:var(--tko-radius)!important;
+}
+@media(max-width:600px){
+  body{-webkit-tap-highlight-color:transparent}
+  button,input,select{min-height:44px}
+  .modal-box,.popup-box{
+    max-width:calc(100vw - 24px);
+    border-radius:22px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    transition-duration:.01ms!important;
+    animation-duration:.01ms!important;
+  }
+}
+
+
+/* ===== TKO FINAL: Stable Notes Popup + Restore Header Drop Animation ===== */
+#notes-popup.modern-notes-popup {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    display: none;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 14px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    z-index: 300000 !important;
+}
+#notes-popup.modern-notes-popup[style*="display: flex"],
+#notes-popup.modern-notes-popup.is-open {
+    display: flex !important;
+}
+#notes-popup .modern-notes-content {
+    width: min(100%, 620px) !important;
+    max-width: calc(100vw - 28px) !important;
+    max-height: calc(100vh - 28px) !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    border-radius: 22px !important;
+}
+#notes-popup .modern-notes-body {
+    min-height: 0 !important;
+    max-height: calc(100vh - 220px) !important;
+    overflow-y: auto !important;
+    box-sizing: border-box !important;
+}
+#notes-popup .modern-notes-textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Restore the original top-to-bottom Tin Win Ko entrance even when the device
+   reports reduced motion. Other animations are left untouched. */
+@keyframes tkoHeaderDropRestore {
+    0%   { transform: translateY(-200px); opacity: 0; }
+    40%  { transform: translateY(30px); opacity: 1; }
+    60%  { transform: translateY(-15px); }
+    80%  { transform: translateY(8px); }
+    100% { transform: translateY(0); opacity: 1; }
+}
+.header-center.animate-drop {
+    animation: tkoHeaderDropRestore 1.5s ease-out !important;
+    opacity: 1 !important;
+}
+
+
+
+
+/* ===== VIBER VOUCHER DESIGN ONLY — no background image in the voucher ===== */
+.tko-voucher-capture {
+    box-sizing: border-box !important;
+    width: 720px !important;
+    overflow: hidden !important;
+    border: 1px solid #dbe4f0 !important;
+    border-radius: 22px !important;
+    background: #ffffff !important;
+    color: #172033 !important;
+    font-family: Arial, 'Noto Sans Myanmar', sans-serif !important;
+    box-shadow: 0 14px 36px rgba(15, 23, 42, .14) !important;
+}
+.tko-voucher-capture * {
+    box-sizing: border-box !important;
+}
+.tko-voucher-top {
+    padding: 27px 34px 24px !important;
+    background: linear-gradient(135deg, #142d4e 0%, #245a81 55%, #287c83 100%) !important;
+    color: #ffffff !important;
+    text-align: center !important;
+    border-bottom: 4px solid #f4c66a !important;
+}
+.tko-voucher-brand {
+    color: #ffffff !important;
+    font-size: 30px !important;
+    font-weight: 900 !important;
+    letter-spacing: 2px !important;
+}
+.tko-voucher-label {
+    margin-top: 7px !important;
+    color: #eaf7ff !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    letter-spacing: 3px !important;
+}
+.tko-voucher-date {
+    padding: 14px 32px !important;
+    margin: 0 !important;
+    background: #f2f7fb !important;
+    color: #31516d !important;
+    border-bottom: 1px solid #e2eaf1 !important;
+    text-align: right !important;
+    font-size: 17px !important;
+    font-weight: 800 !important;
+}
+.tko-voucher-person {
+    padding: 22px 34px 19px !important;
+    background: #ffffff !important;
+    border-bottom: 1px dashed #cbd5e1 !important;
+}
+.tko-voucher-name {
+    color: #123f70 !important;
+    font-size: 28px !important;
+    font-weight: 900 !important;
+    line-height: 1.35 !important;
+    overflow-wrap: anywhere !important;
+}
+.tko-voucher-town {
+    margin-top: 6px !important;
+    color: #64748b !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+}
+.tko-voucher-heading,
+.tko-voucher-row {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 90px !important;
+    align-items: center !important;
+    gap: 14px !important;
+}
+.tko-voucher-heading {
+    padding: 13px 34px !important;
+    background: #eaf2f8 !important;
+    color: #31516d !important;
+    font-size: 13px !important;
+    font-weight: 900 !important;
+    letter-spacing: 1.4px !important;
+}
+.tko-voucher-heading span:last-child {
+    text-align: right !important;
+}
+.tko-voucher-list {
+    padding: 0 34px !important;
+    background: #ffffff !important;
+}
+.tko-voucher-row {
+    min-height: 54px !important;
+    padding: 11px 0 !important;
+    border-bottom: 1px solid #edf1f5 !important;
+}
+.tko-voucher-company {
+    color: #263449 !important;
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    line-height: 1.5 !important;
+    overflow-wrap: anywhere !important;
+}
+.tko-voucher-qty {
+    color: #c62828 !important;
+    font-size: 22px !important;
+    font-weight: 900 !important;
+    text-align: right !important;
+}
+.tko-voucher-paid {
+    display: inline-block !important;
+    margin: 4px 0 0 6px !important;
+    padding: 3px 8px !important;
+    border-radius: 999px !important;
+    background: #e8f7ee !important;
+    color: #167443 !important;
+    font-size: 12px !important;
+    font-weight: 900 !important;
+    vertical-align: middle !important;
+}
+.tko-voucher-total {
+    margin: 20px 30px 16px !important;
+    padding: 17px 20px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 14px !important;
+    border: 1px solid #f2d18a !important;
+    border-left: 6px solid #e7ad35 !important;
+    border-radius: 14px !important;
+    background: #fff8e8 !important;
+    color: #6c4b12 !important;
+    font-size: 16px !important;
+    font-weight: 900 !important;
+}
+.tko-voucher-total strong {
+    color: #b42318 !important;
+    font-size: 29px !important;
+    font-weight: 900 !important;
+}
+.tko-voucher-unpaid {
+    margin: 0 30px 20px !important;
+    padding: 13px 20px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 14px !important;
+    border: 1px solid #f2c5c5 !important;
+    border-left: 6px solid #d94841 !important;
+    border-radius: 12px !important;
+    background: #fff1f1 !important;
+    color: #8f2424 !important;
+    font-size: 16px !important;
+    font-weight: 900 !important;
+}
+.tko-voucher-unpaid strong {
+    color: #b42318 !important;
+    font-size: 24px !important;
+    font-weight: 900 !important;
+}
+.tko-voucher-footer {
+    margin: 0 !important;
+    padding: 17px 30px 22px !important;
+    background: #f7fafc !important;
+    border-top: 1px solid #e5edf4 !important;
+    text-align: center !important;
+}
+.tko-voucher-paid-line {
+    font-size: 14px !important;
+    line-height: 1.8 !important;
+}
+.tko-voucher-paid-line .paid-black {
+    color: #334155 !important;
+    font-weight: 700 !important;
+}
+.tko-voucher-paid-line .paid-green {
+    color: #16834a !important;
+    font-weight: 900 !important;
+}
+.tko-voucher-note {
+    margin-top: 8px !important;
+    color: #64748b !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    line-height: 1.7 !important;
+}
+.tko-voucher-capture .tko-voucher-unpaid-fee {
+    color: #b42318 !important;
+    font-size: 14px !important;
+    font-weight: 900 !important;
+    line-height: 1.7 !important;
+    text-align: center !important;
+    margin: 0 auto 8px !important;
+}
+
+
+
+
+/* ===== VIBER VOUCHER LAYOUT ONLY: date first, grouped paid/unpaid companies ===== */
+.tko-voucher-capture {
+  box-sizing:border-box!important; width:720px!important; overflow:hidden!important;
+  background:#fff!important; color:#172033!important; border:1px solid #d9e5ef!important;
+  border-radius:20px!important; font-family:Arial,'Noto Sans Myanmar',sans-serif!important;
+}
+.tko-voucher-capture * { box-sizing:border-box!important; }
+.tko-voucher-date-top {
+  margin:0!important; padding:18px 28px!important; text-align:center!important;
+  background:linear-gradient(110deg,#eaf6ff,#cce8ff)!important;
+  border-bottom:3px solid #45a7f5!important; color:#123e70!important;
+  font-size:25px!important; font-weight:900!important;
+}
+.tko-voucher-person {
+  padding:20px 28px 14px!important; text-align:center!important;
+  background:#fffdf5!important; border-bottom:1px solid #f3dfad!important;
+}
+.tko-voucher-name { color:#123e70!important; font-size:29px!important; font-weight:900!important; line-height:1.4!important; }
+.tko-voucher-town { color:#167443!important; font-size:21px!important; font-weight:800!important; margin-top:4px!important; }
+.tko-voucher-grand-total {
+  margin:0!important; padding:15px 28px!important; border-radius:0!important;
+  border:0!important; border-bottom:2px solid #ffd3da!important;
+  background:#fff0f3!important; color:#123e70!important; font-size:22px!important;
+}
+.tko-voucher-grand-total strong { font-size:34px!important; color:#d71920!important; }
+.tko-voucher-paid-section,.tko-voucher-unpaid-section { margin:16px 18px!important; overflow:hidden!important; border-radius:15px!important; }
+.tko-voucher-paid-section { border:2px solid #25a879!important; background:#f3fff8!important; }
+.tko-voucher-unpaid-section { border:2px solid #f15b72!important; background:#fff5f6!important; }
+.tko-voucher-section-title {
+  display:flex!important; align-items:center!important; justify-content:space-between!important;
+  gap:12px!important; padding:14px 18px!important; color:#fff!important;
+  font-size:19px!important; font-weight:900!important; line-height:1.6!important;
+}
+.tko-voucher-paid-section .tko-voucher-section-title { background:linear-gradient(110deg,#09885c,#21b47c)!important; }
+.tko-voucher-unpaid-section .tko-voucher-section-title { background:linear-gradient(110deg,#e51e42,#ff536a)!important; }
+.tko-voucher-section-title strong {
+  flex-shrink:0!important; padding:4px 10px!important; border-radius:10px!important;
+  background:rgba(255,255,255,.95)!important; color:#123e70!important; font-size:24px!important;
+}
+.tko-voucher-unpaid-section .tko-voucher-section-title strong { color:#c71935!important; }
+.tko-voucher-section-list { padding:6px 20px 10px!important; }
+.tko-voucher-section-list .tko-voucher-row {
+  display:grid!important; grid-template-columns:minmax(0,1fr) 95px!important;
+  gap:12px!important; align-items:center!important; min-height:42px!important;
+  padding:8px 0!important; border-bottom:1px dashed #d5e6dc!important;
+}
+.tko-voucher-unpaid-section .tko-voucher-row { border-bottom-color:#ffd0d8!important; }
+.tko-voucher-company { color:#132f63!important; font-size:18px!important; font-weight:800!important; line-height:1.5!important; overflow-wrap:anywhere!important; }
+.tko-voucher-qty { color:#1254a0!important; text-align:right!important; font-size:21px!important; font-weight:900!important; white-space:nowrap!important; }
+.tko-voucher-check { font-size:18px!important; }
+.tko-voucher-handshake { margin:10px 18px!important; text-align:center!important; color:#ed8a19!important; font-size:18px!important; font-weight:900!important; letter-spacing:1px!important; }
+.tko-voucher-note {
+  margin:16px 18px 18px!important; padding:15px 18px!important; text-align:center!important;
+  border:1px solid #9bcfff!important; border-radius:13px!important;
+  background:#edf7ff!important; color:#123e70!important;
+  font-size:16px!important; font-weight:800!important; line-height:1.8!important;
+}
+.tko-voucher-empty { padding:16px 0!important; color:#64748b!important; text-align:center!important; font-weight:700!important; }
