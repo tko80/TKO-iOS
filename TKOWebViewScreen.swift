@@ -287,24 +287,30 @@ final class TKOWebViewController: UIViewController,
         _ userContentController: WKUserContentController,
         didReceive message: WKScriptMessage
     ) {
+        print("TKO Bridge received:", message.name, message.body)
 
         guard let body = message.body as? [String: Any] else {
+            print("TKO Bridge error: message body is not a dictionary")
             return
         }
 
-        switch message.name {
+        // Keep UIKit presentation and other UI work on the main thread.
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
 
-        case "tkoBackup":
-            handleBackup(body)
+            switch message.name {
+            case "tkoBackup":
+                self.handleBackup(body)
 
-        case "tkoTTS":
-            speak(body["text"] as? String ?? "")
+            case "tkoTTS":
+                self.speak(body["text"] as? String ?? "")
 
-        case "tkoShare":
-            handleShare(body)
+            case "tkoShare":
+                self.handleShare(body)
 
-        default:
-            break
+            default:
+                break
+            }
         }
     }
 
@@ -365,7 +371,6 @@ final class TKOWebViewController: UIViewController,
     // MARK: - Restore Confirmation
 
     private func showRestoreConfirmation() {
-
         let alert = UIAlertController(
             title: "Restore Backup",
             message: "Select your TKO backup JSON file. Restoring may replace existing data.",
@@ -377,14 +382,29 @@ final class TKOWebViewController: UIViewController,
         )
 
         alert.addAction(
-            UIAlertAction(title: "Choose File", style: .default) {
-                [weak self] _ in
-
+            UIAlertAction(title: "Choose File", style: .default) { [weak self] _ in
                 self?.openRestorePicker()
             }
         )
 
-        present(alert, animated: true)
+        // Present from the currently visible controller. This avoids a silent
+        // presentation failure if another controller is already being presented.
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+
+            var presenter: UIViewController = self
+            while let presented = presenter.presentedViewController {
+                presenter = presented
+            }
+
+            guard presenter.viewIfLoaded?.window != nil else {
+                print("TKO Restore error: no visible view controller for confirmation")
+                return
+            }
+
+            print("TKO Restore: showing confirmation popup")
+            presenter.present(alert, animated: true)
+        }
     }
 
     private func openRestorePicker() {
@@ -706,27 +726,36 @@ final class TKOWebViewController: UIViewController,
             }
         }
 
-        // iOS: intercept the actual Restore File menu tap in the capture phase.
-        // This avoids depending on the page's Android/browser fallback function.
+        // iOS: intercept the Restore File button before page-level click handlers.
+        // The original AndroidBackup.openRestoreFile() bridge remains available below.
         document.addEventListener('click', function(event) {
-            var target = event.target;
-            var button = target && target.closest ? target.closest('button') : null;
+            var node = event.target;
+            var button = null;
+
+            // Walk up from the tapped icon/text to find its button.
+            while (node && node !== document) {
+                if (node.tagName && String(node.tagName).toLowerCase() === 'button') {
+                    button = node;
+                    break;
+                }
+                node = node.parentElement;
+            }
+
             if (!button) return;
 
             var inlineAction = button.getAttribute('onclick') || '';
-            var buttonText = (button.textContent || '').trim();
-
-            var isRestoreMenuButton =
+            var buttonText = (button.textContent || '').trim().toLowerCase();
+            var isRestoreButton =
                 inlineAction.indexOf('openRestoreFilePicker') !== -1 ||
-                (buttonText.indexOf('Restore File') !== -1 &&
-                 button.closest('#menu-dropdown, .menu-dropdown, #menuDropdown'));
+                buttonText.indexOf('restore file') !== -1;
 
-            if (!isRestoreMenuButton) return;
+            if (!isRestoreButton) return;
 
             event.preventDefault();
             event.stopPropagation();
             if (event.stopImmediatePropagation) event.stopImmediatePropagation();
 
+            console.log('TKO iOS: Restore File button intercepted');
             post('tkoBackup', { action: 'restore' });
         }, true);
 
