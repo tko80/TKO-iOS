@@ -5989,69 +5989,95 @@ function restoreData() {
 }
 
 
-/* ===== NATIVE ANDROID RESTORE BRIDGE v39 ===== */
-function restoreBackupJsonFromAndroid(jsonText) {
+/* ===== NATIVE iOS / ANDROID RESTORE BRIDGE v44 =====
+   Native iOS passes confirmed=true after showing a native confirmation
+   dialog. Browser/Android callers retain the normal JS confirmation.
+*/
+function restoreBackupJsonFromAndroid(jsonText, nativeConfirmed) {
+    let oldStorage = null;
     try {
-        const parsed = JSON.parse(String(jsonText || ""));
-        let storage = null;
+        let parsed = jsonText;
 
-        if (parsed && typeof parsed === "object" && parsed.storage &&
-            typeof parsed.storage === "object" && !Array.isArray(parsed.storage)) {
+        // Accept a JSON string from Swift, a parsed object, and legacy
+        // double-encoded JSON files.
+        if (typeof parsed === "string") parsed = JSON.parse(parsed);
+        if (typeof parsed === "string") parsed = JSON.parse(parsed);
+
+        let storage = null;
+        if (parsed && typeof parsed === "object" &&
+            parsed.storage && typeof parsed.storage === "object" &&
+            !Array.isArray(parsed.storage)) {
             storage = parsed.storage;
         } else if (Array.isArray(parsed)) {
             storage = { entries: parsed };
         } else if (parsed && typeof parsed === "object") {
             storage = {};
             Object.keys(parsed).forEach(key => {
-                if (key !== "app" && key !== "backupVersion" && key !== "createdAt") {
+                if (!["app", "backupVersion", "createdAt"].includes(key)) {
                     storage[key] = parsed[key];
                 }
             });
         }
 
         if (!storage || !Object.keys(storage).length) {
-            throw new Error("No restore data found");
+            throw new Error("No restore data found in this backup file.");
         }
 
-        if (!confirm(
-            "Restore this backup?\\n\\n" +
-            "Current saved data will be replaced."
-        )) return;
+        // Do not invoke WKWebView's JavaScript confirm when the native
+        // iOS confirmation has already been shown.
+        if (nativeConfirmed !== true && !window.confirm(
+            "Restore this backup?\n\nCurrent saved app data will be replaced."
+        )) return false;
 
-        localStorage.clear();
+        // Keep a rollback snapshot so a storage write error cannot leave
+        // the app with an empty or partially restored database.
+        oldStorage = {};
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key !== null) oldStorage[key] = localStorage.getItem(key);
+        }
 
-        Object.keys(storage).forEach(key => {
-            const value = storage[key];
-            localStorage.setItem(
-                key,
-                typeof value === "string" ? value : JSON.stringify(value)
-            );
-        });
+        try {
+            localStorage.clear();
+            Object.keys(storage).forEach(key => {
+                const value = storage[key];
+                localStorage.setItem(
+                    key,
+                    typeof value === "string" ? value : JSON.stringify(value)
+                );
+            });
+        } catch (writeError) {
+            localStorage.clear();
+            Object.keys(oldStorage).forEach(key => {
+                localStorage.setItem(key, oldStorage[key]);
+            });
+            throw writeError;
+        }
 
         if (typeof showModernPopup === "function") {
             showModernPopup(
-                "✅ Restore Successful!\\n\\n" +
-                Object.keys(storage).length +
-                " saved data sections restored.\\n\\nThe app will reload now.",
+                "✅ Restore Successful!\n\n" + Object.keys(storage).length +
+                " saved data sections restored.\n\nThe app will reload now.",
                 "Restore Complete"
             );
         } else {
-            alert("✅ Restore Successful!");
+            window.alert("Restore successful. The app will reload now.");
         }
 
-        setTimeout(() => location.reload(), 1000);
+        window.setTimeout(() => window.location.reload(), 1200);
+        return true;
     } catch (error) {
         console.error("Native restore error:", error);
+        const message = "Restore failed: " + (error && error.message ? error.message : "Invalid backup file.");
         if (typeof showModernPopup === "function") {
-            showModernPopup(
-                "❌ Restore Failed!\\n\\nPlease select a valid TKO backup JSON file.",
-                "Restore Error"
-            );
+            showModernPopup(message, "Restore Error");
         } else {
-            alert("❌ Restore Failed!");
+            window.alert(message);
         }
+        return false;
     }
 }
+window.restoreBackupJsonFromAndroid = restoreBackupJsonFromAndroid;
 
 async function shareCurrentPreviewToViber(event) {
     if (event && event.preventDefault) event.preventDefault();
