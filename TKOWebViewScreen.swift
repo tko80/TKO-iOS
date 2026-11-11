@@ -380,12 +380,7 @@ final class TKOWebViewController: UIViewController,
             UIAlertAction(title: "Choose File", style: .default) {
                 [weak self] _ in
 
-                // Wait until the confirmation alert has finished dismissing.
-                // Presenting the document picker immediately can be ignored by iOS.
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    guard let self = self else { return }
-                    self.openRestorePicker()
-                }
+                self?.openRestorePicker()
             }
         )
 
@@ -402,15 +397,8 @@ final class TKOWebViewController: UIViewController,
         picker.delegate = self
         picker.allowsMultipleSelection = false
 
-        guard presentedViewController == nil else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-                self?.openRestorePicker()
-            }
-            return
-        }
-
         pendingRestore = true
-        picker.modalPresentationStyle = .formSheet
+
         present(picker, animated: true)
     }
 
@@ -717,6 +705,30 @@ final class TKOWebViewController: UIViewController,
 
             }
         }
+
+        // iOS: intercept the actual Restore File menu tap in the capture phase.
+        // This avoids depending on the page's Android/browser fallback function.
+        document.addEventListener('click', function(event) {
+            var target = event.target;
+            var button = target && target.closest ? target.closest('button') : null;
+            if (!button) return;
+
+            var inlineAction = button.getAttribute('onclick') || '';
+            var buttonText = (button.textContent || '').trim();
+
+            var isRestoreMenuButton =
+                inlineAction.indexOf('openRestoreFilePicker') !== -1 ||
+                (buttonText.indexOf('Restore File') !== -1 &&
+                 button.closest('#menu-dropdown, .menu-dropdown, #menuDropdown'));
+
+            if (!isRestoreMenuButton) return;
+
+            event.preventDefault();
+            event.stopPropagation();
+            if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+
+            post('tkoBackup', { action: 'restore' });
+        }, true);
 
         window.AndroidBackup = {
 
