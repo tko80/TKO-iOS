@@ -380,7 +380,12 @@ final class TKOWebViewController: UIViewController,
             UIAlertAction(title: "Choose File", style: .default) {
                 [weak self] _ in
 
-                self?.openRestorePicker()
+                // Wait until the confirmation alert has finished dismissing.
+                // Presenting the document picker immediately can be ignored by iOS.
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    guard let self = self else { return }
+                    self.openRestorePicker()
+                }
             }
         )
 
@@ -397,8 +402,15 @@ final class TKOWebViewController: UIViewController,
         picker.delegate = self
         picker.allowsMultipleSelection = false
 
-        pendingRestore = true
+        guard presentedViewController == nil else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                self?.openRestorePicker()
+            }
+            return
+        }
 
+        pendingRestore = true
+        picker.modalPresentationStyle = .formSheet
         present(picker, animated: true)
     }
 
