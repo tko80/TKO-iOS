@@ -3247,6 +3247,27 @@ html, body, button, a, input, select, textarea, label, [role="button"] {
 })();
 </script>
 
+
+<style id="tko-ipad-horizontal-overscroll-fix">
+/* Keep the page viewport fixed to the iPad WebView width.
+   This prevents the document itself from exposing blank side gutters. */
+html {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    overscroll-behavior-x: none;
+}
+body {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    overflow-x: hidden !important;
+    overscroll-behavior-x: none;
+}
+</style>
+
 </head>
 <body>
 <!-- To-Do UI styles -->
