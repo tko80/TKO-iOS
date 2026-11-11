@@ -30,7 +30,9 @@ final class TKOWebViewController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .systemBackground
+        // Match the app's dark sky background if WebView ever exposes an edge.
+        let tkoBackground = UIColor(red: 8.0/255.0, green: 24.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+        view.backgroundColor = tkoBackground
 
         setupWebView()
         loadLocalApp()
@@ -68,11 +70,15 @@ final class TKOWebViewController: UIViewController,
         webView.navigationDelegate = self
 
         webView.isOpaque = false
-        webView.backgroundColor = .white
-        webView.scrollView.backgroundColor = .white
+        webView.backgroundColor = UIColor(red: 8.0/255.0, green: 24.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+        webView.scrollView.backgroundColor = UIColor(red: 8.0/255.0, green: 24.0/255.0, blue: 55.0/255.0, alpha: 1.0)
 
         webView.scrollView.contentInsetAdjustmentBehavior = .never
         webView.scrollView.alwaysBounceVertical = true
+        webView.scrollView.alwaysBounceHorizontal = false
+        webView.scrollView.bounces = false
+        webView.scrollView.isDirectionalLockEnabled = true
+        webView.scrollView.showsHorizontalScrollIndicator = false
         webView.scrollView.keyboardDismissMode = .interactive
 
         view.addSubview(webView)
