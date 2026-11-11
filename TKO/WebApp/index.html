@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <!-- Android backup bridge is supplied by MainActivity.kt v38. -->
 
@@ -3153,6 +3156,72 @@ input[name="preferredName"]:focus {
   .tko-cmd-month-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .tko-cmd-date-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
   .tko-cmd-actions{grid-template-columns:1fr}
+}
+</style>
+
+
+<style id="tko-ipad6-display-fix">
+/* iPad 6th generation: correct WebView viewport and Myanmar/system font fallback */
+html {
+    width: 100%;
+    min-height: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+body {
+    width: 100%;
+    min-width: 0;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    font-family: "Myanmar Sangam MN", "Myanmar Text", "Noto Sans Myanmar",
+                 "Pyidaungsu", "Tharlon", sans-serif;
+}
+button, input, select, textarea, label {
+    font-family: "Myanmar Sangam MN", "Myanmar Text", "Noto Sans Myanmar",
+                 "Pyidaungsu", "Tharlon", sans-serif;
+}
+
+/* iPad 6th gen portrait (768 CSS px) and landscape (1024 CSS px).
+   Override phone-only compact sizing without changing the page structure. */
+@media screen and (min-width: 700px) and (max-width: 1180px) {
+    body {
+        font-size: 16px !important;
+    }
+    button {
+        font-size: 14px !important;
+        line-height: 1.35 !important;
+    }
+    input, select, textarea {
+        font-size: 16px !important;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .top-buttons button,
+    .menu-icon {
+        min-height: 44px !important;
+        padding: 9px 10px !important;
+    }
+    .button-row-3d button,
+    .action-button-row button {
+        min-height: 42px !important;
+        padding: 8px 12px !important;
+    }
+    .credit-btn, .credit-list-btn {
+        min-height: 42px !important;
+        padding: 9px 12px !important;
+    }
+    .preferred-row-single-line {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    img, video, canvas, iframe {
+        max-width: 100%;
+    }
+}
+
+/* Keep Font Awesome icons on their own icon font, not the Myanmar text font. */
+i.fas, i.far, i.fab, .fa, .fas, .far, .fab {
+    font-style: normal;
 }
 </style>
 
@@ -14740,4 +14809,3 @@ button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
   if(document.documentElement)obs.observe(document.documentElement,{childList:true,subtree:true});
 })();
 </script>
-
