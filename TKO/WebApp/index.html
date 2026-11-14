@@ -13841,29 +13841,22 @@ button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
       else alert('Sync request ပို့ပြီးပါပြီ။');
     }
 
-    let sent=false;
+    // Submit directly through a hidden form/iframe. A no-cors fetch can
+    // resolve with an opaque response even when the Apps Script write fails,
+    // which previously caused a false success message and skipped fallback.
     try{
-      if(window.fetch){
-        fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(payload),keepalive:true})
-          .then(()=>{sent=true;finish();})
-          .catch(()=>legacy());
-      } else legacy();
-    }catch(e){ legacy(); }
-
-    function legacy(){
-      if(sent) return;
-      try{
-        const name='tkoSyncFrame_'+Date.now();
-        const iframe=document.createElement('iframe'); iframe.name=name;
-        iframe.style.cssText='position:fixed;left:-10000px;top:-10000px;width:1px;height:1px;border:0;opacity:0;pointer-events:none;';
-        document.body.appendChild(iframe);
-        const form=document.createElement('form'); form.method='POST'; form.action=url; form.target=name; form.style.display='none';
-        const input=document.createElement('input'); input.type='hidden'; input.name='payload'; input.value=JSON.stringify(payload);
-        form.appendChild(input); document.body.appendChild(form); form.submit();
-        sent=true;
-        setTimeout(()=>{form.remove();iframe.remove();},3000);
-        setTimeout(finish,300);
-      }catch(e){ if(btn){btn.disabled=false;btn.textContent='☁️ Sync to Google Sheet';} alert('Google Sheet Sync မအောင်မြင်ပါ။'); }
+      const name='tkoSyncFrame_'+Date.now();
+      const iframe=document.createElement('iframe'); iframe.name=name;
+      iframe.style.cssText='position:fixed;left:-10000px;top:-10000px;width:1px;height:1px;border:0;opacity:0;pointer-events:none;';
+      document.body.appendChild(iframe);
+      const form=document.createElement('form'); form.method='POST'; form.enctype='application/x-www-form-urlencoded'; form.action=url; form.target=name; form.style.display='none';
+      const input=document.createElement('input'); input.type='hidden'; input.name='payload'; input.value=JSON.stringify(payload);
+      form.appendChild(input); document.body.appendChild(form); form.submit();
+      setTimeout(()=>{form.remove();iframe.remove();},10000);
+      setTimeout(finish,500);
+    }catch(e){
+      if(btn){btn.disabled=false;btn.textContent='☁️ Sync to Google Sheet';}
+      alert('Google Sheet Sync မအောင်မြင်ပါ။ '+String(e.message||e));
     }
   };
 })();
