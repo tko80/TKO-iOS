@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <!-- Android backup bridge is supplied by MainActivity.kt v38. -->
 
@@ -3156,6 +3159,115 @@ input[name="preferredName"]:focus {
 }
 </style>
 
+
+<style id="tko-ipad6-display-fix">
+/* iPad 6th generation: correct WebView viewport and Myanmar/system font fallback */
+html {
+    width: 100%;
+    min-height: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+body {
+    width: 100%;
+    min-width: 0;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    font-family: "Myanmar Sangam MN", "Myanmar Text", "Noto Sans Myanmar",
+                 "Pyidaungsu", "Tharlon", sans-serif;
+}
+button, input, select, textarea, label {
+    font-family: "Myanmar Sangam MN", "Myanmar Text", "Noto Sans Myanmar",
+                 "Pyidaungsu", "Tharlon", sans-serif;
+}
+
+/* iPad 6th gen portrait (768 CSS px) and landscape (1024 CSS px).
+   Override phone-only compact sizing without changing the page structure. */
+@media screen and (min-width: 700px) and (max-width: 1180px) {
+    body {
+        font-size: 16px !important;
+    }
+    button {
+        font-size: 14px !important;
+        line-height: 1.35 !important;
+    }
+    input, select, textarea {
+        font-size: 16px !important;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .top-buttons button,
+    .menu-icon {
+        min-height: 44px !important;
+        padding: 9px 10px !important;
+    }
+    .button-row-3d button,
+    .action-button-row button {
+        min-height: 42px !important;
+        padding: 8px 12px !important;
+    }
+    .credit-btn, .credit-list-btn {
+        min-height: 42px !important;
+        padding: 9px 12px !important;
+    }
+    .preferred-row-single-line {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    img, video, canvas, iframe {
+        max-width: 100%;
+    }
+}
+
+/* Keep Font Awesome icons on their own icon font, not the Myanmar text font. */
+i.fas, i.far, i.fab, .fa, .fas, .far, .fab {
+    font-style: normal;
+}
+</style>
+
+
+<style id="tko-prevent-double-tap-zoom">
+/* Prevent double-tap zoom while keeping normal scrolling and button taps. */
+html, body, button, a, input, select, textarea, label, [role="button"] {
+    touch-action: manipulation;
+    -ms-touch-action: manipulation;
+}
+</style>
+<script id="tko-ios-zoom-guard">
+(function () {
+    // iOS Safari/WKWebView gesture events; this blocks browser zoom gestures,
+    // without cancelling ordinary taps, form controls, or vertical scrolling.
+    document.addEventListener('gesturestart', function (event) {
+        event.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('gesturechange', function (event) {
+        event.preventDefault();
+    }, { passive: false });
+})();
+</script>
+
+
+<style id="tko-ipad-horizontal-overscroll-fix">
+/* Keep the page viewport fixed to the iPad WebView width.
+   This prevents the document itself from exposing blank side gutters. */
+html {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    overscroll-behavior-x: none;
+}
+body {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    overflow-x: hidden !important;
+    overscroll-behavior-x: none;
+}
+</style>
+
 </head>
 <body>
 <!-- To-Do UI styles -->
@@ -3722,7 +3834,7 @@ input[name="preferredName"]:focus {
  
 
     <!-- Add this To-Do Popup at the end of body -->
-    <!-- Add this at the end of your body, before closing 
+    <!-- Add the To-Do popup scripts at the end of the body. -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     try {
@@ -3778,16 +3890,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 <script>
-/* ===== TKO RESTORE FILE PICKER v43 ===== */
+/* ===== TKO MENU RESTORE FILE PICKER FIX v46 ===== */
 function openRestoreFilePicker() {
     try {
+        // Android: use the native document picker through the existing JavaScript bridge.
         if (window.AndroidBackup &&
             typeof window.AndroidBackup.openRestoreFile === "function") {
+            console.log("TKO_RESTORE: calling native Android file picker");
             window.AndroidBackup.openRestoreFile();
             return;
         }
 
-        // Browser fallback: use the existing backup-file input if available.
+        // Non-Android browser fallback.
         let input = document.getElementById("backup-file-input");
         if (!input) {
             input = document.createElement("input");
@@ -3795,23 +3909,33 @@ function openRestoreFilePicker() {
             input.id = "backup-file-input";
             input.accept = ".json,application/json,text/json,text/plain,*/*";
             input.style.display = "none";
-            input.addEventListener("change", function () {
-                if (typeof restoreBackupFile === "function") restoreBackupFile();
-            });
             document.body.appendChild(input);
+        }
+        if (input.dataset.tkoRestoreHandler !== "ready") {
+            input.addEventListener("change", function () {
+                if (input.files && input.files.length &&
+                    typeof restoreBackupFile === "function") {
+                    restoreBackupFile();
+                }
+            });
+            input.dataset.tkoRestoreHandler = "ready";
         }
         input.value = "";
         input.click();
     } catch (e) {
-        console.error("Restore picker error:", e);
-        alert("❌ Restore File ကိုဖွင့်လို့မရပါ။");
+        console.error("TKO_RESTORE: picker error", e);
+        if (typeof showModernPopup === "function") {
+            showModernPopup("❌ Restore File ကိုဖွင့်လို့မရပါ။\n" +
+                (e.message || ""), "Restore Error");
+        } else {
+            alert("❌ Restore File ကိုဖွင့်လို့မရပါ။");
+        }
     }
 }
 </script>
 
 
 
- To-Do popup -->
 <div id="todoPopup" class="todo-popup-overlay" style="display: none;">
     <div class="todo-popup-container">
         <!-- Header -->
@@ -4178,7 +4302,7 @@ document.addEventListener('DOMContentLoaded', function () {
             color: #333;
         ">📥 Backup File</button>
         
-        <button onclick="openRestoreFilePicker()" style="
+        <button onclick="(function(){var m=document.getElementById('menu-dropdown');if(m)m.style.display='none';if(window.AndroidBackup&&typeof window.AndroidBackup.openRestoreFile==='function'){window.AndroidBackup.openRestoreFile();}else{openRestoreFilePicker();}})()" style="
             display: block;
             width: 100%;
             padding: 12px 15px;
@@ -13159,7 +13283,7 @@ label[for="town"] {
 
 <script>
 (function(){
-  const TKO_GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbx4byGJFM8foabzaG8sKJhRe061BrGtNQIVASkLcZ8qCH9A1ytetMR71edDW6BA44ccNg/exec';
+  const TKO_GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyMbKLo-3b3WZDEc9WaoqHcQwZ6oiDJJIBjnorf5_2y2L3IHLKVCLNK2Cq_JZaVyOXf/exec';
   window.TKO_GOOGLE_SHEET_URL = TKO_GOOGLE_SHEET_URL;
 })();
 </script>
@@ -13717,29 +13841,22 @@ button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
       else alert('Sync request ပို့ပြီးပါပြီ။');
     }
 
-    let sent=false;
+    // Submit directly through a hidden form/iframe. A no-cors fetch can
+    // resolve with an opaque response even when the Apps Script write fails,
+    // which previously caused a false success message and skipped fallback.
     try{
-      if(window.fetch){
-        fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(payload),keepalive:true})
-          .then(()=>{sent=true;finish();})
-          .catch(()=>legacy());
-      } else legacy();
-    }catch(e){ legacy(); }
-
-    function legacy(){
-      if(sent) return;
-      try{
-        const name='tkoSyncFrame_'+Date.now();
-        const iframe=document.createElement('iframe'); iframe.name=name;
-        iframe.style.cssText='position:fixed;left:-10000px;top:-10000px;width:1px;height:1px;border:0;opacity:0;pointer-events:none;';
-        document.body.appendChild(iframe);
-        const form=document.createElement('form'); form.method='POST'; form.action=url; form.target=name; form.style.display='none';
-        const input=document.createElement('input'); input.type='hidden'; input.name='payload'; input.value=JSON.stringify(payload);
-        form.appendChild(input); document.body.appendChild(form); form.submit();
-        sent=true;
-        setTimeout(()=>{form.remove();iframe.remove();},3000);
-        setTimeout(finish,300);
-      }catch(e){ if(btn){btn.disabled=false;btn.textContent='☁️ Sync to Google Sheet';} alert('Google Sheet Sync မအောင်မြင်ပါ။'); }
+      const name='tkoSyncFrame_'+Date.now();
+      const iframe=document.createElement('iframe'); iframe.name=name;
+      iframe.style.cssText='position:fixed;left:-10000px;top:-10000px;width:1px;height:1px;border:0;opacity:0;pointer-events:none;';
+      document.body.appendChild(iframe);
+      const form=document.createElement('form'); form.method='POST'; form.enctype='application/x-www-form-urlencoded'; form.action=url; form.target=name; form.style.display='none';
+      const input=document.createElement('input'); input.type='hidden'; input.name='payload'; input.value=JSON.stringify(payload);
+      form.appendChild(input); document.body.appendChild(form); form.submit();
+      setTimeout(()=>{form.remove();iframe.remove();},10000);
+      setTimeout(finish,500);
+    }catch(e){
+      if(btn){btn.disabled=false;btn.textContent='☁️ Sync to Google Sheet';}
+      alert('Google Sheet Sync မအောင်မြင်ပါ။ '+String(e.message||e));
     }
   };
 })();
@@ -14728,4 +14845,3 @@ button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
   if(document.documentElement)obs.observe(document.documentElement,{childList:true,subtree:true});
 })();
 </script>
-
