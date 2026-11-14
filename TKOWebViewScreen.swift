@@ -92,59 +92,30 @@ final class TKOWebViewController: UIViewController,
         ])
     }
 
-    // MARK: - Load Original HTML
+    // MARK: - Load TKO Website from GitHub Pages
 
     private func loadLocalApp() {
 
-        guard let resourceURL = Bundle.main.resourceURL else {
-            showLoadError("App resource directory not found.")
-            return
-        }
-
-        let webDirectory = resourceURL.appendingPathComponent(
-            "WebApp",
-            isDirectory: true
-        )
-
-        let indexURL = webDirectory.appendingPathComponent(
-            "index.html"
-        )
-
-        var isDirectory: ObjCBool = false
-
-        guard FileManager.default.fileExists(
-            atPath: webDirectory.path,
-            isDirectory: &isDirectory
-        ), isDirectory.boolValue else {
-            showLoadError("WebApp folder is missing from App Bundle.")
-            return
-        }
-
-        guard FileManager.default.fileExists(
-            atPath: indexURL.path
+        guard let url = URL(
+            string: "https://tko80.github.io/TKO-iOS/"
         ) else {
-            showLoadError("WebApp/index.html was not found.")
+            showLoadError("Invalid TKO website URL.")
             return
         }
 
-        guard FileManager.default.isReadableFile(
-            atPath: indexURL.path
-        ) else {
-            showLoadError("Cannot read WebApp/index.html.")
-            return
-        }
-
-        let files = (try? FileManager.default.contentsOfDirectory(
-            atPath: webDirectory.path
-        )) ?? []
-
-        print("TKO WebApp:", webDirectory.path)
-        print("TKO Files:", files)
-
-        webView.loadFileURL(
-            indexURL,
-            allowingReadAccessTo: webDirectory
+        var request = URLRequest(
+            url: url,
+            cachePolicy: .reloadIgnoringLocalCacheData,
+            timeoutInterval: 30
         )
+
+        request.setValue(
+            "no-cache",
+            forHTTPHeaderField: "Cache-Control"
+        )
+
+        print("TKO Website:", url.absoluteString)
+        webView.load(request)
     }
 
     // MARK: - Navigation Delegate
