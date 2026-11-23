@@ -4412,12 +4412,6 @@ document.querySelectorAll('.dropdown-menu button, .dropdown-menu div').forEach(i
       <div id="tkoCalcExpression" class="tko-calc-expression"></div>
       <div id="calc-display" class="tko-calc-display">0</div>
     </div>
-    <div id="tkoCalcHistoryPanel" aria-label="Calculation history">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-        <strong>History</strong><button type="button" onclick="tkoCalcClearHistory()" style="background:transparent;color:#ff9f0a;border:0">Clear</button>
-      </div>
-      <div id="tkoCalcHistoryList"></div>
-    </div>
 
     <div id="tkoCalcMemory" class="tko-calc-memory">
       <button type="button" onclick="tkoCalcMemoryClear()">MC</button>
@@ -4658,52 +4652,7 @@ document.querySelectorAll('.dropdown-menu button, .dropdown-menu div').forEach(i
   #calculator .tko-calc-grid button { min-height:54px; }
   #calculator .tko-calc-display { font-size:38px; }
 }
-
 </style>
-<style id="tko-iphone-calculator-design">
-/* iPhone-style calculator skin — scoped only to the Calculator popup */
-#calculator.tko-calculator-open,
-#calculator[style*="display: flex"]{
-  position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;
-  margin:0!important;padding:16px!important;box-sizing:border-box!important;
-  display:flex;align-items:center!important;justify-content:center!important;
-  background:rgba(0,0,0,.58)!important;z-index:2147483647!important;
-}
-#calculator .tko-calc-window{
-  width:min(100%,390px)!important;max-width:390px!important;max-height:92dvh!important;
-  overflow-y:auto!important;border:0!important;border-radius:28px!important;
-  background:#111214!important;color:#fff!important;box-shadow:0 18px 55px rgba(0,0,0,.45)!important;
-  padding:18px 16px 20px!important;display:flex!important;flex-direction:column!important;gap:14px!important;
-}
-#calculator .tko-calc-titlebar{height:30px!important;min-height:30px!important;background:transparent!important;border:0!important;padding:0!important}
-#calculator .tko-calc-title{font-size:15px!important;color:#a7a7aa!important;font-weight:600!important}
-#calculator .tko-calc-close{width:32px!important;height:32px!important;border-radius:50%!important;background:#333438!important;color:#fff!important;border:0!important;font-size:22px!important}
-#calculator .tko-calc-modebar{display:flex!important;align-items:center!important;gap:10px!important;background:transparent!important;border:0!important;padding:0!important;color:#fff!important}
-#calculator .tko-calc-menu,#calculator .tko-calc-mode-icon{width:42px!important;height:42px!important;border-radius:50%!important;background:#292a2e!important;color:#fff!important;border:0!important;font-size:20px!important}
-#calculator .tko-calc-modebar strong{font-size:18px!important;font-weight:650!important;color:#fff!important}
-#calculator .tko-calc-display-wrap{min-height:116px!important;display:flex!important;flex-direction:column!important;justify-content:flex-end!important;align-items:flex-end!important;background:transparent!important;border:0!important;padding:8px 4px 16px!important;gap:8px!important}
-#calculator .tko-calc-expression{width:100%!important;min-height:22px!important;text-align:right!important;color:#999!important;font-size:16px!important;white-space:nowrap!important;overflow:hidden!important}
-#calculator .tko-calc-display{width:100%!important;background:transparent!important;border:0!important;box-shadow:none!important;color:#fff!important;text-align:right!important;font-size:clamp(42px,12vw,64px)!important;font-weight:300!important;line-height:1.15!important;padding:0!important;min-height:70px!important}
-#calculator .tko-calc-memory{display:none!important}
-#calculator .tko-calc-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important;padding:0!important;background:transparent!important}
-#calculator .tko-calc-grid button{aspect-ratio:1/1!important;min-height:0!important;width:100%!important;border:0!important;border-radius:50%!important;
-  background:#333438!important;color:#fff!important;font-size:26px!important;font-weight:500!important;box-shadow:none!important}
-#calculator .tko-calc-grid button.tko-calc-fn{background:#a5a5a8!important;color:#111!important;font-size:21px!important}
-#calculator .tko-calc-grid button.tko-calc-op{background:#ff9f0a!important;color:#fff!important;font-size:30px!important}
-#calculator .tko-calc-grid button.tko-calc-equals{background:#ff9f0a!important;color:#fff!important}
-#calculator .tko-calc-grid button:active{filter:brightness(1.25)!important;transform:scale(.96)!important}
-#calculator .tko-calc-grid button.tko-calc-sign{background:#333438!important;color:#fff!important}
-#calculator .tko-calc-menu-popup{display:none!important}
-#tkoCalcHistoryPanel{display:none;background:#202125;border-radius:16px;padding:12px;color:#fff;max-height:190px;overflow:auto}
-#tkoCalcHistoryPanel.show{display:block}
-#tkoCalcHistoryPanel .history-row{padding:9px 4px;border-bottom:1px solid #3a3b40;text-align:right}
-#tkoCalcHistoryPanel .history-expression{font-size:12px;color:#aaa}
-#tkoCalcHistoryPanel .history-result{font-size:19px;color:#fff}
-@media(max-width:430px){
- #calculator .tko-calc-window{width:min(100%,390px)!important;border-radius:28px!important}
- #calculator .tko-calc-grid{gap:9px!important}
- #calculator .tko-calc-grid button{font-size:25px!important}
-}
 
 <script id="tko-calculator-windows-functions">
 (function(){
@@ -4711,10 +4660,6 @@ document.querySelectorAll('.dropdown-menu button, .dropdown-menu div').forEach(i
   let current = '0';
   let memory = 0;
   let justEvaluated = false;
-  const HISTORY_KEY='tkoCalculatorHistoryV1';
-  function getHistory(){ try{return JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]');}catch(e){return [];} }
-  function saveHistory(formula,result){ const h=getHistory(); h.unshift({formula,result,at:new Date().toISOString()}); localStorage.setItem(HISTORY_KEY,JSON.stringify(h.slice(0,50))); renderHistory(); }
-  function renderHistory(){ const list=document.getElementById('tkoCalcHistoryList'); if(!list)return; const h=getHistory(); list.innerHTML=h.length?h.map(x=>'<div class="history-row"><div class="history-expression">'+String(x.formula).replace(/</g,'&lt;')+'</div><div class="history-result">'+String(x.result).replace(/</g,'&lt;')+'</div></div>').join(''):'<div style="color:#aaa;text-align:center;padding:12px">No history</div>'; }
 
   function displayEl(){ return document.getElementById('calc-display'); }
   function exprEl(){ return document.getElementById('tkoCalcExpression'); }
@@ -4768,7 +4713,6 @@ document.querySelectorAll('.dropdown-menu button, .dropdown-menu div').forEach(i
       if(!Number.isFinite(result)) throw new Error('Math');
       expr=formula+' =';
       current=cleanNumber(result);
-      saveHistory(formula,current);
       justEvaluated=true;
       render();
     }catch(e){
@@ -4828,11 +4772,7 @@ document.querySelectorAll('.dropdown-menu button, .dropdown-menu div').forEach(i
     if(el) el.style.display=el.style.display==='none'?'block':'none';
   };
   window.tkoCalcToggleHistory=function(){
-    const panel=document.getElementById('tkoCalcHistoryPanel');
-    if(panel){ panel.classList.toggle('show'); renderHistory(); }
-  };
-  window.tkoCalcClearHistory=function(){
-    localStorage.removeItem(HISTORY_KEY); renderHistory();
+    alert('History is not stored in this calculator.');
   };
 
   document.addEventListener('keydown',function(ev){
@@ -4846,7 +4786,7 @@ document.querySelectorAll('.dropdown-menu button, .dropdown-menu div').forEach(i
     else if(ev.key==='Escape'){ closeCalculator(); ev.preventDefault(); }
   });
 
-  document.addEventListener('DOMContentLoaded',function(){render();renderHistory();});
+  document.addEventListener('DOMContentLoaded',render);
 })();
 </script>
     </div>
@@ -14905,3 +14845,46 @@ button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
   if(document.documentElement)obs.observe(document.documentElement,{childList:true,subtree:true});
 })();
 </script>
+
+
+<!-- TKO Calculator button/open fix: isolated to calculator only -->
+<script id="tko-calculator-button-final-fix">
+(function () {
+  function getCalculator() {
+    return document.getElementById('calculator');
+  }
+  window.openCalculator = function () {
+    var box = getCalculator();
+    if (!box) {
+      console.error('TKO Calculator popup element #calculator was not found.');
+      return;
+    }
+    if (box.parentElement !== document.body) document.body.appendChild(box);
+    box.style.setProperty('position', 'fixed', 'important');
+    box.style.setProperty('inset', '0', 'important');
+    box.style.setProperty('width', '100vw', 'important');
+    box.style.setProperty('height', '100dvh', 'important');
+    box.style.setProperty('display', 'flex', 'important');
+    box.style.setProperty('align-items', 'center', 'important');
+    box.style.setProperty('justify-content', 'center', 'important');
+    box.style.setProperty('z-index', '2147483647', 'important');
+    box.style.setProperty('pointer-events', 'auto', 'important');
+    box.classList.add('tko-calculator-open');
+  };
+  window.closeCalculator = function () {
+    var box = getCalculator();
+    if (!box) return;
+    box.style.setProperty('display', 'none', 'important');
+    box.classList.remove('tko-calculator-open');
+  };
+  document.addEventListener('click', function (event) {
+    var button = event.target.closest('button[onclick*="openCalculator"]');
+    if (button) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      window.openCalculator();
+    }
+  }, true);
+})();
+</script>
+
