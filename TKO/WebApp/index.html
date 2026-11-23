@@ -4505,203 +4505,48 @@ document.querySelectorAll('.dropdown-menu button, .dropdown-menu div').forEach(i
     </div>
   </div>
 
+  <div id="tkoCalcHistoryPanel" class="tkoCalcHistoryPanel">
+    <div class="history-actions"><button type="button" onclick="tkoCalcToggleHistory()">Back</button><button type="button" onclick="tkoCalcClearHistory()">Clear History</button></div>
+    <h3>History</h3><div id="tkoCalcHistoryList"></div>
+  </div>
   <div id="tkoCalcMenu" class="tko-calc-menu-popup" style="display:none;">
     <div class="tko-calc-menu-title">Calculator</div>
     <button type="button" onclick="tkoCalcToggleMenu()">Standard</button>
   </div>
 </div>
 
-<style id="tko-calculator-windows-style">
-#calculator.tko-calculator-open,
-#calculator[style*="display: flex"] {
-  position:fixed !important;
-  inset:0 !important;
-  width:100vw !important;
-  height:100vh !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  padding:12px !important;
-  box-sizing:border-box !important;
-  background:rgba(0,0,0,.28) !important;
-  z-index:2147482000 !important;
-  transform:none !important;
-}
-
-#calculator .tko-calc-window {
-  width:min(100%, 390px);
-  max-height:calc(100vh - 24px);
-  overflow:hidden;
-  background:#f3f3f3;
-  color:#111;
-  border:1px solid #c8c8c8;
-  border-radius:10px;
-  box-shadow:0 18px 50px rgba(0,0,0,.35);
-  font-family:"Segoe UI", Arial, sans-serif;
-  position:relative;
-}
-
-#calculator .tko-calc-titlebar {
-  height:42px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 10px 0 14px;
-  background:#f3f3f3;
-}
-
-#calculator .tko-calc-title {
-  font-size:15px;
-  font-weight:500;
-}
-
-#calculator .tko-calc-close {
-  width:42px !important;
-  height:36px !important;
-  border:0 !important;
-  background:transparent !important;
-  color:#333 !important;
-  font-size:26px !important;
-  font-weight:300 !important;
-  border-radius:6px !important;
-  cursor:pointer;
-}
-#calculator .tko-calc-close:hover { background:#e81123 !important; color:#fff !important; }
-
-#calculator .tko-calc-modebar {
-  height:44px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:0 10px;
-  font-size:20px;
-}
-
-#calculator .tko-calc-menu,
-#calculator .tko-calc-mode-icon {
-  width:38px !important;
-  height:38px !important;
-  border:0 !important;
-  background:transparent !important;
-  color:#222 !important;
-  font-size:21px !important;
-  padding:0 !important;
-  border-radius:6px !important;
-}
-#calculator .tko-calc-menu:hover,
-#calculator .tko-calc-mode-icon:hover { background:#e5e5e5 !important; }
-#calculator .tko-calc-mode-icon { margin-left:auto; }
-
-#calculator .tko-calc-display-wrap {
-  min-height:116px;
-  padding:8px 18px 8px;
-  box-sizing:border-box;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  text-align:right;
-}
-
-#calculator .tko-calc-expression {
-  min-height:24px;
-  font-size:15px;
-  color:#666;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-#calculator .tko-calc-display {
-  width:100%;
-  font-size:42px;
-  line-height:1.15;
-  font-weight:600;
-  text-align:right;
-  white-space:nowrap;
-  overflow-x:auto;
-  scrollbar-width:none;
-  user-select:none;
-}
-#calculator .tko-calc-display::-webkit-scrollbar { display:none; }
-
-#calculator .tko-calc-memory {
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:2px;
-  padding:2px 6px 6px;
-}
-#calculator .tko-calc-memory button {
-  min-height:34px;
-  border:0;
-  background:transparent;
-  color:#666;
-  font-size:12px;
-  font-weight:600;
-  border-radius:5px;
-}
-#calculator .tko-calc-memory button:hover { background:#e2e2e2; }
-
-#calculator .tko-calc-grid {
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:2px;
-  padding:0 6px 6px;
-}
-
-#calculator .tko-calc-grid button {
-  min-height:58px;
-  border:1px solid #d1d1d1;
-  border-radius:3px;
-  background:#fafafa;
-  color:#111;
-  font-size:18px;
-  font-family:inherit;
-  cursor:pointer;
-  box-shadow:none;
-  transition:background .08s, transform .05s;
-}
-#calculator .tko-calc-grid button:hover { background:#e9e9e9; }
-#calculator .tko-calc-grid button:active { transform:scale(.98); background:#ddd; }
-
-#calculator .tko-calc-fn { background:#ededed !important; font-size:16px !important; }
-#calculator .tko-calc-op { background:#e8e8e8 !important; font-size:22px !important; }
-#calculator .tko-calc-sign { background:#fafafa !important; }
-#calculator .tko-calc-equals {
-  background:#6aa9df !important;
-  color:#fff !important;
-  border-color:#5b99cc !important;
-  font-size:23px !important;
-}
-#calculator .tko-calc-equals:hover { background:#5b99cc !important; }
-
-#calculator .tko-calc-menu-popup {
-  position:absolute;
-  top:78px;
-  left:10px;
-  width:170px;
-  padding:8px;
-  background:#fff;
-  border:1px solid #ccc;
-  border-radius:8px;
-  box-shadow:0 10px 28px rgba(0,0,0,.22);
-  z-index:3;
-}
-#calculator .tko-calc-menu-title { padding:8px 10px; font-size:13px; color:#666; }
-#calculator .tko-calc-menu-popup button {
-  width:100%;
-  border:0;
-  background:#f1f1f1;
-  padding:10px;
-  border-radius:5px;
-  text-align:left;
-  font-weight:600;
-}
-
-@media (max-width:430px) {
-  #calculator .tko-calc-window { width:100%; border-radius:8px; }
-  #calculator .tko-calc-grid button { min-height:54px; }
-  #calculator .tko-calc-display { font-size:38px; }
-}
+<style id="tko-calculator-iphone-style">
+#calculator.tko-calculator-open,#calculator[style*="display: flex"]{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:12px!important;box-sizing:border-box!important;background:rgba(0,0,0,.58)!important;z-index:2147483647!important;transform:none!important;pointer-events:auto!important}
+#calculator .tko-calc-window{width:min(100%,390px);max-height:calc(100vh - 24px);overflow:auto;background:#111214;color:#fff;border:1px solid #303136;border-radius:28px;box-shadow:0 20px 60px rgba(0,0,0,.5);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;padding:12px;position:relative}
+#calculator .tko-calc-titlebar{height:34px;display:flex;align-items:center;justify-content:space-between;padding:0 4px 4px}
+#calculator .tko-calc-title{font-size:15px;font-weight:600;color:#f5f5f7}
+#calculator .tko-calc-close{width:34px!important;height:34px!important;border:0!important;background:#303136!important;color:#fff!important;font-size:22px!important;border-radius:50%!important}
+#calculator .tko-calc-modebar{height:38px;display:flex;align-items:center;gap:10px;padding:0 2px;font-size:17px;color:#f5f5f7}
+#calculator .tko-calc-menu,#calculator .tko-calc-mode-icon{width:36px!important;height:36px!important;border:0!important;background:#25262a!important;color:#fff!important;font-size:18px!important;padding:0!important;border-radius:50%!important}
+#calculator .tko-calc-mode-icon{margin-left:auto}
+#calculator .tko-calc-display-wrap{min-height:112px;padding:10px 8px 18px;display:flex;flex-direction:column;justify-content:flex-end;text-align:right}
+#calculator .tko-calc-expression{min-height:24px;font-size:15px;color:#a1a1a6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#calculator .tko-calc-display{width:100%;font-size:52px;line-height:1.12;font-weight:300;text-align:right;white-space:nowrap;overflow-x:auto;scrollbar-width:none;color:#fff}
+#calculator .tko-calc-memory{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;padding:0 0 10px}
+#calculator .tko-calc-memory button{min-height:30px;border:0;background:#242529;color:#d8d8dc;font-size:11px;font-weight:600;border-radius:16px}
+#calculator .tko-calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;padding:0 0 4px}
+#calculator .tko-calc-grid button{aspect-ratio:1/1;min-height:0;border:0;border-radius:50%;background:#333438;color:#fff;font-size:24px;font-family:inherit;cursor:pointer;box-shadow:none;transition:filter .08s,transform .05s}
+#calculator .tko-calc-grid button:active{filter:brightness(1.3);transform:scale(.96)}
+#calculator .tko-calc-fn{background:#a5a5a9!important;color:#111!important;font-size:20px!important}
+#calculator .tko-calc-op{background:#ff9f0a!important;color:#fff!important;font-size:27px!important}
+#calculator .tko-calc-sign{background:#a5a5a9!important;color:#111!important}
+#calculator .tko-calc-equals{background:#ff9f0a!important;color:#fff!important;font-size:27px!important}
+#calculator .tko-calc-menu-popup{position:absolute;top:74px;left:12px;width:170px;padding:8px;background:#28292d;border:1px solid #48494e;border-radius:12px;box-shadow:0 10px 28px rgba(0,0,0,.4);z-index:5}
+#calculator .tko-calc-menu-title{padding:8px 10px;font-size:13px;color:#aaa}
+#calculator .tko-calc-menu-popup button{width:100%;border:0;background:#3a3b40;color:#fff;padding:10px;border-radius:8px;text-align:left;font-weight:600}
+#calculator .tkoCalcHistoryPanel{display:none;position:absolute;inset:76px 10px 10px;background:#202125;border:1px solid #45464b;border-radius:16px;z-index:8;overflow:auto;padding:12px;color:#fff}
+#calculator .tkoCalcHistoryPanel h3{margin:0 0 10px;font-size:17px}
+#calculator .tkoCalcHistoryPanel .history-row{padding:10px 4px;border-bottom:1px solid #3a3b40;text-align:right}
+#calculator .tkoCalcHistoryPanel .history-expression{font-size:12px;color:#aaa;overflow-wrap:anywhere}
+#calculator .tkoCalcHistoryPanel .history-result{font-size:22px;color:#fff;margin-top:3px}
+#calculator .tkoCalcHistoryPanel .history-actions{display:flex;gap:8px;margin-bottom:8px}
+#calculator .tkoCalcHistoryPanel .history-actions button{border:0;border-radius:10px;padding:8px 12px;background:#3a3b40;color:#fff}
+@media(max-width:430px){#calculator .tko-calc-window{width:100%;border-radius:26px;padding:10px}#calculator .tko-calc-grid{gap:8px}#calculator .tko-calc-grid button{font-size:22px}#calculator .tko-calc-display{font-size:46px}}
 </style>
 
 <script id="tko-calculator-windows-functions">
@@ -4710,6 +4555,24 @@ document.querySelectorAll('.dropdown-menu button, .dropdown-menu div').forEach(i
   let current = '0';
   let memory = 0;
   let justEvaluated = false;
+  const HISTORY_KEY='tkoCalculatorHistory_v1';
+  let history=[];
+  try{history=JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]');if(!Array.isArray(history))history=[];}catch(e){history=[];}
+  function saveHistory(){try{localStorage.setItem(HISTORY_KEY,JSON.stringify(history.slice(0,100)));}catch(e){}}
+  function renderHistory(){
+    const list=document.getElementById('tkoCalcHistoryList'); if(!list)return;
+    if(!history.length){list.innerHTML='<div style="color:#aaa;text-align:center;padding:24px 8px;">No history yet</div>';return;}
+    list.innerHTML='';
+    history.forEach((item,index)=>{
+      const row=document.createElement('div');row.className='history-row';
+      const ex=document.createElement('div');ex.className='history-expression';ex.textContent=item.expression;
+      const result=document.createElement('div');result.className='history-result';result.textContent=item.result;
+      const use=document.createElement('button');use.type='button';use.textContent='Use Result';use.style.cssText='margin-top:6px;border:0;border-radius:8px;padding:5px 10px;background:#ff9f0a;color:#fff;';
+      use.addEventListener('click',()=>{current=String(item.result);expr='';justEvaluated=true;render();window.tkoCalcToggleHistory();});
+      row.append(ex,result,use);list.appendChild(row);
+    });
+  }
+  window.tkoCalcClearHistory=function(){history=[];saveHistory();renderHistory();};
 
   function displayEl(){ return document.getElementById('calc-display'); }
   function exprEl(){ return document.getElementById('tkoCalcExpression'); }
@@ -4746,31 +4609,27 @@ document.querySelectorAll('.dropdown-menu button, .dropdown-menu div').forEach(i
 
   window.tkoCalcOperator=function(op){
     resetAfterError();
+    if(justEvaluated){ expr=current+op; current='0'; justEvaluated=false; render(); return; }
     if(expr && /[+\-*/]$/.test(expr)) expr=expr.slice(0,-1)+op;
     else expr=(expr?expr:'')+current+op;
     current='0';
-    justEvaluated=false;
     render();
   };
 
   window.tkoCalcEquals=function(){
-    resetAfterError();
+    if(justEvaluated) return;
+    if(current==='Error'){resetAfterError();render();return;}
     const formula=(expr?expr:'')+current;
-    if(!formula.trim()) return;
+    if(!formula.trim())return;
     try{
-      if(!/^[0-9+\-*/().\s]+$/.test(formula)) throw new Error('Invalid');
+      if(!/^[0-9+\-*/().\s]+$/.test(formula))throw new Error('Invalid');
       const result=Function('"use strict";return ('+formula+')')();
-      if(!Number.isFinite(result)) throw new Error('Math');
-      expr=formula+' =';
-      current=cleanNumber(result);
-      justEvaluated=true;
-      render();
-    }catch(e){
-      expr=formula;
-      current='Error';
-      justEvaluated=true;
-      render();
-    }
+      if(!Number.isFinite(result))throw new Error('Math');
+      const answer=cleanNumber(result);
+      history.unshift({expression:formula+' =',result:answer});
+      history=history.slice(0,100);saveHistory();
+      expr=formula+' =';current=answer;justEvaluated=true;render();
+    }catch(e){expr=formula;current='Error';justEvaluated=true;render();}
   };
 
   window.tkoCalcClear=function(){ expr=''; current='0'; justEvaluated=false; render(); };
@@ -4822,7 +4681,8 @@ document.querySelectorAll('.dropdown-menu button, .dropdown-menu div').forEach(i
     if(el) el.style.display=el.style.display==='none'?'block':'none';
   };
   window.tkoCalcToggleHistory=function(){
-    alert('History is not stored in this calculator.');
+    const panel=document.getElementById('tkoCalcHistoryPanel');if(!panel)return;
+    const open=panel.style.display!=='block';panel.style.display=open?'block':'none';if(open)renderHistory();
   };
 
   document.addEventListener('keydown',function(ev){
@@ -4842,17 +4702,7 @@ document.querySelectorAll('.dropdown-menu button, .dropdown-menu div').forEach(i
     </div>
   </div>
 
-<script id="tko-calculator-open-fix">
-(function(){
-  window.toggleCalculator=function(show){
-    const box=document.getElementById('calculator');
-    if(!box) return;
-    box.classList.toggle('tko-calculator-open', !!show);
-    box.style.setProperty('display', show ? 'flex' : 'none', 'important');
-    if(show && typeof window.tkoCalcClear === 'function') { /* keep current state; no reset */ }
-  };
-})();
-</script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="script.js"></script>
@@ -14592,87 +14442,7 @@ button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
   setTimeout(bindClose,300);
 })();
 </script><!-- TKO Calculator FINAL position isolation fix -->
-<script id="tko-calculator-position-isolation-final">
-(function(){
-  function isolateCalculator(){
-    var calc=document.getElementById('calculator');
-    if(!calc || calc.parentElement===document.body) return calc;
-    document.body.appendChild(calc);
-    calc.setAttribute('data-tko-calculator-isolated','1');
-    return calc;
-  }
 
-  function forceCalculatorLayout(){
-    var calc=isolateCalculator();
-    if(!calc) return;
-    calc.style.position='fixed';
-    calc.style.left='0';
-    calc.style.top='0';
-    calc.style.right='0';
-    calc.style.bottom='0';
-    calc.style.width='100vw';
-    calc.style.height='100vh';
-    calc.style.margin='0';
-    calc.style.padding='12px';
-    calc.style.boxSizing='border-box';
-    calc.style.alignItems='center';
-    calc.style.justifyContent='center';
-    calc.style.zIndex='2147483647';
-    calc.style.transform='none';
-  }
-
-  function wrapOpen(){
-    if(typeof window.openCalculator!=='function' || window.openCalculator.__tkoWrapped) return;
-    var originalOpen=window.openCalculator;
-    function wrappedOpen(){
-      forceCalculatorLayout();
-      var result=originalOpen.apply(this,arguments);
-      var calc=document.getElementById('calculator');
-      if(calc){
-        forceCalculatorLayout();
-        calc.style.display='flex';
-      }
-      return result;
-    }
-    wrappedOpen.__tkoWrapped=true;
-    wrappedOpen.__tkoOriginal=originalOpen;
-    window.openCalculator=wrappedOpen;
-  }
-
-  function wrapClose(){
-    if(typeof window.closeCalculator!=='function' || window.closeCalculator.__tkoWrapped) return;
-    var originalClose=window.closeCalculator;
-    function wrappedClose(){
-      var result=originalClose.apply(this,arguments);
-      var calc=document.getElementById('calculator');
-      if(calc) calc.style.display='none';
-      return result;
-    }
-    wrappedClose.__tkoWrapped=true;
-    wrappedClose.__tkoOriginal=originalClose;
-    window.closeCalculator=wrappedClose;
-  }
-
-  function init(){
-    forceCalculatorLayout();
-    wrapOpen();
-    wrapClose();
-    setTimeout(function(){
-      forceCalculatorLayout();
-      wrapOpen();
-      wrapClose();
-    },100);
-    setTimeout(function(){
-      forceCalculatorLayout();
-      wrapOpen();
-      wrapClose();
-    },500);
-  }
-
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
-  else init();
-})();
-</script>
 
 
 <style id="tko-company-data-viewer-v3">
@@ -14976,43 +14746,34 @@ button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 
 
 <!-- TKO Calculator button/open fix: isolated to calculator only -->
-<script id="tko-calculator-button-final-fix">
-(function () {
-  function getCalculator() {
-    return document.getElementById('calculator');
-  }
-  window.openCalculator = function () {
-    var box = getCalculator();
-    if (!box) {
-      console.error('TKO Calculator popup element #calculator was not found.');
-      return;
-    }
-    if (box.parentElement !== document.body) document.body.appendChild(box);
-    box.style.setProperty('position', 'fixed', 'important');
-    box.style.setProperty('inset', '0', 'important');
-    box.style.setProperty('width', '100vw', 'important');
-    box.style.setProperty('height', '100dvh', 'important');
-    box.style.setProperty('display', 'flex', 'important');
-    box.style.setProperty('align-items', 'center', 'important');
-    box.style.setProperty('justify-content', 'center', 'important');
-    box.style.setProperty('z-index', '2147483647', 'important');
-    box.style.setProperty('pointer-events', 'auto', 'important');
+
+
+<!-- TKO Calculator isolated open/close handler -->
+<script id="tko-calculator-open-close-stable">
+(function(){
+  function getCalc(){return document.getElementById('calculator');}
+  window.openCalculator=function(){
+    var box=getCalc();if(!box)return;
+    if(box.parentElement!==document.body)document.body.appendChild(box);
     box.classList.add('tko-calculator-open');
+    box.style.setProperty('position','fixed','important');
+    box.style.setProperty('inset','0','important');
+    box.style.setProperty('width','100vw','important');
+    box.style.setProperty('height','100vh','important');
+    box.style.setProperty('display','flex','important');
+    box.style.setProperty('align-items','center','important');
+    box.style.setProperty('justify-content','center','important');
+    box.style.setProperty('z-index','2147483647','important');
+    box.style.setProperty('pointer-events','auto','important');
   };
-  window.closeCalculator = function () {
-    var box = getCalculator();
-    if (!box) return;
-    box.style.setProperty('display', 'none', 'important');
-    box.classList.remove('tko-calculator-open');
+  window.closeCalculator=function(){
+    var box=getCalc();if(!box)return;
+    box.style.setProperty('display','none','important');box.classList.remove('tko-calculator-open');
+    var panel=document.getElementById('tkoCalcHistoryPanel');if(panel)panel.style.display='none';
+    var menu=document.getElementById('tkoCalcMenu');if(menu)menu.style.display='none';
   };
-  document.addEventListener('click', function (event) {
-    var button = event.target.closest('button[onclick*="openCalculator"]');
-    if (button) {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      window.openCalculator();
-    }
-  }, true);
+  function init(){var box=getCalc();if(box&&box.parentElement!==document.body)document.body.appendChild(box);if(box)box.style.setProperty('display','none','important');}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
 
