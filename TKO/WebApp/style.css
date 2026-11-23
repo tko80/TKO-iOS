@@ -1335,21 +1335,6 @@ ul {
     padding: 0;
 }
 
-/* 👍 လက်မ Effect */
-.thumb-up {
-    font-size: 120px;
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: fadeOut 2s forwards;
-}
-
-@keyframes fadeOut {
-    0% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.2); }
-    100% { opacity: 0; transform: scale(1.5); }
-}
 .check-container {
     display: flex;
     align-items: center; /* Checkbox, Name, Quantity တန်းညီစေမယ် */
@@ -2071,31 +2056,6 @@ body.dark-mode {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-100%); }
   }
-  /* ✅ Smooth Floating Animation for Thumb Up */
-@keyframes floatUp {
-    0% { 
-      transform: translate(-50%, -50%) scale(0.8);
-      opacity: 0;
-    }
-    20% { 
-      transform: translate(-50%, -60%) scale(1.1);
-      opacity: 1;
-    }
-    80% { 
-      transform: translate(-50%, -70%) scale(1.1);
-      opacity: 1;
-    }
-    100% { 
-      transform: translate(-50%, -80%) scale(1.5);
-      opacity: 0;
-    }
-  }
-  
-  .thumb-up {
-    animation: floatUp 1.5s ease-out forwards;
-    z-index: 1000;
-  }
-  
   /* ✅ Button Click Animation */
   button {
     transition: all 0.3s ease;

@@ -59,42 +59,8 @@ function updateDeliveryTimeDisplay(checkbox, timestamp) {
 }
 
 // ✅ Delivery time display ကိုဖျက်ခြင်း
-function removeDeliveryTimeDisplay(checkbox) {
-    const container = checkbox.parentElement;
-    const timeSpan = container.querySelector('.delivery-time');
-    
-    if (timeSpan) {
-        container.removeChild(timeSpan);
-    }
-}
 
 // ✅ Remaining quantity တွက်ချက်ပြီး update လုပ်ခြင်း
-function updateRemainingQuantity(company, date, town, name) {
-    // Get all entries for this name in this town on this date
-    const entries = JSON.parse(localStorage.getItem("entries")) || [];
-    const filteredEntries = entries.filter(entry => 
-        entry.date === date &&
-        entry.town === town &&
-        entry.name === name
-    );
-    
-    // Calculate total quantity
-    const totalQuantity = filteredEntries.reduce((sum, entry) => sum + parseInt(entry.quantity), 0);
-    
-    // Calculate delivered quantity
-    let deliveredQuantity = 0;
-    filteredEntries.forEach(entry => {
-        if (entry.delivered === true) {
-            deliveredQuantity += Number(entry.quantity) || 0;
-        }
-    });
-    
-    // Calculate remaining quantity
-    const remainingQuantity = totalQuantity - deliveredQuantity;
-    
-    // Update the UI
-    updateRemainingDisplay(town, name, totalQuantity, remainingQuantity);
-}
 
 // ✅ Remaining quantity ကို UI မှာပြသခြင်း
 function updateRemainingDisplay(town, name, totalQuantity, remainingQuantity) {
@@ -118,34 +84,6 @@ function updateRemainingDisplay(town, name, totalQuantity, remainingQuantity) {
 }
 
 // ✅ Checkbox ဖန်တီးတဲ့နေရာမှာ ဒီ function ကိုခေါ်သုံးပါ
-function createCompanyCheckbox(entry, index, container) {
-    const checkboxContainer = document.createElement("div");
-    checkboxContainer.style.display = "flex";
-    checkboxContainer.style.alignItems = "center";
-    
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.className = "company-delivery-checkbox";
-    
-    // Each Entry has its own delivery state. Never use company/name/quantity
-    // as the key because duplicate entries must be counted independently.
-    const deliveredTime = entry.delivered ? (entry.deliveredAt || '') : '';
-
-    checkbox.checked = entry.delivered === true;
-
-    checkbox.onchange = function() {
-        saveCompanyDeliveryStatus(entry.id, this);
-    };
-    
-    checkboxContainer.appendChild(checkbox);
-    
-    // Add delivery time if already delivered
-    if (deliveredTime) {
-        updateDeliveryTimeDisplay(checkbox, deliveredTime);
-    }
-    
-    container.appendChild(checkboxContainer);
-}
 // ==================== ENTRY DELIVERY / REMARK SYSTEM ====================
 function generateEntryId() {
     return 'entry_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10);
@@ -162,66 +100,6 @@ function ensureEntryIds(entries) {
     });
     if (changed) localStorage.setItem('entries', JSON.stringify(entries));
     return entries;
-}
-
-function saveRemarkEntry() {
-    if (window.__remarkConfirmOpen === true) return;
-
-    const company = String(document.getElementById('company')?.value || '').trim();
-    const name = String(document.getElementById('name')?.value || '').trim();
-    const town = String(document.getElementById('town')?.value || '').trim();
-    const quantity = Number(document.getElementById('quantity')?.value || 0);
-    const date = String(
-        document.getElementById('date')?.value ||
-        new Date().toISOString().slice(0, 10)
-    ).trim();
-
-    if (!company || !name || !town || !quantity || quantity < 1) {
-        showModernPopup(
-            'Please select Company, Name, Town and Quantity first.',
-            'Remark'
-        );
-        return;
-    }
-
-    let remarks = [];
-    try {
-        const raw = JSON.parse(localStorage.getItem('remarkEntries') || '[]');
-        remarks = Array.isArray(raw) ? raw : [];
-    } catch (e) {
-        remarks = [];
-    }
-
-    const norm = v => String(v ?? '').trim().toLowerCase();
-
-    const duplicate = remarks.some(r =>
-        norm(r.date) === norm(date) &&
-        norm(r.company) === norm(company) &&
-        norm(r.name) === norm(name) &&
-        norm(r.town) === norm(town)
-    );
-
-    // Remark click NEVER saves directly.
-    // It always opens a confirmation popup. Duplicate is clearly indicated.
-    const title = duplicate ? '⚠️ Duplicate Remark' : 'Remark Confirmation';
-    const message =
-        (duplicate
-            ? '<span class="remark-duplicate-warning">ဒီနေ့အတွက် အရောက်ပို့ခ Remark လုပ်ပြီးသားရှိပါတယ်။</span><br><br>'
-            : 'ဒီနေ့အတွက် အရောက်ပို့ခ ရှင်းပြီးအဖြစ် မှတ်သားမယ်။<br><br>') +
-        `<b>Company:</b> ${escapeRemarkText(company)}<br>` +
-        `<b>Name:</b> ${escapeRemarkText(name)}<br>` +
-        `<b>Town:</b> ${escapeRemarkText(town)}<br>` +
-        `<b>Quantity:</b> ${quantity}<br><br>` +
-        `<b>အရောက်ပို့ခ ရှင်းပြီး</b><br><br>` +
-        (duplicate
-            ? '<span class="remark-save-question"><span class="remark-save-question">ထပ်ပြီး Save လုပ်မလား?</span></span>'
-            : 'Save လုပ်မလား?');
-
-    showRemarkSaveConfirmation(title, message, () => {
-        commitRemarkEntry({
-            date, company, name, town, quantity
-        });
-    });
 }
 
 /* Confirmation popup used ONLY for Remark Save. */
@@ -374,90 +252,6 @@ function commitRemarkEntry(data) {
     }
 }
 
-function openRemarkSelection() {
-    const modal = document.getElementById('remarkSelectionModal');
-    const body = document.getElementById('remarkSelectionBody');
-    const count = document.getElementById('remarkSelectionCount');
-    const selectAll = document.getElementById('remarkSelectAll');
-
-    if (!modal || !body) return;
-
-    // Only show today's Entries that are in Preferred.
-    const selectedDate = document.getElementById('date')?.value ||
-        new Date().toISOString().slice(0, 10);
-
-    const entries = ensureEntryIds(
-        JSON.parse(localStorage.getItem('entries') || '[]')
-    );
-
-    // Preferred data may be stored under common keys. Use the existing
-    // Preferred list if present; otherwise match the current Preferred
-    // selections exposed by the page.
-    let preferred = [];
-    try {
-        preferred = JSON.parse(localStorage.getItem('preferredEntries') || '[]');
-        if (!Array.isArray(preferred)) preferred = [];
-    } catch (e) {
-        preferred = [];
-    }
-
-    const preferredIds = new Set(
-        preferred.map(x => String(
-            x?.id ?? x?.entryId ?? x
-        ))
-    );
-
-    const preferredMatches = entries.filter(entry => {
-        if (entry.date !== selectedDate) return false;
-
-        // If Preferred IDs exist, use them. Also support Preferred records
-        // saved by Company + Name + Town when no entry id is available.
-        if (preferred.length) {
-            if (preferredIds.has(String(entry.id))) return true;
-
-            return preferred.some(p =>
-                String(p?.company || '').trim() === String(entry.company || '').trim() &&
-                String(p?.name || '').trim() === String(entry.name || '').trim() &&
-                String(p?.town || '').trim() === String(entry.town || '').trim()
-            );
-        }
-
-        return false;
-    });
-
-    body.innerHTML = '';
-
-    if (!preferredMatches.length) {
-        body.innerHTML =
-            '<tr><td colspan="5" style="padding:25px;text-align:center;color:#777;font-weight:700;">ဒီနေ့ Preferred ထဲမှာ ရွေးထားတဲ့ Entry မရှိပါ။</td></tr>';
-    } else {
-        preferredMatches.forEach(entry => {
-            const tr = document.createElement('tr');
-            tr.style.borderTop = '1px solid #eee';
-
-            tr.innerHTML = `
-                <td style="padding:9px;text-align:center;">
-                    <input type="checkbox"
-                        class="remark-entry-checkbox"
-                        data-entry-id="${String(entry.id).replace(/"/g, '&quot;')}"
-                        onchange="updateRemarkSelectionCount()">
-                </td>
-                <td style="padding:9px;">${escapeRemarkText(entry.company)}</td>
-                <td style="padding:9px;">${escapeRemarkText(entry.name)}</td>
-                <td style="padding:9px;">${escapeRemarkText(entry.town)}</td>
-                <td style="padding:9px;text-align:center;font-weight:700;">${Number(entry.quantity) || 0}</td>
-            `;
-
-            body.appendChild(tr);
-        });
-    }
-
-    if (selectAll) selectAll.checked = false;
-    if (count) count.textContent = '0 selected';
-
-    modal.style.display = 'flex';
-}
-
 function escapeRemarkText(value) {
     return String(value ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
@@ -605,23 +399,6 @@ function saveRemarkSelection() {
         console.error('Remark save error:', error);
         showModernPopup('အရောက်ပို့ခ မှတ်သား၍ မရပါ။', 'Error');
     }
-}
-
-function toggleSelectAllEntries() {
-    const boxes = Array.from(document.querySelectorAll('#entry-list .entry-select:not(:disabled)'));
-    if (!boxes.length) {
-        alert('There are no pending Entries to select.');
-        return;
-    }
-    const shouldCheck = boxes.some(cb => !cb.checked);
-    boxes.forEach(cb => cb.checked = shouldCheck);
-}
-
-function updateEntryRemarkCount() {
-    const el = document.getElementById('entryRemarkCount');
-    if (!el) return;
-    const count = document.querySelectorAll('#entry-list .entry-select:checked').length;
-    el.textContent = `${count} selected`;
 }
 
 // ==================== REMARK VIEWER ====================
@@ -903,10 +680,7 @@ function saveEntry() {
     document.getElementById("quantity").value = "1";
 
     loadEntries();
-    showThumbUp();
     
-    // ✅ iPhone notification sound ထည့်မယ်
-    playSaveConfirmationSound();
 }
 
 // ✅ iPhone notification sound function
@@ -1225,14 +999,6 @@ function deleteEntryById(entryId) {
     refreshOpenSmartViews();
 }
 
-function deleteEntry(index) {
-    const selectedDate = document.getElementById("date").value;
-    const entries = ensureEntryIds(JSON.parse(localStorage.getItem("entries")) || []);
-    const filtered = entries.filter(e => e.date === selectedDate);
-    if (!filtered[index]) return;
-    deleteEntryById(filtered[index].id);
-}
-
 function calculateTotalQuantity(filteredEntries, groupsToOpen = new Set()) {
     const totalDiv = document.getElementById("total-quantity");
     if (!totalDiv) return;
@@ -1426,56 +1192,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });																				
 																							
 // Helper function to update name remaining quantity without refreshing the entire page																							
-function updateNameRemaining(nameTownBox, name, totalQuantity, town, selectedDate) {
-    // Calculate delivered quantity for this name
-    let nameDelivered = 0;
-    let allChecked = true;
-
-    // Get all entries for this name in this town
-    let entries = JSON.parse(localStorage.getItem("entries")) || [];
-    let filteredEntries = entries.filter(entry =>
-        entry.date === selectedDate &&
-        entry.town === town &&
-        entry.name === name
-    );
-
-    filteredEntries.forEach(entry => {
-        if (entry.delivered === true) {
-            nameDelivered += Number(entry.quantity) || 0;
-        } else {
-            allChecked = false;
-        }
-    });
-
-    let nameRemaining = totalQuantity - nameDelivered;
-
-    // Update the name town box text
-    let nameTownText = nameTownBox.querySelector("span:first-child");
-
-    if (nameRemaining === 0) {
-        nameTownText.innerHTML = `
-        <span style="color:black; font-weight:bold;">${name}</span> -
-        <span style="color:red; font-weight:bold;">${totalQuantity}</span>
-        <span style="color:green; font-weight:bold; margin-left: 5px;">✅</span>
-        `;
-    } else {
-        // ✅ ALWAYS show remaining quantity in RED BOLD
-        nameTownText.innerHTML = `
-        <span style="color:black; font-weight:bold;">${name}</span> -
-        <span style="color:red; font-weight:bold;">${totalQuantity}</span>
-         <span class="town-wise-remaining-label" style="color:#4b5563 !important;-webkit-text-fill-color:#4b5563 !important;font-weight:900;">(Remaining: </span><span class="town-wise-remaining-qty" style="color:#dc2626 !important;-webkit-text-fill-color:#dc2626 !important;font-weight:900;">${nameRemaining}</span><span class="town-wise-remaining-label" style="color:#4b5563 !important;-webkit-text-fill-color:#4b5563 !important;font-weight:900;">)</span>
-        `;
-    }
-
-    // Update the background color based on check status
-    if (allChecked) {
-        nameTownBox.style.backgroundColor = "#a0bdc0ff"; // Light green
-        nameTownBox.classList.add('completed');
-    } else {
-        nameTownBox.style.backgroundColor = "#a0bdc0ff";
-        nameTownBox.classList.remove('completed');
-    }
-}																						
 																							
 // Update the background color based on check status																							
 if (allChecked) {																							
@@ -1488,15 +1204,6 @@ nameTownBox.classList.remove('completed');
 																						
 																							
 // Helper function to update town delivered total display with remaining calculation																							
-function updateTownDeliveredTotal(town, deliveredTotal, townTotal) {																							
-const deliveredElement = document.getElementById(`delivered-${town.replace(/\s+/g, '-')}`);																							
-const remainingElement = document.getElementById(`remaining-${town.replace(/\s+/g, '-')}`);																							
-																							
-if (deliveredElement && remainingElement) {																							
-deliveredElement.textContent = deliveredTotal;																							
-remainingElement.textContent = townTotal - deliveredTotal;																							
-}																							
-}																							
 																																														
 																									
 /* ✅ Preferred Name Add & Load */
@@ -1522,66 +1229,7 @@ function addPreferred(type) {
 /* ✅ Preferred Name Add & Load - Modified with Dark Background & Bold White Text */
 
 // ✅ STEP 2: Paste preferred data ကို normalize + duplicate remove
-function normalizePreferredData(input) {
-
-  let preferred = {
-    company: [],
-    name: [],
-    town: []
-  };
-
-  // Case 1: Array only ( ["AA","BB"] )
-  if (Array.isArray(input)) {
-    preferred.company = [...new Set(input.filter(Boolean))];
-    return preferred;
-  }
-
-  // Case 2: Object
-  if (typeof input === "object" && input !== null) {
-
-    // If wrapped inside preferred
-    if (input.preferred) {
-      input = input.preferred;
-    }
-
-    if (Array.isArray(input.company)) {
-      preferred.company = [...new Set(input.company.filter(Boolean))];
-    }
-
-    if (Array.isArray(input.name)) {
-      preferred.name = [...new Set(input.name.filter(Boolean))];
-    }
-
-    if (Array.isArray(input.town)) {
-      preferred.town = [...new Set(input.town.filter(Boolean))];
-    }
-  }
-
-  return preferred;
-}
 // ✅ STEP 3: Preferred names restore (NO duplicate)
-function restorePreferredAnyFormat(data) {
-
-  const preferred = data.preferred || {
-    company: [],
-    name: [],
-    town: []
-  };
-
-  ["company", "name", "town"].forEach(type => {
-
-    let current = JSON.parse(localStorage.getItem(type) || "[]");
-
-    let incoming = Array.isArray(preferred[type]) 
-      ? preferred[type] 
-      : [];
-
-    // Merge + remove duplicate
-    let merged = [...new Set([...current, ...incoming])];
-
-    localStorage.setItem(type, JSON.stringify(merged));
-  });
-}
 
 
 /* ✅ 🔄 Refresh Function */
@@ -1690,29 +1338,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // ✅ New Company Button Function
-function addNewCompany() {
-    let companyName = prompt("Enter New Company Name:");
-    if (companyName) {
-        // ✅ Local Storage ထဲမှာ သိမ်းမယ်
-        localStorage.setItem("lastCompany", companyName);
-
-        alert("New Company Added: " + companyName);
-    }
-}
 
 // ✅ Popup ပြ Function
 
 
 
 // ✅ Notes ကို နှိပ်လိုက်ရင် Notes Box ကို ပြမယ်
-function showNotes() {
-    let notesBox = document.getElementById("notes");
-    if (notesBox) {
-        notesBox.scrollIntoView({ behavior: "smooth" });
-    } else {
-        alert("Notes Box Not Found!");
-    }
-}
 
 // ✅ Shield Box ကို ဖွင့်မယ်
 
@@ -1744,77 +1375,11 @@ function fixCompanyViewText() {
 
 
 // Also call when company data changes
-function refreshCompanyView() {
-    // Your existing refresh code...
-    
-    setTimeout(fixCompanyViewText, 100);
-}
 // ✅ Modified Open Shield Function
-function openShield(title, content, showNav = false) {
-    const shieldBox = document.getElementById("shield-box");
-    const shieldTitle = document.getElementById("shield-title");
-    const shieldBody = document.getElementById("shield-body");
-    const navButtons = document.querySelector(".company-navigation");
-    
-    shieldTitle.textContent = title;
-    shieldBody.innerHTML = content;
-    
-    // Show/hide navigation buttons
-    navButtons.style.display = showNav && companyList.length > 1 ? "flex" : "none";
-    
-    shieldBox.style.display = "flex";
-}
 
 // ✅ Close Shield Function
 function closeShield() {
     document.getElementById("shield-box").style.display = "none";
-}
-
-function filterByTown(name) {
-    let selectedTown = document.getElementById("town-filter").value;
-    let selectedDate = document.getElementById("date").value;
-    let entries = JSON.parse(localStorage.getItem("entries")) || [];
-
-    let filteredEntries = entries.filter(entry => 
-        entry.name.trim() === name && entry.date === selectedDate
-    );
-
-    if (selectedTown !== "all") {
-        filteredEntries = filteredEntries.filter(entry => entry.town === selectedTown);
-    }
-
-    let totalQuantity = filteredEntries.reduce((sum, entry) => sum + parseInt(entry.quantity), 0);
-    
-    let totalQuantityElement = document.querySelector("#total-quantity");
-    if (totalQuantityElement) {
-        totalQuantityElement.innerText = totalQuantity;
-    }
-
-    let resultHTML = `<ul>`;
-    filteredEntries.forEach(entry => {
-        resultHTML += `<li>${entry.company} | ${entry.town} | ${entry.quantity}</li>`;
-    });
-    resultHTML += `</ul>`;
-
-    document.getElementById("filtered-results").innerHTML = resultHTML;
-}
-
-function showPopup(content) {
-    let popup = document.createElement("div");
-    popup.style.position = "fixed";
-    popup.style.top = "50%";
-    popup.style.left = "50%";
-    popup.style.transform = "translate(-50%, -50%)";
-    popup.style.background = "white";
-    popup.style.padding = "20px";
-    popup.style.border = "2px solid black";
-    popup.style.boxShadow = "0px 0px 10px rgba(0,0,0,0.3)";
-    popup.style.zIndex = "1000";
-    popup.style.textAlign = "center";
-
-    popup.innerHTML = content + `<br><br><button onclick="closePopup()">Close</button>`;
-
-    document.body.appendChild(popup);
 }
 
 function closePopup() {
@@ -2159,16 +1724,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let savedTheme = localStorage.getItem("theme") || "light";
     setTheme(savedTheme);
 });
-
-
-
-function appendToDisplay(value) {
-    document.getElementById("calc-display").value += value;
-}
-
-function clearDisplay() {
-    document.getElementById("calc-display").value = "";
-}
 
 /* ==========================================================
    PREFERRED EDIT - ROBUST / NO GLOBAL EDIT STATE
@@ -3087,45 +2642,10 @@ document.addEventListener('DOMContentLoaded', function() {
 // ==============================================
 
 // Ultra-simple version that definitely works
-function simpleDayReport() {
-    const entries = JSON.parse(localStorage.getItem("entries")) || [];
-    
-    if (entries.length === 0) {
-        alert("No data found!");
-        return;
-    }
-    
-    let output = "Date\tCompany\tName\tTown\tQuantity\n";
-    entries.forEach(e => {
-        output += `${e.date || "No Date"}\t${e.company}\t${e.name}\t${e.town}\t${e.quantity}\n`;
-    });
-    
-    // Copy using simple method
-    const textarea = document.createElement('textarea');
-    textarea.value = output;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
-    
-    alert(`✅ Copied ${entries.length} entries!`);
-}
-function printTable() {
-    const printContents = document.querySelector("table").outerHTML;
-    const originalContents = document.body.innerHTML;
-    document.body.innerHTML = printContents;
-    window.print();
-    document.body.innerHTML = originalContents;
-    location.reload(); // ပြန် Refresh
-}
 function setTheme(mode) {
     document.body.classList.remove("light-mode", "dark-mode", "colorful-mode", "retro-mode", "neon-mode");
     document.body.classList.add(`${mode}-mode`);
     localStorage.setItem("theme", mode);
-}
-
-function changeTheme(value) {
-    setTheme(value);
 }
 
 window.onload = () => {
@@ -3140,128 +2660,6 @@ function copyNotes() {
         alert("Notes copied to clipboard!");
     });
 }
-function saveTableAsImage() {
-    const table = document.querySelector("table");
-    if (!table) {
-        alert("No table found!");
-        return;
-    }
-
-    html2canvas(table).then(canvas => {
-        const link = document.createElement("a");
-        link.download = "saved-entries.png";
-        link.href = canvas.toDataURL("image/png");
-        link.click();
-    });
-}
-
-function refreshEntries() {
-    const entries = JSON.parse(localStorage.getItem("entries")) || [];
-
-    const tableBody = document.getElementById("entry-list");
-    const totalList = document.getElementById("total-quantity");
-
-    tableBody.innerHTML = "";
-    totalList.innerHTML = "";
-
-    let totalQuantity = 0;
-
-    entries.forEach((entry, index) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${entry.date}</td>
-            <td>${entry.company}</td>
-            <td><span class="tko-entry-name-link" data-entry-id="${String(entry.id || '').replace(/'/g, "&#39;")}">${escapeHtmlSimple(entry.name || '')}</span></td>
-            <td>${entry.town}</td>
-            <td>${entry.quantity}</td>
-        `;
-        row.dataset.entryId = String(entry.id || '');
-        tableBody.appendChild(row);
-        totalQuantity += Number(entry.quantity);
-    });
-
-    const totalItem = document.createElement("li");
-    totalItem.textContent = `Total Quantity: ${totalQuantity}`;
-    totalList.appendChild(totalItem);
-}
-function copyEntriesBySelectedDate() {
-    const selectedDate = document.getElementById("date").value;
-    if (!selectedDate) {
-        alert("📅 Please select a date first.");
-        return;
-    }
-
-    const entries = JSON.parse(localStorage.getItem("entries")) || [];
-    const filteredEntries = entries.filter(entry => entry.date === selectedDate);
-
-    if (filteredEntries.length === 0) {
-        alert(`😕 No entries found for ${selectedDate}`);
-        return;
-    }
-
-    // Create tab-separated values for Google Sheets
-    let csvContent = "Date\tCompany\tName\tTown\tQuantity\n"; // Header row
-    
-    filteredEntries.forEach(entry => {
-        csvContent += `${entry.date}\t${entry.company}\t${entry.name}\t${entry.town}\t${entry.quantity}\n`;
-    });
-
-    // Add summary section
-    const companyTotals = {};
-    const townTotals = {};
-    
-    filteredEntries.forEach(entry => {
-        companyTotals[entry.company] = (companyTotals[entry.company] || 0) + parseInt(entry.quantity);
-        townTotals[entry.town] = (townTotals[entry.town] || 0) + parseInt(entry.quantity);
-    });
-
-    csvContent += "\nCompany Totals:\n";
-    for (const [company, total] of Object.entries(companyTotals)) {
-        csvContent += `${company}\t${total}\n`;
-    }
-
-    csvContent += "\nTown Totals:\n";
-    for (const [town, total] of Object.entries(townTotals)) {
-        csvContent += `${town}\t${total}\n`;
-    }
-
-    // Copy to clipboard
-    navigator.clipboard.writeText(csvContent)
-        .then(() => {
-            alert(`✅ Data for ${selectedDate} copied in Google Sheets format!\nPaste directly into Google Sheets.`);
-        })
-        .catch(err => {
-            alert("❌ Copy failed: " + err);
-        });
-}
-  function refreshUI() {
-    // နေရာတိုင်းကို clear / reload တော့ theme မပျက်
-    // ตัวอย่าง: Form တွေ reset, Table တွေ reload
-    document.getElementById("company").value = "";
-    document.getElementById("name").value = "";
-    document.getElementById("town").value = "";
-    document.getElementById("quantity").value = "";
-    document.getElementById("search-box").value = "";
-  
-    // Entry List ပြန်ပြ
-    loadEntries();
-  
-    // Theme, LocalStorage, Layout မထိဘူး!
-  }
-  function getTownWiseData(selectedDate) {
-    const entries = JSON.parse(localStorage.getItem("entries")) || [];
-    const dataByTown = {};
-  
-    entries.forEach(entry => {
-      if (entry.date.startsWith(selectedDate)) {
-        if (!dataByTown[entry.town]) dataByTown[entry.town] = {};
-        if (!dataByTown[entry.town][entry.name]) dataByTown[entry.town][entry.name] = 0;
-        dataByTown[entry.town][entry.name] += entry.quantity;
-      }
-    });
-  
-    return dataByTown;
-  }
   
   function closeTownWisePopup() {
     document.getElementById("townWiseModal").style.display = "none";
@@ -3288,105 +2686,13 @@ html += `
 
 
 
-
-
-function copyMonthlySummary() {
-    const allEntries = JSON.parse(localStorage.getItem("entries") || "[]");
-
-    if (!allEntries.length) {
-        alert("📭 Save Entries မရှိသေးပါ။");
-        return;
-    }
-
-    // Group entries by date
-    const groupedByDate = {};
-
-    allEntries.forEach(entry => {
-        const date = entry.date || "Unknown";
-        if (!groupedByDate[date]) groupedByDate[date] = [];
-        groupedByDate[date].push(entry);
-    });
-
-    const allDates = Object.keys(groupedByDate).sort();
-    let output = "TKO Monthly Summary (From Save Entries)\n\n";
-
-    allDates.forEach(date => {
-        const entries = groupedByDate[date];
-        if (!entries || entries.length === 0) return;
-
-        const townTotals = {};
-        const companyTotals = {};
-        const nameTownTotals = {};
-
-        entries.forEach(entry => {
-            const qty = parseInt(entry.quantity || 0);
-
-            townTotals[entry.town] = (townTotals[entry.town] || 0) + qty;
-            companyTotals[entry.company] = (companyTotals[entry.company] || 0) + qty;
-
-            const key = `${entry.name} (${entry.town})`;
-            nameTownTotals[key] = (nameTownTotals[key] || 0) + qty;
-        });
-
-        output += `Date: ${date}\n`;
-        output += "Name\tTown\tCompany\tQuantity\n";
-        entries.forEach(e => {
-            output += `${e.name}\t${e.town}\t${e.company}\t${e.quantity}\n`;
-        });
-
-        output += "\nTown Wise\nTown\tTotal Quantity\n";
-        for (let town in townTotals) {
-            output += `${town}\t${townTotals[town]}\n`;
-        }
-
-        output += "\nCompany Wise\nCompany\tTotal Quantity\n";
-        for (let comp in companyTotals) {
-            output += `${comp}\t${companyTotals[comp]}\n`;
-        }
-
-        output += "\nName (Town) Wise\nName (Town)\tTotal Quantity\n";
-        for (let nt in nameTownTotals) {
-            output += `${nt}\t${nameTownTotals[nt]}\n`;
-        }
-
-        output += "\n-----------------------------\n\n";
-    });
-
-    navigator.clipboard.writeText(output).then(() => {
-        alert("📋 တစ်လစာ Save Entries Summary ကို Copy လုပ်ပြီးပါပြီ! Excel / Sheets ထဲ Paste လုပ်နိုင်ပါပြီ။");
-    });
-}
-
-
-
-
 function toggleRestoreBox() {
     const box = document.getElementById("restore-section");
     box.style.display = box.style.display === "none" ? "block" : "none";
 }
 
 
-  
-  function closeDebtPopup() {
-    document.getElementById("debt-overlay").style.display = "none";
-  }
-
-
 // ✅ Modified Debt Functions
-function showDebtPopup() {
-    document.getElementById("debt-overlay").style.display = "flex";
-    
-    // Load saved data
-    const receiveData = localStorage.getItem("debt-receive") || "";
-    const oweData = localStorage.getItem("debt-owe") || "";
-    
-    document.getElementById("debt-receive").value = receiveData;
-    document.getElementById("debt-owe").value = oweData;
-    
-    // Set active tab from localStorage or default to "receive"
-    const lastTab = localStorage.getItem("debt-tab") || "receive";
-    switchDebtTab(lastTab);
-}
 
 function switchDebtTab(tab) {
     currentDebtTab = tab;
@@ -3402,15 +2708,6 @@ function switchDebtTab(tab) {
     document.getElementById("tab-receive").classList.toggle("active", tab === "receive");
     document.getElementById("tab-owe").classList.toggle("active", tab === "owe");
 }
-
-function clearDebt() {
-    if (confirm("ဖျက်မှာသေချာလား?")) {
-        document.getElementById("debt-receive").value = "";
-        document.getElementById("debt-owe").value = "";
-        localStorage.removeItem("debt-receive");
-        localStorage.removeItem("debt-owe");
-    }
-}
 function loadDebt() {
     const data = JSON.parse(localStorage.getItem("debt"));
     if (data) {
@@ -3423,11 +2720,6 @@ function loadDebt() {
 document.addEventListener("DOMContentLoaded", () => {
     loadDebt();
 });
-
-function changeFontSize(size) {
-    document.documentElement.style.setProperty('--app-font-size', size);
-    localStorage.setItem('appFontSize', size);
-  }
   // Load saved font size on app start
 window.addEventListener('DOMContentLoaded', () => {
     const savedSize = localStorage.getItem('appFontSize');
@@ -3472,46 +2764,8 @@ function restorePreferredFromClipboard() {
 }
 
 // ✅ Toggle Restore UI
-function toggleNotesRestore() {
-    const box = document.getElementById("notes-restore-section");
-    box.style.display = box.style.display === "none" ? "block" : "none";
-}
 
 // ✅ Restore Notes – Only new dates
-function restoreNotes() {
-    const raw = document.getElementById("notes-restore-box").value;
-
-    try {
-        const incoming = JSON.parse(raw);
-        const existing = JSON.parse(localStorage.getItem("notes") || "{}");
-
-        let added = 0;
-
-        for (const date in incoming) {
-            if (!existing.hasOwnProperty(date)) {
-                existing[date] = incoming[date];
-                added++;
-            }
-        }
-
-        if (added === 0) {
-            alert("⚠️ Restore လုပ်မယ့် အသစ် Date မရှိပါ။");
-            return;
-        }
-
-        localStorage.setItem("notes", JSON.stringify(existing));
-        alert(`✅ Notes Restore ပြီးပါပြီ။ ${added} ခု အသစ်ထည့်ပြီးပါပြီ။`);
-        document.getElementById("notes-restore-box").value = "";
-
-    } catch (e) {
-        alert("❌ JSON Format မှားနေပါတယ်။ Paste ပြန်စစ်ပါ။");
-    }
-}
-function saveNoteForDate(date, noteText) {
-    const notes = JSON.parse(localStorage.getItem("notes") || "{}");
-    notes[date] = noteText;
-    localStorage.setItem("notes", JSON.stringify(notes));
-}
 
     
     // Auto-click the first town button if available
@@ -3519,42 +2773,8 @@ function saveNoteForDate(date, noteText) {
         townListDiv.firstChild.click();
     }
 
-  
-function saveDeliveredStatus(town, name, checkbox) {
-    const key = `delivered-${btoa(`${town}-${name}`)}`;
-    const parent = checkbox.closest("li");
-    const infoSpan = parent.querySelector("span");
 
-    // Remove old delivered time if exists
-    const oldDelivered = infoSpan.querySelector(".delivered-time");
-    if (oldDelivered) oldDelivered.remove();
-
-    if (checkbox.checked) {
-        const timestamp = new Date().toLocaleString();
-        localStorage.setItem(key, timestamp);
-
-        const newSpan = document.createElement("span");
-        newSpan.className = "delivered-time";
-        newSpan.style.color = "blue";
-        newSpan.style.fontSize = "13px";
-        newSpan.textContent = ` | Delivered: ${timestamp}`;
-        infoSpan.appendChild(newSpan);
-    } else {
-        localStorage.removeItem(key);
-    }
-}
-
-
-function playClickSound() {
-    const sound = new Audio();
-    sound.play().catch(e => console.log("Audio play error:", e));
-}
-function scrollToTop() {
-    playClickSound(); //  play
-    window.scrollTo({ top: 0, behavior: "smooth" });
-}
 function toggleEntries() {
-    playClickSound(); // 
 
     const entrySection = document.getElementById("entries-section");
     const button = event.target;
@@ -3569,7 +2789,6 @@ function toggleEntries() {
     }
 }
 function toggleTotals() {
-    playClickSound(); // ✅ sound
 
     const totalDiv = document.getElementById("total-quantity");
     const button = event.target;
@@ -3583,35 +2802,6 @@ function toggleTotals() {
         button.textContent = "Show Totals";
     }
 }
-function appendCalc(val) {
-    const display = document.getElementById("calc-display");
-    if (val === '×') val = '*';
-    if (val === '÷') val = '/';
-    display.value += val;
-  }
-
-
-  
-  function calculateResult() {
-    const display = document.getElementById("calc-display");
-    try {
-      display.value = eval(display.value);
-    } catch {
-      display.value = "Error";
-    }
-  }
-
-
-  function toggleCalculator(show = true) {
-    document.getElementById("calculator-popup").style.display = show ? "flex" : "none";
-  }
-  
-  function copyResult() {
-    const display = document.getElementById("calc-display");
-    navigator.clipboard.writeText(display.value).then(() => {
-      alert("📋 Result Copied!");
-    });
-  }
   function backupDateEntriesToClipboard() {
     const selectedDate = document.getElementById("date").value;
     let entries = JSON.parse(localStorage.getItem("entries")) || [];
@@ -3648,14 +2838,6 @@ function restoreDateEntriesFromClipboard() {
 
 // Show/Hide restore section
 
-
-
-function hideRestoreMonthSection() {
-    document.getElementById("restore-month-section").style.display = "none";
-    document.getElementById("restore-month-status").textContent = "";
-    document.getElementById("month-backup-file").value = "";
-}
-
 // Restore month data
 
 
@@ -3674,17 +2856,6 @@ companyEntries.forEach(entry => {
 
 					
 // Function to handle marking as delivered					
-function markAsDelivered(entryKey, checkbox, town, date) {					
-if (checkbox.checked) {					
-const timestamp = new Date().toLocaleString();					
-localStorage.setItem(`delivered-${entryKey}`, timestamp);					
-					
-// Refresh the town view					
-const entries = JSON.parse(localStorage.getItem("entries") || []);					
-const filteredEntries = entries.filter(e => e.date === date && e.town === town);					
-showTownEntries(town, filteredEntries, date);					
-}					
-}					
 function openCompanyWisePopup() {
     const modal = document.getElementById("companyWiseModal");
     const companyListDiv = document.getElementById("companyButtonList");
@@ -3815,44 +2986,6 @@ btn.onmouseout = function() {
     this.style.transform = "scale(1)";
     this.style.boxShadow = "0 2px 5px rgba(0,0,0,0.1)";
 };
-
-    
-
-function updateDeliveredStatus(nameTownBox, checkboxes) {
-    let allChecked = checkboxes.every(checkbox => checkbox.checked);
-    let statusText = nameTownBox.querySelector(".delivered-status");
-
-    if (allChecked) {
-        if (!statusText) {
-            statusText = document.createElement("span");
-            statusText.className = "delivered-status";
-            statusText.innerHTML = "Done";  // Changed from "Delivered Done"
-            statusText.style.color = "#1d07e1ff";  // Pink color for the heart
-            statusText.style.fontWeight = "bold";
-            statusText.style.marginLeft = "10px";
-            statusText.style.fontSize = "1.1em";
-            statusText.style.animation = "heartbeat 1s ease-in-out";
-            nameTownBox.appendChild(statusText);
-            
-            // Add heartbeat animation
-            const style = document.createElement('style');
-            style.innerHTML = `
-                @keyframes heartbeat {
-                    0% { transform: scale(1); }
-                    25% { transform: scale(1.1); }
-                    50% { transform: scale(1); }
-                    75% { transform: scale(1.1); }
-                    100% { transform: scale(1); }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-    } else {
-        if (statusText) {
-            nameTownBox.removeChild(statusText);
-        }
-    }
-}
 // When creating the checkbox container
 checkboxContainer.style.display = "flex";
 checkboxContainer.style.alignItems = "center";
@@ -3959,37 +3092,6 @@ function markGroupAsDelivered(date, town, groupKey) {
     const filtered = entries.filter(e => e.date === date && e.town === town);
     showTownEntries(town, filtered, date);
 }
-													
-function markNameTownAsDelivered(name, town, date, checkbox) {
-    if (checkbox.checked) {
-        // Get all entries for this name+town combination
-        const entries = JSON.parse(localStorage.getItem("entries")) || [];
-        const filteredEntries = entries.filter(e => 
-            e.date === date &&
-            e.name === name &&
-            e.town === town
-        );
-
-        // Mark all matching entries as delivered
-        filteredEntries.forEach((entry, index) => {
-            const entryKey = `${date}_${entry.name}_${entry.town}_${entry.quantity}_${index}`;
-            const storageKey = `delivered-${entryKey}`;
-            
-            // Only mark if not already delivered
-            if (!localStorage.getItem(storageKey)) {
-                const timestamp = new Date().toLocaleString();
-                localStorage.setItem(storageKey, timestamp);
-            }
-        });
-
-        // Refresh the town view
-        setTimeout(() => {
-            const allEntries = JSON.parse(localStorage.getItem("entries")) || [];
-            const townEntries = allEntries.filter(e => e.date === date && e.town === town);
-            showTownEntries(town, townEntries, date);
-        }, 300);
-    }
-}						
 							
 // ✅ Town Wise ကို နှိပ်လိုက်ရင် Town Wise Section ကို ပြမယ်
 // ✅ Town Wise ကို နှိပ်လိုက်ရင် Town Wise Section ကို ပြမယ်
@@ -4200,38 +3302,6 @@ function closeCalculator() {
   if (box) box.style.display = "none";
 }
 
-function appendToCalc(value) {
-  const display = document.getElementById("calc-display");
-  if(!display)return;
-  if(display.value === "0" && value !== ".") display.value = "";
-  display.value += value;
-  display.scrollLeft = display.scrollWidth;
-}
-
-function clearCalc() {
-  const d=document.getElementById("calc-display");
-  if(d) d.value='0';
-  const e=document.getElementById("tko-calc-expression");
-  if(e) e.textContent="";
-}
-
-function backspaceCalc() {
-  const display = document.getElementById("calc-display");
-  display.value = display.value.slice(0, -1);
-  display.scrollLeft = display.scrollWidth;
-}
-
-function calculateCalc() {
-  const display = document.getElementById("calc-display");
-  try {
-    display.value = eval(display.value);
-  } catch {
-    display.value = 'Error';
-  }
-
-  display.scrollLeft = display.scrollWidth;
-}
-
 
 // ===== TKO Standard Calculator helpers =====
 let tkoCalcMemory = 0;
@@ -4247,23 +3317,6 @@ function tkoCalcSet(value, expression){
   const e=document.getElementById("tko-calc-expression");
   if(e && expression!==undefined) e.textContent=String(expression);
 }
-function percentCalc(){
-  const d=document.getElementById("calc-display"); if(!d)return;
-  const v=tkoCalcNumber(); tkoCalcSet(v/100, v + "%");
-}
-function reciprocalCalc(){
-  const v=tkoCalcNumber();
-  if(v===0){tkoCalcSet("Error","Cannot divide by zero");return;}
-  tkoCalcSet(1/v,"1/"+v);
-}
-function squareCalc(){const v=tkoCalcNumber();tkoCalcSet(v*v,v+"²");}
-function sqrtCalc(){const v=tkoCalcNumber();if(v<0){tkoCalcSet("Error","Invalid input");return;}tkoCalcSet(Math.sqrt(v),"√("+v+")");}
-function toggleSignCalc(){const d=document.getElementById("calc-display");if(!d)return;const v=tkoCalcNumber();tkoCalcSet(v===0?0:-v,"±");}
-function memoryClear(){tkoCalcMemory=0;}
-function memoryRecall(){tkoCalcSet(tkoCalcMemory,"MR");}
-function memoryAdd(){tkoCalcMemory+=tkoCalcNumber();}
-function memorySubtract(){tkoCalcMemory-=tkoCalcNumber();}
-function memoryStore(){tkoCalcMemory=tkoCalcNumber();}
 
 
 		
@@ -4298,9 +3351,6 @@ function loadDebtSummary() {
 
 // Load summary on page load
 window.onload = loadDebtSummary;
-function closeCompanyWisePopup() {
-    document.getElementById("companyWiseModal").style.display = "none";
-}
 // ============================================
 // COMPLETE INCOME SYSTEM - FIXED & CENTERED
 // ============================================
@@ -5031,19 +4081,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // ✅ 19. CLEANUP FUNCTION
-function cleanupAllModals() {
-    const modals = [
-        "incomePasswordModal",
-        "forgetPasswordModal",
-        "changePasswordModal",
-        "incomeModal"
-    ];
-    
-    modals.forEach(id => {
-        const modal = document.getElementById(id);
-        if (modal) modal.remove();
-    });
-}
 function copyCurrentPreview(e) {
     // e parameter ကို လက်ခံမယ်
     const previewContent = document.getElementById('previewContent');
@@ -5569,88 +4606,13 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// ✅ Save confirmation sound - iPhone notification
-// ✅ iPhone notification sound ONLY
-function playSaveConfirmationSound() {
-    try {
-        // iPhone notification sound
-        const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/257/257-preview.mp3');
-        audio.volume = 0.8;
-        
-        // Play the sound
-        audio.play().catch(error => {
-            console.log("iPhone sound play error:", error);
-        });
-        
-    } catch (error) {
-        console.log("Audio error:", error);
-    }
-}
 
 // Detail tones for data
 
 // စာသားကို musical tones အဖြစ်ပြောင်း
-function playStringAsTones(text, audioCtx, startTime) {
-    const chars = text.toUpperCase().split('');
-    const baseFreq = 440; // A4 note
-    
-    chars.forEach((char, index) => {
-        const charCode = char.charCodeAt(0);
-        if (charCode >= 65 && charCode <= 90) { // A-Z
-            const freq = baseFreq + ((charCode - 65) * 20);
-            
-            const oscillator = audioCtx.createOscillator();
-            const gainNode = audioCtx.createGain();
-            
-            oscillator.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-            
-            oscillator.frequency.value = freq;
-            oscillator.type = 'sine';
-            
-            gainNode.gain.setValueAtTime(0, startTime + index * 0.1);
-            gainNode.gain.linearRampToValueAtTime(0.15, startTime + index * 0.1 + 0.02);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + index * 0.1 + 0.08);
-            
-            oscillator.start(startTime + index * 0.1);
-            oscillator.stop(startTime + index * 0.1 + 0.08);
-        }
-    });
-}
 
 // နံပါတ်ကို musical tones အဖြစ်ပြောင်း
-function playNumberAsTones(number, audioCtx, startTime) {
-    const digits = number.toString().split('');
-    const scale = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25];
-    
-    digits.forEach((digit, index) => {
-        const num = parseInt(digit);
-        const freq = scale[num % scale.length];
-        
-        const oscillator = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-        
-        oscillator.frequency.value = freq;
-        oscillator.type = 'triangle'; // Softer sound
-        
-        gainNode.gain.setValueAtTime(0, startTime + index * 0.2);
-        gainNode.gain.linearRampToValueAtTime(0.2, startTime + index * 0.2 + 0.05);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + index * 0.2 + 0.15);
-        
-        oscillator.start(startTime + index * 0.2);
-        oscillator.stop(startTime + index * 0.2 + 0.15);
-    });
-}
 // Audio မရရင် vibration သုံးမယ်
-function playVibrationFeedback() {
-    if (navigator.vibrate) {
-        // Save success vibration pattern
-        navigator.vibrate([100, 50, 100, 50, 100]);
-    }
-}
 
 // Combined feedback function
 

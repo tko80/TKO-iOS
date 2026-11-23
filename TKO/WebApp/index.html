@@ -7531,132 +7531,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 </style>
 
-<script>					
-// Button Click Sounds - Fixed Version					
-(function(){					
-// Create audio context					
-const AudioContext = window.AudioContext || window.webkitAudioContext;					
-let audioContext = null;					
-					
-// Function to play sound					
-function playButtonSound(type = 'regular') {					
-try {					
-if (!AudioContext) return;					
-					
-// Initialize audio context if needed					
-if (!audioContext) {					
-audioContext = new AudioContext();					
-}					
-					
-// Resume context if suspended (required for Chrome)					
-if (audioContext.state === 'suspended') {					
-audioContext.resume();					
-}					
-					
-const now = audioContext.currentTime;					
-					
-// Different frequencies based on button type					
-let freq1, freq2, duration;					
-					
-switch(type) {					
-case 'confirm':					
-freq1 = 800; freq2 = 1200; duration = 0.15;					
-break;					
-case 'cancel':					
-freq1 = 600; freq2 = 400; duration = 0.12;					
-break;					
-case 'action':					
-freq1 = 700; freq2 = 1000; duration = 0.1;					
-break;					
-default: // regular					
-freq1 = 500; freq2 = 800; duration = 0.08;					
-}					
-					
-// Create oscillator					
-const oscillator = audioContext.createOscillator();					
-const gainNode = audioContext.createGain();					
-					
-// Configure oscillator					
-oscillator.type = 'sine';					
-oscillator.frequency.setValueAtTime(freq1, now);					
-oscillator.frequency.exponentialRampToValueAtTime(freq2, now + duration);					
-					
-// Configure gain (volume)					
-gainNode.gain.setValueAtTime(0.3, now);					
-gainNode.gain.exponentialRampToValueAtTime(0.01, now + duration);					
-					
-// Connect and play					
-oscillator.connect(gainNode);					
-gainNode.connect(audioContext.destination);					
-					
-oscillator.start(now);					
-oscillator.stop(now + duration);					
-					
-} catch (error) {					
-console.log("Audio error:", error);					
-}					
-}					
-					
-// Function to add click sound to a button					
-function addClickSound(button) {					
-button.addEventListener('click', function(e) {					
-// Stop event propagation to prevent multiple sounds					
-e.stopPropagation();					
-					
-// Determine sound type based on button content or class					
-const text = this.textContent || '';					
-const className = this.className || '';					
-					
-let soundType = 'regular';					
-					
-if (text.includes('Save') || text.includes('Add') || text.includes('Confirm') ||					
-className.includes('add-btn')) {					
-soundType = 'confirm';					
-} else if (text.includes('Close') || text.includes('Cancel') || text.includes('Reset') ||					
-text.includes('Delete') || className.includes('subtract-btn')) {					
-soundType = 'cancel';					
-} else if (text.includes('Calculate') || text.includes('Copy') || text.includes('Search') ||					
-text.includes('Export') || text.includes('Import')) {					
-soundType = 'action';					
-}					
-					
-playButtonSound(soundType);					
-});					
-}					
-					
-// Add click event listeners when page loads					
-document.addEventListener('DOMContentLoaded', function() {					
-// Add to all existing buttons					
-document.querySelectorAll('button').forEach(addClickSound);					
-					
-console.log('Button sounds loaded -', document.querySelectorAll('button').length, 'buttons found');					
-});					
-					
-// Also handle dynamically created buttons					
-const observer = new MutationObserver(function(mutations) {					
-mutations.forEach(function(mutation) {					
-mutation.addedNodes.forEach(function(node) {					
-if (node.nodeType === 1) { // Element node					
-if (node.tagName === 'BUTTON') {					
-addClickSound(node);					
-}					
-// Check for buttons inside added elements					
-if (node.querySelectorAll) {					
-node.querySelectorAll('button').forEach(addClickSound);					
-}					
-}					
-});					
-});					
-});					
-					
-// Start observing					
-observer.observe(document.body, {					
-childList: true,					
-subtree: true					
-});					
-					
-})();					
-</script>					
 <script>
 // Save Button function with voice and popup only
 function saveEntryWithVoice() {
@@ -7672,8 +7546,6 @@ function saveEntryWithVoice() {
         return;
     }
     
-    // Play save sound
-    playSaveSound();
     
     // Create confirmation message with all data
     const hasBurmese = containsBurmese(company) || containsBurmese(name) || containsBurmese(town);
@@ -7724,29 +7596,6 @@ function speakWithFemaleVoice(text, lang = 'en-US') {
     }
 }
 
-// Save sound function
-function playSaveSound() {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    const audioCtx = new AudioContext();
-    
-    const oscillator = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-    
-    // Higher frequency for female-like sound
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(1000, audioCtx.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.3);
-    
-    // Softer volume
-    gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
-    
-    oscillator.start();
-    oscillator.stop(audioCtx.currentTime + 0.4);
-}
 // To-Do List System - Fixed Version
 // 🌈 MODERN TO-DO LIST SYSTEM - COMPLETE FIXED VERSION
 
@@ -7869,9 +7718,6 @@ function showTodoPopup() {
     
     try {
         // Play sound
-        if (typeof playButtonSound === 'function') {
-            playButtonSound('action');
-        }
         
         // Load and display tasks
         loadTasksForDisplay();
@@ -7905,9 +7751,6 @@ function showTodoPopup() {
 
 function closeTodoPopup() {
     try {
-        if (typeof playButtonSound === 'function') {
-            playButtonSound('cancel');
-        }
         
         const popup = document.getElementById('todoPopup');
         if (popup) {
@@ -8024,9 +7867,6 @@ function addTodoTask() {
         loadTasksForDisplay();
         
         // Play success sound
-        if (typeof playButtonSound === 'function') {
-            playButtonSound('confirm');
-        }
         
         // Show success message
         showModernPopup("Task added successfully!", "Success");
@@ -8071,9 +7911,6 @@ function switchTodoTab(tabName) {
         }
         
         // Play sound
-        if (typeof playButtonSound === 'function') {
-            playButtonSound('regular');
-        }
         
         // Update counts
         updateTaskCounts();
@@ -8301,9 +8138,6 @@ function toggleTaskDone(taskId) {
             loadTasksForDisplay();
             
             // Play sound
-            if (typeof playButtonSound === 'function') {
-                playButtonSound(task.done ? 'confirm' : 'cancel');
-            }
             
             // Show message
             const message = task.done ? "Task marked as done!" : "Task marked as pending";
@@ -8330,9 +8164,6 @@ function deleteTask(taskId) {
                 loadTasksForDisplay();
                 
                 // Play sound
-                if (typeof playButtonSound === 'function') {
-                    playButtonSound('cancel');
-                }
                 
                 showModernPopup("Task deleted successfully!", "Deleted");
             } else {
@@ -8374,10 +8205,6 @@ function deleteAllExpired() {
             saveTodoData();
             loadTasksForDisplay();
             
-            if (typeof playButtonSound === 'function') {
-                playButtonSound('cancel');
-            }
-            
             showModernPopup(`Deleted ${expiredTasks.length} expired tasks!`, "Cleaned Up");
         }
     } catch (error) {
@@ -8401,10 +8228,6 @@ function clearAllDone() {
             todoData.tasks = todoData.tasks.filter(task => !task.done);
             saveTodoData();
             loadTasksForDisplay();
-            
-            if (typeof playButtonSound === 'function') {
-                playButtonSound('confirm');
-            }
             
             showModernPopup(`Cleared ${completedTasks.length} completed tasks!`, "Cleaned Up");
         }
@@ -8609,9 +8432,6 @@ function openDebtModal() {
     createOverlay();
     
     // Play sound if available
-    if (typeof playButtonSound === 'function') {
-        playButtonSound('action');
-    }
 }
 
 function closeDebtModal() {
@@ -8620,10 +8440,6 @@ function closeDebtModal() {
         debtModal.style.display = 'none';
     }
     removeOverlay();
-    
-    if (typeof playButtonSound === 'function') {
-        playButtonSound('cancel');
-    }
 }
 
 function saveDebt() {
@@ -8646,10 +8462,6 @@ function saveDebt() {
         localStorage.setItem('debtData', JSON.stringify(debtData));
         
         showModernPopup("Debt data saved successfully!", "Saved");
-        
-        if (typeof playButtonSound === 'function') {
-            playButtonSound('confirm');
-        }
         
         // Close modal after save
         setTimeout(() => {
@@ -8801,15 +8613,8 @@ function toggleRestoreBox() {
         }, 100);
         
         // Play sound
-        if (typeof playButtonSound === 'function') {
-            playButtonSound('action');
-        }
     } else {
         restoreSectionEl.style.display = 'none';
-        
-        if (typeof playButtonSound === 'function') {
-            playButtonSound('cancel');
-        }
     }
 }
 
@@ -8994,9 +8799,6 @@ function restoreData() {
             showModernPopup(`✅ Restore Successful!\n\n${restoreMessage}\n\nPage will refresh in 2 seconds.`, "Restore Complete");
             
             // Play success sound
-            if (typeof playButtonSound === 'function') {
-                playButtonSound('confirm');
-            }
             
             // Refresh page
             setTimeout(() => {
@@ -9022,10 +8824,6 @@ function restoreData() {
         }
         
         showModernPopup(errorMessage, "Restore Error");
-        
-        if (typeof playButtonSound === 'function') {
-            playButtonSound('cancel');
-        }
     }
 }
 
@@ -9106,16 +8904,9 @@ function toggleRestoreBox() {
         }, 100);
         
         // Play sound
-        if (typeof playButtonSound === 'function') {
-            playButtonSound('action');
-        }
     } else {
         restoreSection.style.display = 'none';
         removeRestoreOverlay();
-        
-        if (typeof playButtonSound === 'function') {
-            playButtonSound('cancel');
-        }
     }
 }
 
@@ -9164,10 +8955,6 @@ function handleRestoreData() {
     } catch (error) {
         console.error("Restore error:", error);
         showModernPopup(`❌ Restore Failed!\n\nError: ${error.message}\n\nPlease check your JSON format.`, "Restore Error");
-        
-        if (typeof playButtonSound === 'function') {
-            playButtonSound('cancel');
-        }
         
         return false;
     }
@@ -9257,9 +9044,6 @@ function performRestore(parsedData) {
             showModernPopup(`✅ Restore Successful!\n\n${restoreMessage}\n\nPage will refresh in 3 seconds.`, "Restore Complete");
             
             // Play success sound
-            if (typeof playButtonSound === 'function') {
-                playButtonSound('confirm');
-            }
             
             // Refresh page
             setTimeout(() => {

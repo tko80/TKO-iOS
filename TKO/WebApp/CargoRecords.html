@@ -2126,64 +2126,6 @@ renderMerchantButtons();
 renderItemButtons();
 loadAllDataForDate(datePickerElement.value);
 
-// Button click sound functionality
-(function(){
-  const AudioCtx = window.AudioContext || window.webkitAudioContext;
-  let ctx = null;
-
-  function ensureCtx() {
-    if (!ctx && AudioCtx) {
-      try {
-        ctx = new AudioCtx();
-      } catch (e) {
-        ctx = null;
-      }
-    }
-  }
-
-  function playClickSound() {
-    if (!AudioCtx) return;
-    ensureCtx();
-    if (!ctx) return;
-    const now = ctx.currentTime;
-
-    // first short tone
-    const o1 = ctx.createOscillator();
-    const g1 = ctx.createGain();
-    o1.type = 'sine';
-    o1.frequency.setValueAtTime(1200, now);
-    g1.gain.setValueAtTime(0, now);
-    g1.gain.linearRampToValueAtTime(0.18, now + 0.001);
-    g1.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
-    o1.connect(g1).connect(ctx.destination);
-    o1.start(now);
-    o1.stop(now + 0.09);
-
-    // second short tone slightly later
-    const o2 = ctx.createOscillator();
-    const g2 = ctx.createGain();
-    o2.type = 'sine';
-    o2.frequency.setValueAtTime(900, now + 0.09);
-    g2.gain.setValueAtTime(0, now + 0.09);
-    g2.gain.linearRampToValueAtTime(0.16, now + 0.091);
-    g2.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
-    o2.connect(g2).connect(ctx.destination);
-    o2.start(now + 0.09);
-    o2.stop(now + 0.18);
-  }
-
-  // Catch clicks on any <button> (including dynamically created ones)
-  document.addEventListener('click', function(e){
-    if (e.target.closest && e.target.closest('button')) {
-      // resume if suspended (required on some browsers)
-      if (ctx && ctx.state === 'suspended') {
-        ctx.resume().then(playClickSound).catch(playClickSound);
-      } else {
-        playClickSound();
-      }
-    }
-  }, true);
-})();
 </script>
 </body>
 </html>
