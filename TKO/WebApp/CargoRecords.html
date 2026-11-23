@@ -1,0 +1,2189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cargo Records</title>
+<style>
+:root {
+  --primary: #4361ee;
+  --secondary: #3a0ca3;
+  --accent: #7209b7;
+  --light: #f8f9fa;
+  --dark: #212529;
+  --success: #4cc9f0;
+  --danger: #e63946;
+  --warning: #fca311;
+  --gray: #6c757d;
+  --border: #dee2e6;
+  --item-1: #ff6b6b;
+  --item-2: #4ecdc4;
+  --item-3: #45b7d1;
+  --item-4: #96ceb4;
+  --item-5: #feca57;
+  --item-6: #ff9ff3;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', 'Noto Sans Myanmar', system-ui, sans-serif;
+}
+
+body {
+  background-color: #f5f7fb;
+  color: var(--dark);
+  line-height: 1.6;
+  padding: 0;
+}
+
+.container {
+  max-width: 100%;
+  padding: 16px;
+}
+
+header {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  padding: 20px 16px;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.date-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.date-display {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.date-picker {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border);
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  color: var(--secondary);
+  display: flex;
+  align-items: center;
+}
+
+h2::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 20px;
+  background: var(--accent);
+  margin-right: 8px;
+  border-radius: 2px;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+input, select {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background-color: white;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+/* Keep typed text readable in all form fields (Names, Categories and Quantity). */
+input:not(.date-picker), select, textarea {
+  color: #212529 !important;
+  -webkit-text-fill-color: #212529;
+  caret-color: #212529;
+  background-color: #ffffff;
+}
+
+input:not(.date-picker)::placeholder,
+textarea::placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+input:not(.date-picker):disabled,
+select:disabled,
+textarea:disabled {
+  color: #495057;
+  -webkit-text-fill-color: #495057;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+button {
+  padding: 12px 20px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+button:hover {
+  background-color: var(--secondary);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.btn-small {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+}
+
+.btn-success {
+  background-color: var(--success);
+}
+
+.btn-danger {
+  background-color: var(--danger);
+}
+
+.btn-warning {
+  background-color: var(--warning);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.merchant-buttons, .items-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.merchant-btn, .item-btn {
+  background-color: var(--light);
+  color: var(--dark);
+  border: 1px solid var(--border);
+}
+
+.merchant-btn.active {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* Item buttons with different colors */
+.item-btn:nth-child(1) { background-color: var(--item-1); color: white; }
+.item-btn:nth-child(2) { background-color: var(--item-2); color: white; }
+.item-btn:nth-child(3) { background-color: var(--item-3); color: white; }
+.item-btn:nth-child(4) { background-color: var(--item-4); color: var(--dark); }
+.item-btn:nth-child(5) { background-color: var(--item-5); color: var(--dark); }
+.item-btn:nth-child(6) { background-color: var(--item-6); color: white; }
+
+.selected-merchant {
+  margin: 12px 0;
+  padding: 12px;
+  background-color: rgba(67, 97, 238, 0.1);
+  border-radius: 12px;
+  border-left: 4px solid var(--primary);
+  font-weight: 600;
+  color: #e63946; /* red */
+}
+
+.selected-merchant-name {
+  color: #e63946; /* red */
+  font-weight: bold;
+}
+
+.payment-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.payment-status.paid {
+  background-color: rgba(76, 201, 240, 0.1);
+  border-left: 4px solid var(--success);
+  color: var(--success);
+}
+
+.payment-status.unpaid {
+  background-color: rgba(230, 57, 70, 0.1);
+  border-left: 4px solid var(--danger);
+  color: var(--danger);
+}
+
+.item-list {
+  margin-top: 16px;
+}
+
+.item-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.item-row:last-child {
+  border-bottom: none;
+}
+
+.item-name {
+  flex: 2;
+  font-weight: 700; /* Bold for item names */
+  font-size: 1.05rem;
+}
+
+.item-quantity {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.delete-btn {
+  background-color: transparent;
+  color: var(--danger);
+  padding: 8px;
+  border-radius: 8px;
+}
+
+/* Save and payment controls */
+.save-section {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.save-section .payment-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+.payment-list {
+  margin-top: 16px;
+}
+
+.paid-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background-color: rgba(76, 201, 240, 0.1);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  border-left: 4px solid var(--success);
+}
+
+.unpaid-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background-color: rgba(230, 57, 70, 0.1);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  border-left: 4px solid var(--danger);
+}
+
+.records-list {
+  margin-top: 16px;
+}
+
+.record-item {
+  background-color: white;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border);
+}
+
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.record-details {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 10px;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 30px 20px;
+  color: var(--gray);
+  font-style: italic;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.summary-card {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border);
+}
+
+.summary-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-top: 8px;
+}
+
+.tab-navigation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  display: flex;
+  padding: 12px 16px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.tab-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  background: none;
+  border: none;
+  color: var(--gray);
+  font-size: 0.8rem;
+  gap: 4px;
+}
+
+.tab-btn.active {
+  color: var(--primary);
+}
+
+.tab-content {
+  margin-bottom: 70px;
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+/* Beautiful Popup Styles */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.popup-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup {
+  background: white;
+  border-radius: 24px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  transform: scale(0.7);
+  transition: all 0.3s ease;
+  max-width: 320px;
+  width: 90%;
+  position: relative;
+  overflow: hidden;
+}
+
+.popup-overlay.active .popup {
+  transform: scale(1);
+}
+
+.popup::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+.popup-icon {
+  font-size: 4rem;
+  margin-bottom: 15px;
+  display: inline-block;
+  animation: popupIcon 0.5s ease-out;
+}
+
+@keyframes popupIcon {
+  0% { transform: scale(0); opacity: 0; }
+  70% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.popup-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--secondary);
+  margin-bottom: 10px;
+}
+
+.popup-message {
+  color: var(--dark);
+  margin-bottom: 25px;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.popup-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.popup-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex: 1;
+  box-shadow: 0 4px 8px rgba(67, 97, 238, 0.3);
+}
+
+.popup-btn:hover {
+  background: var(--secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(67, 97, 238, 0.4);
+}
+
+.popup-btn:active {
+  transform: translateY(0);
+}
+
+.popup-btn-secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.popup-btn-secondary:hover {
+  background: rgba(67, 97, 238, 0.1);
+}
+
+.popup-success .popup-icon { color: var(--success); }
+.popup-success .popup-title { color: var(--success); }
+.popup-success .popup-btn { background: var(--success); box-shadow: 0 4px 8px rgba(76, 201, 240, 0.3); }
+.popup-warning .popup-icon { color: var(--warning); }
+.popup-warning .popup-title { color: var(--warning); }
+.popup-error .popup-icon { color: var(--danger); }
+.popup-error .popup-title { color: var(--danger); }
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .input-group { flex-direction: column; }
+  .save-section { flex-direction: column; }
+  .save-section .payment-buttons { flex-direction: row; width: 100%; }
+  .summary-grid { grid-template-columns: 1fr; }
+  .record-details { grid-template-columns: 1fr; }
+}
+
+/* Delete button style for records */
+.delete-record-btn {
+  background-color: var(--danger);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.2s;
+}
+
+.delete-record-btn:hover {
+  background-color: #c1121f;
+  transform: translateY(-1px);
+}
+
+/* Real-time update indicator */
+.real-time-update {
+  background-color: rgba(76, 201, 240, 0.1);
+  border-left: 4px solid var(--success);
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin: 8px 0;
+  font-size: 0.9rem;
+  color: var(--success);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.real-time-update.delete {
+  background-color: rgba(230, 57, 70, 0.1);
+  border-left: 4px solid var(--danger);
+  color: var(--danger);
+}
+
+.category-manage-list { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+.category-manage-item { display:flex; align-items:center; gap:5px; padding:5px 7px; background:#f1f3f8; border:1px solid var(--border); border-radius:10px; }
+.category-manage-item span { font-weight:600; padding:0 4px; }
+.category-manage-item button { padding:5px 8px; font-size:.78rem; border-radius:7px; }
+.backup-help { color:var(--gray); margin-bottom:12px; }
+.backup-actions { display:flex; gap:10px; flex-wrap:wrap; }
+
+
+
+/* ===== Cargo Records modern mobile redesign (visual-only layer) ===== */
+:root {
+  --primary:#2457e8; --secondary:#1238a8; --accent:#19b8d5;
+  --light:#f3f6fc; --dark:#15213b; --success:#12a879;
+  --danger:#e34e62; --warning:#e9a23b; --gray:#74819a;
+  --border:#e6ebf4;
+  --shadow-soft:0 10px 28px rgba(23,48,99,.07);
+}
+html { min-height:100%; background:#f3f6fc; -webkit-text-size-adjust:100%; }
+body { background:linear-gradient(180deg,#eaf1ff 0,#f5f7fc 260px,#f5f7fc 100%); color:var(--dark); padding:0 0 calc(92px + env(safe-area-inset-bottom)); line-height:1.5; }
+.container { max-width:760px; margin:0 auto; padding:16px 15px 20px; }
+header { position:relative; overflow:hidden; margin:0; padding:calc(18px + env(safe-area-inset-top)) 20px 22px; border-radius:0 0 28px 28px; background:linear-gradient(128deg,#1765f5 0%,#1745c5 56%,#142e83 100%); box-shadow:0 12px 30px rgba(25,68,170,.22); }
+header:after { content:""; position:absolute; width:220px; height:220px; right:-76px; top:-110px; border:1px solid rgba(255,255,255,.13); border-radius:50%; box-shadow:0 0 0 24px rgba(255,255,255,.045),0 0 0 50px rgba(255,255,255,.035); pointer-events:none; }
+.brand-lockup { position:relative; z-index:1; display:flex; align-items:center; gap:13px; }
+.brand-logo { width:54px; height:54px; border-radius:16px; object-fit:cover; border:1px solid rgba(255,255,255,.42); box-shadow:0 5px 15px rgba(0,0,0,.16); }
+.brand-copy { min-width:0; flex:1; }
+header h1 { text-align:left; margin:0; font-size:1.35rem; line-height:1.2; letter-spacing:-.035em; font-weight:800; color:#fff; }
+.brand-copy p { margin-top:4px; color:rgba(255,255,255,.76); font-size:.76rem; letter-spacing:.02em; }
+.brand-live { display:flex; align-items:center; gap:6px; padding:6px 9px; border:1px solid rgba(255,255,255,.2); border-radius:99px; color:#eaf3ff; background:rgba(255,255,255,.12); font-size:.62rem; font-weight:800; letter-spacing:.08em; }
+.brand-live i { width:6px; height:6px; border-radius:50%; background:#5df0bd; box-shadow:0 0 0 4px rgba(93,240,189,.15); }
+.date-section { position:relative; z-index:1; margin-top:18px; padding:11px 12px; display:flex; align-items:center; gap:10px; border:1px solid rgba(255,255,255,.2); border-radius:15px; background:rgba(255,255,255,.12); backdrop-filter:blur(12px); }
+.date-display { flex:1; color:#fff; font-size:.88rem; font-weight:700; }
+.date-picker { max-width:154px; padding:9px 10px; border:1px solid rgba(255,255,255,.25); border-radius:10px; background:rgba(255,255,255,.96); color:#18336d; font-size:.82rem; font-weight:700; }
+.card { padding:19px; margin-bottom:15px; border:1px solid rgba(224,231,243,.95); border-radius:21px; background:rgba(255,255,255,.96); box-shadow:var(--shadow-soft); }
+h2 { margin-bottom:15px; color:#172b55; font-size:1.02rem; font-weight:800; letter-spacing:-.02em; }
+h2:before { width:5px; height:19px; margin-right:9px; border-radius:9px; background:linear-gradient(180deg,#2c75ff,#19bed1); }
+input,select,textarea { min-width:0; padding:13px 14px; border:1px solid #dfe6f1; border-radius:13px; background:#f9fbff; font-size:.94rem; }
+input:focus,select:focus,textarea:focus { border-color:#4b83f5; box-shadow:0 0 0 4px rgba(49,112,238,.11); }
+button { min-height:43px; padding:11px 16px; border-radius:13px; background:linear-gradient(135deg,#3478ff,#2454db); box-shadow:0 5px 12px rgba(37,88,220,.16); font-size:.9rem; font-weight:750; transition:transform .16s ease,filter .16s ease,box-shadow .16s ease; }
+button:hover { background:linear-gradient(135deg,#2868ee,#1b45bd); transform:translateY(-1px); }
+button:active { transform:scale(.98); }
+.btn-small { min-height:40px; padding:9px 13px; font-size:.82rem; }
+.btn-success { background:linear-gradient(135deg,#16bd91,#0c9d79); box-shadow:0 5px 12px rgba(14,166,125,.16); }
+.btn-danger { background:linear-gradient(135deg,#f06a78,#d94359); box-shadow:0 5px 12px rgba(217,67,89,.15); }
+.btn-warning { background:linear-gradient(135deg,#f2b64d,#df922a); }
+.btn-outline { background:#fff; color:#2859c9; border:1px solid #cbd9f5; box-shadow:none; }
+.input-group { gap:9px; margin-bottom:14px; }
+.input-group input { flex:1; }
+.merchant-buttons,.items-buttons { gap:9px; }
+.merchant-btn,.item-btn { min-height:42px; padding:9px 14px; border-radius:12px; background:#f2f6ff; color:#29416e; border:1px solid #e0e8f8; box-shadow:none; }
+.merchant-btn.active { color:#fff; border-color:#285ce0; background:linear-gradient(135deg,#3479ff,#234ed0); box-shadow:0 6px 14px rgba(41,91,218,.2); }
+.item-btn:nth-child(n) { color:#24416f; background:#edf4ff; border:1px solid #dce8fc; box-shadow:none; }
+.item-btn:nth-child(3n+2) { background:#e9f9f7; border-color:#d1f0eb; color:#087e75; }
+.item-btn:nth-child(3n) { background:#f1edff; border-color:#e2dbff; color:#6045b5; }
+.selected-merchant { margin:13px 0; padding:13px 14px; border:1px solid #dce8ff; border-left:4px solid #3478ff; border-radius:14px; background:#f0f5ff; color:#244b9b; }
+.selected-merchant-name { color:#2457c8; }
+.payment-status { margin:12px 0; padding:12px 14px; border-radius:13px; }
+.payment-status.paid { color:#087c5b; background:#eafaf4; border:1px solid #d2f3e5; }
+.payment-status.unpaid { color:#b8324b; background:#fff0f2; border:1px solid #f9d9df; }
+.item-list { margin-top:14px; }
+.item-row { gap:9px; padding:12px 2px; border-bottom:1px solid #edf0f6; }
+.item-name { color:#243655; font-size:.96rem; }
+.item-quantity { max-width:105px; padding:10px 8px; border-radius:11px; background:#f8faff; font-weight:750; }
+.delete-btn { min-width:38px; min-height:38px; box-shadow:none; }
+.save-section { margin-top:17px; padding-top:16px; border-top:1px solid #edf0f6; gap:9px; }
+.save-section > button { flex:1; }
+.save-section .payment-buttons { flex:1.2; gap:8px; }
+.save-section .payment-buttons button { flex:1; }
+.payment-list,.records-list { margin-top:13px; }
+.paid-item,.unpaid-item { margin-bottom:9px; padding:13px 14px; border-radius:14px; }
+.paid-item { background:#effbf6; border:1px solid #d9f3e7; border-left:4px solid #14aa7d; }
+.unpaid-item { background:#fff4f5; border:1px solid #f8dfe3; border-left:4px solid #e34e62; }
+.record-item { margin-bottom:11px; padding:15px; border:1px solid #e7ecf5; border-radius:16px; background:#fff; box-shadow:0 5px 16px rgba(25,48,91,.045); }
+.record-header { gap:10px; color:#1b3159; }
+.record-details { gap:9px; }
+.summary-grid { gap:10px; margin-top:13px; }
+.summary-card { padding:15px 12px; border:1px solid #e5ebf5; border-radius:16px; background:linear-gradient(145deg,#fff,#f8faff); box-shadow:0 5px 14px rgba(27,55,108,.045); }
+.summary-value { color:#2459d9; font-size:1.55rem; letter-spacing:-.03em; }
+.tab-navigation { position:fixed; bottom:0; left:0; right:0; z-index:100; justify-content:space-around; gap:7px; padding:9px 12px calc(9px + env(safe-area-inset-bottom)); border-top:1px solid #e7edf7; background:rgba(255,255,255,.94); box-shadow:0 -8px 25px rgba(24,48,91,.08); backdrop-filter:blur(18px); }
+.tab-btn { min-height:49px; padding:7px 5px; border-radius:13px; color:#8792a7; background:transparent; box-shadow:none; font-size:.72rem; font-weight:750; }
+.tab-btn.active { color:#2458d8; background:#edf3ff; }
+.tab-content { margin-bottom:14px; }
+.empty-message { padding:28px 16px; border:1px dashed #dce4f1; border-radius:14px; background:#fafcff; color:#8994a8; }
+.category-manage-item { padding:6px 8px; border-color:#e4eaf4; border-radius:11px; background:#f6f8fc; }
+.category-manage-item button { min-height:31px; padding:5px 8px; }
+.real-time-update { border-radius:12px; }
+.popup { border-radius:22px; }
+.backup-actions button { flex:1; }
+@media (min-width:600px) {
+  .container { padding:20px 20px 28px; }
+  .summary-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .tab-navigation { left:50%; right:auto; width:min(100%,760px); transform:translateX(-50%); border:1px solid #e7edf7; border-bottom:0; border-radius:18px 18px 0 0; }
+}
+@media (max-width:480px) {
+  .container { padding:13px 12px 18px; }
+  header { padding-left:17px; padding-right:17px; }
+  .brand-logo { width:49px; height:49px; border-radius:14px; }
+  header h1 { font-size:1.22rem; }
+  .brand-live { padding:5px 7px; font-size:.58rem; }
+  .card { padding:16px; border-radius:18px; }
+  .input-group { flex-direction:row; }
+  .input-group button { flex-shrink:0; padding-left:12px; padding-right:12px; }
+  .save-section { flex-direction:column; }
+  .save-section > button,.save-section .payment-buttons { width:100%; }
+  .save-section .payment-buttons { flex-direction:row; }
+  .summary-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .record-details { grid-template-columns:1fr; }
+  .date-display { font-size:.8rem; }
+  .date-picker { max-width:145px; font-size:.78rem; }
+}
+@media (prefers-reduced-motion:reduce) { *,*:before,*:after { scroll-behavior:auto!important; transition:none!important; animation:none!important; } }
+
+
+/* Dedicated debt ledger */
+.debt-hero{padding:18px;border-radius:19px;background:linear-gradient(135deg,#102d68,#2358c8 62%,#13a6c2);color:#fff;box-shadow:0 10px 24px rgba(25,73,164,.18);margin-bottom:14px}
+.debt-hero-label{font-size:.76rem;opacity:.82;font-weight:700;letter-spacing:.04em}
+.debt-total{font-size:1.85rem;font-weight:850;letter-spacing:-.04em;margin:3px 0 13px}
+.debt-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.debt-stat{padding:11px 12px;border-radius:13px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.15)}
+.debt-stat small{display:block;font-size:.68rem;opacity:.8}.debt-stat strong{display:block;font-size:1rem;margin-top:2px}
+.debt-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.debt-field{display:flex;flex-direction:column;gap:6px;min-width:0}.debt-field.full{grid-column:1/-1}.debt-field label{font-size:.76rem;color:#65738b;font-weight:750}.debt-field input,.debt-field textarea{width:100%;min-height:44px}.debt-field textarea{min-height:76px;resize:vertical}
+.debt-tools{display:flex;gap:8px;margin:12px 0}.debt-tools input{flex:1;min-width:0}.debt-tools select{max-width:125px}
+.debt-card{padding:15px;margin:10px 0;border:1px solid #e3eaf5;border-radius:17px;background:linear-gradient(145deg,#fff,#fbfcff);box-shadow:0 5px 15px rgba(29,53,97,.045)}
+.debt-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.debt-person{font-weight:850;color:#172e59;font-size:1rem;overflow-wrap:anywhere}.debt-date{font-size:.72rem;color:#8995a8;margin-top:3px}.debt-balance{font-weight:850;color:#c33c55;white-space:nowrap;font-size:.98rem}.debt-amounts{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:12px 0}.debt-amounts div{padding:9px 7px;border-radius:11px;background:#f3f6fc;text-align:center;min-width:0}.debt-amounts small{display:block;color:#8190a7;font-size:.65rem}.debt-amounts strong{font-size:.78rem;color:#263b60;overflow-wrap:anywhere}.debt-progress{height:7px;background:#edf1f8;border-radius:20px;overflow:hidden;margin:8px 0 11px}.debt-progress span{display:block;height:100%;background:linear-gradient(90deg,#18b88b,#42c6b0);border-radius:20px}
+.debt-actions{display:flex;gap:7px;flex-wrap:wrap}.debt-actions button{flex:1;min-width:76px;padding:8px 9px;min-height:37px;font-size:.75rem}.debt-status{font-size:.68rem;font-weight:800;padding:5px 9px;border-radius:99px;white-space:nowrap}.debt-status.open{background:#fff0f2;color:#c43e56}.debt-status.partial{background:#fff6e5;color:#a66b12}.debt-status.settled{background:#e8faf3;color:#0c8b68}.debt-note{font-size:.8rem;color:#66758d;margin:8px 0;white-space:pre-wrap;overflow-wrap:anywhere}.debt-history{margin-top:10px;padding:10px 11px;border-radius:12px;background:#f7f9fd;font-size:.75rem;color:#5f6e85}.debt-history-row{display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-bottom:1px solid #e9eef6}.debt-history-row:last-child{border:0}
+@media(max-width:420px){.debt-form-grid{grid-template-columns:1fr}.debt-field.full{grid-column:auto}.debt-tools select{max-width:112px}.debt-amounts{gap:5px}.debt-amounts div{padding:8px 4px}}
+
+
+/* ===== Fixed mobile viewport: prevent sideways page drift and outer-page bounce ===== */
+html, body {
+  width:100%;
+  max-width:100%;
+  height:100%;
+  min-height:0;
+  overflow:hidden !important;
+  overscroll-behavior:none;
+  overscroll-behavior-x:none;
+}
+body {
+  position:fixed;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  touch-action:pan-y;
+}
+header { flex:0 0 auto; width:100%; min-width:0; }
+.container {
+  flex:1 1 auto;
+  min-height:0;
+  width:100%;
+  max-width:760px;
+  overflow-x:hidden !important;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-y;
+  padding-bottom:calc(24px + env(safe-area-inset-bottom));
+}
+.tab-pane, .card, .record-item, .debt-card { max-width:100%; min-width:0; }
+img, video, canvas, iframe { max-width:100%; }
+input, select, textarea, button { max-width:100%; }
+@supports (height:100dvh) {
+  html, body { height:100dvh; }
+}
+
+
+/* Debt controls visibility and touch-safe layout */
+#tab-debts { padding-bottom: 120px !important; }
+#tab-debts .debt-form-grid { display:grid !important; }
+#tab-debts .save-section { display:flex !important; flex-direction:column !important; align-items:stretch !important; gap:10px !important; width:100% !important; }
+#tab-debts .save-section button { display:flex !important; visibility:visible !important; opacity:1 !important; width:100% !important; min-height:50px !important; flex:0 0 auto !important; position:relative !important; z-index:5 !important; }
+#tab-debts .debt-actions { display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:9px !important; width:100% !important; margin-top:12px !important; }
+#tab-debts .debt-actions button { display:flex !important; visibility:visible !important; opacity:1 !important; min-height:46px !important; width:100% !important; max-width:none !important; }
+.tab-navigation { position:fixed !important; display:flex !important; visibility:visible !important; opacity:1 !important; z-index:2147483000 !important; bottom:0 !important; left:0 !important; right:0 !important; min-height:68px !important; padding-bottom:calc(10px + env(safe-area-inset-bottom)) !important; }
+.tab-navigation .tab-btn { display:flex !important; visibility:visible !important; opacity:1 !important; flex:1 1 0 !important; min-width:0 !important; color:#33476d !important; }
+.tab-navigation .tab-btn.active { color:#2458d8 !important; }
+#debtPaymentModal { display:none; position:fixed; inset:0; z-index:2147483647; background:rgba(10,20,40,.62); padding:18px; align-items:center; justify-content:center; }
+#debtPaymentModal.active { display:flex !important; }
+#debtPaymentModal .payment-dialog { width:100%; max-width:420px; max-height:90vh; overflow:auto; background:#fff; border-radius:20px; padding:20px; box-shadow:0 18px 50px rgba(0,0,0,.25); }
+#debtPaymentModal .payment-dialog h3 { margin:0 0 12px; color:#17366e; }
+#debtPaymentModal label { display:block; margin:10px 0 5px; font-size:.82rem; font-weight:700; color:#43516a; }
+#debtPaymentModal input, #debtPaymentModal textarea { width:100%; min-height:46px; color:#17213a !important; background:#fff !important; }
+#debtPaymentModal .payment-modal-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:16px; }
+#debtPaymentModal button { min-height:48px; }
+
+
+/* iOS WKWebView fix: keep the page in normal document flow so the fixed
+   bottom navigation is not clipped by a fixed, overflow-hidden BODY. */
+html, body {
+  width:100% !important; max-width:100% !important;
+  height:auto !important; min-height:100% !important;
+  overflow-x:hidden !important; overflow-y:auto !important;
+  overscroll-behavior-x:none !important;
+}
+body {
+  position:static !important; inset:auto !important;
+  display:block !important; min-width:0 !important;
+  touch-action:pan-y !important;
+  padding-bottom:calc(100px + env(safe-area-inset-bottom)) !important;
+}
+header { width:100% !important; }
+.container {
+  display:block !important; width:100% !important; max-width:760px !important;
+  min-height:0 !important; height:auto !important; overflow:visible !important;
+  padding-bottom:calc(110px + env(safe-area-inset-bottom)) !important;
+}
+.tab-content { overflow:visible !important; margin-bottom:0 !important; }
+.tab-navigation {
+  position:fixed !important; display:flex !important;
+  left:0 !important; right:0 !important; bottom:0 !important;
+  width:100% !important; transform:none !important; margin-left:0 !important;
+  min-height:70px !important;
+  padding:8px 10px calc(8px + env(safe-area-inset-bottom)) !important;
+  background:rgba(255,255,255,.98) !important;
+  border-top:1px solid #dce4f1 !important;
+  box-shadow:0 -5px 20px rgba(20,40,80,.14) !important;
+  z-index:2147483647 !important; visibility:visible !important; opacity:1 !important;
+}
+.tab-navigation .tab-btn {
+  display:flex !important; visibility:visible !important; opacity:1 !important;
+  flex:1 1 0 !important; min-width:0 !important; min-height:52px !important;
+  color:#33476d !important; background:transparent !important;
+  box-shadow:none !important; font-size:.72rem !important;
+}
+.tab-navigation .tab-btn.active { color:#2458d8 !important; background:#edf3ff !important; }
+#tab-debts { padding-bottom:24px !important; }
+
+
+/* TKO premium Cargo theme — visual-only overrides */
+:root{--primary:#245bd5;--secondary:#132b55;--accent:#22b8cf;--light:#f3f7ff;--border:#dbe5f2}
+body{background:radial-gradient(circle at 10% 0%,rgba(34,184,207,.18),transparent 34%),linear-gradient(145deg,#eaf1fb,#f7f9fd 48%,#e8f0fb)!important;color:#17243b!important;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif!important}
+header{background:linear-gradient(120deg,#101d3d 0%,#1e4c91 58%,#147f9b 100%)!important;border-radius:0 0 26px 26px!important;padding:24px 18px!important;box-shadow:0 14px 32px rgba(15,35,75,.2)!important}
+.card{border:1px solid rgba(148,163,184,.2)!important;border-radius:20px!important;box-shadow:0 12px 30px rgba(20,48,91,.09)!important;padding:19px!important}
+h2{color:#18345f!important;font-weight:800!important;letter-spacing:-.2px}
+button{border-radius:13px!important;box-shadow:0 6px 15px rgba(36,91,213,.15)!important;font-weight:700!important}
+input,select,textarea{border-radius:13px!important;border:1px solid #d8e2f0!important;background:#fff!important;min-height:44px}
+input:focus,select:focus,textarea:focus{border-color:#2698d8!important;box-shadow:0 0 0 3px rgba(38,152,216,.14)!important}
+.merchant-btn,.item-btn{border-radius:12px!important}
+.selected-merchant,.payment-status{border-radius:14px!important}
+@media(max-width:600px){.container{padding:12px!important}.card{padding:16px!important;margin-bottom:13px!important}header{padding:21px 15px!important}}
+</style>
+</head>
+<body>
+<!-- Popups -->
+<div class="popup-overlay" id="savePopup">
+  <div class="popup popup-success">
+    <div class="popup-icon">✅</div>
+    <div class="popup-title">Saved Successfully!</div>
+    <div class="popup-message"></div>
+    <div class="popup-buttons">
+      <button class="popup-btn" id="closePopupBtn">OK</button>
+    </div>
+  </div>
+</div>
+
+<div class="popup-overlay" id="deletePopup">
+  <div class="popup popup-warning">
+    <div class="popup-icon">⚠️</div>
+    <div class="popup-title">Are you sure?</div>
+    <div class="popup-message">Are you sure you want to delete this record?</div>
+    <div class="popup-buttons">
+      <button class="popup-btn popup-btn-secondary" id="cancelDeleteBtn">Cancel</button>
+      <button class="popup-btn" id="confirmDeleteBtn">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div class="popup-overlay" id="errorPopup">
+  <div class="popup popup-error">
+    <div class="popup-icon">❌</div>
+    <div class="popup-title">Something went wrong</div>
+    <div class="popup-message"></div>
+    <div class="popup-buttons">
+      <button class="popup-btn" id="closeErrorPopupBtn">OK</button>
+    </div>
+  </div>
+</div>
+
+<header>
+<div class="brand-lockup"><img class="brand-logo" alt="Cargo Records" src="data:image/jpeg;base64,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"><div class="brand-copy"><h1>Cargo Records</h1><p>Smart daily cargo management</p></div><span class="brand-live"><i></i> LIVE</span></div>
+<div class="date-section">
+<div class="date-display" id="currentDate">Date: </div>
+<input type="date" id="datePicker" class="date-picker">
+</div>
+</header>
+
+<div class="container">
+<div class="tab-content">
+<!-- Tab 1: Summary -->
+<div class="tab-pane active" id="tab-summary">
+<div class="card">
+<h2>Dashboard</h2>
+<div id="realTimeUpdates">
+  <!-- Real-time updates will appear here -->
+</div>
+<div class="summary-grid" id="summaryGrid">
+<!-- Summary cards will be added here -->
+</div>
+</div>
+
+<div class="card">
+<h2>Payment Status</h2>
+<div class="payment-list" id="paymentList">
+<!-- Payment status will be displayed here -->
+</div>
+</div>
+</div>
+
+<!-- Tab 2: Merchants & Items -->
+<div class="tab-pane" id="tab-merchants">
+<div class="card">
+<h2>Names</h2>
+<div class="input-group">
+<input type="text" id="merchantInput" placeholder="Enter a name...">
+<button id="addMerchantBtn" class="btn-small">＋ Add New</button>
+</div>
+
+<div style="display:flex; gap:8px; align-items:center;">
+  <div class="selected-merchant" id="selectedMerchant" style="flex:1;"></div>
+  <!-- Delete merchant button -->
+  <button id="editMerchantBtn" class="btn-outline btn-small" title="Rename selected name">Rename</button>
+  <button id="deleteMerchantBtn" class="btn-danger btn-small" title="Delete selected name">Delete</button>
+</div>
+
+<div class="payment-status" id="paymentStatus">
+<!-- Payment status will be displayed here -->
+</div>
+<div class="merchant-buttons" id="merchantButtons">
+<!-- Merchant buttons will be added here -->
+</div>
+</div>
+
+<div class="card">
+<h2>Categories / Items</h2>
+<div class="input-group">
+<input type="text" id="newItemInput" placeholder="Enter a new category...">
+<button id="addNewItemBtn" class="btn-small">＋ Add New</button>
+</div>
+<div class="items-buttons" id="itemsButtons">
+<!-- Item buttons will be added here -->
+</div>
+<div class="item-list" id="itemList">
+<!-- Item list will be displayed here -->
+</div>
+
+<!-- Save and payment controls -->
+<div class="save-section">
+  <button class="btn-success" id="saveItemsBtn">
+    <span>💾</span>
+    <span>Save</span>
+  </button>
+  
+  <div class="payment-buttons">
+    <button class="btn-success" id="markPaidBtn">Paid</button>
+    <button class="btn-danger" id="markUnpaidBtn">Unpaid</button>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- Tab 3: Records -->
+<div class="tab-pane" id="tab-records">
+<div class="card">
+<h2>Records</h2>
+<div class="records-list" id="recordsList">
+<!-- Records will be displayed here -->
+</div>
+</div>
+<div class="card">
+<h2>Backup / Restore</h2>
+<p class="backup-help">Export your data to a JSON backup file, or restore a previous backup.</p>
+<div class="backup-actions">
+<button class="btn-success" id="backupBtn">💾 Backup</button>
+<button class="btn-warning" id="restoreBtn">📂 Restore</button>
+<input type="file" id="restoreFileInput" accept=".json,application/json" hidden>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Tab 4: Dedicated Debt Ledger -->
+<div class="tab-pane" id="tab-debts">
+  <div class="debt-hero">
+    <div class="debt-hero-label">TOTAL OUTSTANDING DEBT</div>
+    <div class="debt-total" id="debtOutstanding">0 MMK</div>
+    <div class="debt-stats">
+      <div class="debt-stat"><small>Total lent / owed</small><strong id="debtTotalAmount">0 MMK</strong></div>
+      <div class="debt-stat"><small>Total received</small><strong id="debtTotalPaid">0 MMK</strong></div>
+      <div class="debt-stat"><small>Open accounts</small><strong id="debtOpenCount">0</strong></div>
+      <div class="debt-stat"><small>Settled accounts</small><strong id="debtSettledCount">0</strong></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2 id="debtFormTitle">Add Debt Record</h2>
+    <form id="debtForm">
+      <div class="debt-form-grid">
+        <div class="debt-field full"><label for="debtName">Person / Customer name *</label><input id="debtName" type="text" placeholder="Enter name" required maxlength="80"></div>
+        <div class="debt-field"><label for="debtAmount">Debt amount (MMK) *</label><input id="debtAmount" type="number" min="1" step="1" inputmode="numeric" placeholder="0" required></div>
+        <div class="debt-field"><label for="debtDate">Date *</label><input id="debtDate" type="date" required></div>
+        <div class="debt-field full"><label for="debtNote">Note (optional)</label><textarea id="debtNote" placeholder="Details, phone, reason..."></textarea></div>
+      </div>
+      <div class="save-section" style="display:flex;flex-direction:row;align-items:center">
+        <button class="btn-success" type="button" id="debtSaveBtn">＋ Save Debt</button>
+        <button class="btn-outline" type="button" id="debtCancelEdit" style="display:none">Cancel Edit</button>
+      </div>
+    </form>
+  </div>
+  <div class="card">
+    <h2>Debt Accounts</h2>
+    <div class="debt-tools"><input id="debtSearch" type="search" placeholder="Search name or note..."><select id="debtFilter"><option value="all">All status</option><option value="open">Unpaid</option><option value="partial">Partial</option><option value="settled">Paid</option></select></div>
+    <div id="debtList"><div class="empty-message">No debt records yet. Add your first account above.</div></div>
+  </div>
+</div>
+
+
+<div id="debtPaymentModal" aria-hidden="true">
+  <div class="payment-dialog">
+    <h3>Record Debt Payment</h3>
+    <div id="debtPaymentBalance" style="font-weight:800;color:#c33c55;margin-bottom:8px"></div>
+    <form id="debtPaymentForm">
+      <label for="debtPaymentAmount">Payment amount (MMK) *</label>
+      <input id="debtPaymentAmount" type="number" min="1" step="1" inputmode="numeric" placeholder="Enter amount" required>
+      <label for="debtPaymentDate">Payment date *</label>
+      <input id="debtPaymentDate" type="date" required>
+      <label for="debtPaymentNote">Note (optional)</label>
+      <textarea id="debtPaymentNote" placeholder="Payment details"></textarea>
+      <div class="payment-modal-actions">
+        <button type="button" class="btn-outline" id="debtPaymentCancel">Cancel</button>
+        <button type="submit" class="btn-success">Save Payment</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Bottom Tab Navigation -->
+<div class="tab-navigation">
+<button class="tab-btn active" data-tab="tab-summary">
+<span>Dashboard</span>
+</button>
+<button class="tab-btn" data-tab="tab-merchants">
+<span>Names & Items</span>
+</button>
+<button class="tab-btn" data-tab="tab-records">
+<span>Records</span>
+</button>
+<button class="tab-btn" data-tab="tab-debts"><span>Debt Ledger</span></button>
+</div>
+
+<script>
+// Popup functionality
+const savePopup = document.getElementById('savePopup');
+const deletePopup = document.getElementById('deletePopup');
+const errorPopup = document.getElementById('errorPopup');
+const closePopupBtn = document.getElementById('closePopupBtn');
+const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+const closeErrorPopupBtn = document.getElementById('closeErrorPopupBtn');
+
+function showSuccessPopup(message) {
+  const popupMessage = savePopup.querySelector('.popup-message');
+  popupMessage.textContent = message;
+  savePopup.classList.add('active');
+}
+
+function showDeletePopup(message, callback) {
+  const popupMessage = deletePopup.querySelector('.popup-message');
+  popupMessage.textContent = message;
+  deletePopup.classList.add('active');
+  confirmDeleteBtn.onclick = function() {
+    deletePopup.classList.remove('active');
+    if (callback) callback();
+  };
+}
+
+function showErrorPopup(message) {
+  const popupMessage = errorPopup.querySelector('.popup-message');
+  popupMessage.textContent = message;
+  errorPopup.classList.add('active');
+}
+
+closePopupBtn.addEventListener('click', function() {
+  savePopup.classList.remove('active');
+});
+cancelDeleteBtn.addEventListener('click', function() {
+  deletePopup.classList.remove('active');
+});
+closeErrorPopupBtn.addEventListener('click', function() {
+  errorPopup.classList.remove('active');
+});
+[savePopup, deletePopup, errorPopup].forEach(popup => {
+  popup.addEventListener('click', function(e) {
+    if (e.target === popup) {
+      popup.classList.remove('active');
+    }
+  });
+});
+
+// Tab Navigation
+document.querySelectorAll('.tab-btn').forEach(button => {
+button.addEventListener('click', function() {
+document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+this.classList.add('active');
+const tabId = this.getAttribute('data-tab');
+document.getElementById(tabId).classList.add('active');
+});
+});
+
+// Current date display
+const currentDateElement = document.getElementById('currentDate');
+const datePickerElement = document.getElementById('datePicker');
+const today = new Date();
+const formattedDate = today.toLocaleDateString('en-GB', {
+year: 'numeric',
+month: 'long',
+day: 'numeric'
+});
+currentDateElement.textContent = `Date: ${formattedDate}`;
+const yyyy = today.getFullYear();
+const mm = String(today.getMonth() + 1).padStart(2, '0');
+const dd = String(today.getDate()).padStart(2, '0');
+datePickerElement.value = `${yyyy}-${mm}-${dd}`;
+datePickerElement.addEventListener('change', function() {
+const selectedDate = new Date(this.value);
+const formattedSelectedDate = selectedDate.toLocaleDateString('en-GB', {
+year: 'numeric',
+month: 'long',
+day: 'numeric'
+});
+currentDateElement.textContent = `Date: ${formattedSelectedDate}`;
+loadAllDataForDate(this.value);
+});
+
+// Merchant management
+const merchantInput = document.getElementById('merchantInput');
+const addMerchantBtn = document.getElementById('addMerchantBtn');
+const merchantButtons = document.getElementById('merchantButtons');
+const selectedMerchantElement = document.getElementById('selectedMerchant');
+const paymentStatusElement = document.getElementById('paymentStatus');
+const deleteMerchantBtn = document.getElementById('deleteMerchantBtn');
+const editMerchantBtn = document.getElementById('editMerchantBtn');
+
+let merchants = JSON.parse(localStorage.getItem('merchants')) || [];
+let selectedMerchant = null;
+
+// Render merchant buttons
+function renderMerchantButtons() {
+merchantButtons.innerHTML = '';
+merchants.forEach(merchant => {
+const button = document.createElement('button');
+button.textContent = merchant;
+button.className = 'merchant-btn btn-small';
+if (merchant === selectedMerchant) {
+button.classList.add('active');
+}
+button.addEventListener('click', function() {
+selectMerchant(merchant);
+});
+merchantButtons.appendChild(button);
+});
+}
+
+// Select merchant
+function selectMerchant(merchantName) {
+selectedMerchant = merchantName;
+selectedMerchantElement.innerHTML = ` <span class="selected-merchant-name">${merchantName}</span>`;
+renderMerchantButtons();
+loadItemsForMerchant(merchantName);
+updatePaymentStatus();
+}
+
+// Update payment status display
+function updatePaymentStatus() {
+if (!selectedMerchant) {
+paymentStatusElement.innerHTML = '';
+return;
+}
+const currentDate = datePickerElement.value;
+const isPaid = paidMerchants[currentDate] && paidMerchants[currentDate].includes(selectedMerchant);
+if (isPaid) {
+paymentStatusElement.innerHTML = `
+<div class="payment-status paid">
+<span>✅</span>
+<span>Paid</span>
+</div>
+`;
+} else {
+paymentStatusElement.innerHTML = `
+<div class="payment-status unpaid">
+<span>❌</span>
+<span>Unpaid</span>
+</div>
+`;
+}
+}
+
+// Add new merchant
+addMerchantBtn.addEventListener('click', function() {
+const merchantName = merchantInput.value.trim();
+if (merchantName && !merchants.includes(merchantName)) {
+merchants.push(merchantName);
+localStorage.setItem('merchants', JSON.stringify(merchants));
+renderMerchantButtons();
+merchantInput.value = '';
+selectMerchant(merchantName);
+// Show real-time update
+showRealTimeUpdate(`"${merchantName}" was added.`);
+}
+});
+
+// Rename selected name and update all linked data
+editMerchantBtn.addEventListener('click', function() {
+  if (!selectedMerchant) {
+    showErrorPopup('Please select a name to rename.');
+    return;
+  }
+  const oldName = selectedMerchant;
+  const newName = prompt('Enter the new name:', oldName);
+  if (newName === null) return;
+  const cleanName = newName.trim();
+  if (!cleanName || (cleanName !== oldName && merchants.includes(cleanName))) {
+    showErrorPopup('Please enter a unique, non-empty name.');
+    return;
+  }
+  merchants = merchants.map(name => name === oldName ? cleanName : name);
+  Object.keys(merchantItems).forEach(date => {
+    if (merchantItems[date] && merchantItems[date][oldName]) {
+      merchantItems[date][cleanName] = merchantItems[date][oldName];
+      delete merchantItems[date][oldName];
+    }
+  });
+  Object.keys(records).forEach(date => {
+    (records[date] || []).forEach(record => {
+      if (record.merchant === oldName) record.merchant = cleanName;
+    });
+  });
+  Object.keys(paidMerchants).forEach(date => {
+    paidMerchants[date] = (paidMerchants[date] || []).map(name => name === oldName ? cleanName : name);
+  });
+  selectedMerchant = cleanName;
+  localStorage.setItem('merchants', JSON.stringify(merchants));
+  localStorage.setItem('merchantItems', JSON.stringify(merchantItems));
+  localStorage.setItem('records', JSON.stringify(records));
+  localStorage.setItem('paidMerchants', JSON.stringify(paidMerchants));
+  selectedMerchantElement.textContent = cleanName;
+  renderMerchantButtons();
+  loadAllDataForDate(datePickerElement.value);
+  showRealTimeUpdate(`Name changed to "${cleanName}".`);
+});
+
+// Delete merchant (and all its data across dates)
+deleteMerchantBtn.addEventListener('click', function() {
+if (!selectedMerchant) {
+showErrorPopup('Please select a name to delete.');
+return;
+}
+showDeletePopup(`Delete "${selectedMerchant}" and all related records? This cannot be undone.`, function() {
+  const merchantName = selectedMerchant;
+  // Remove merchant from merchants list
+  merchants = merchants.filter(m => m !== selectedMerchant);
+  localStorage.setItem('merchants', JSON.stringify(merchants));
+
+  // Remove merchant data across merchantItems, records, paidMerchants
+  // merchantItems: structure { date: { merchant: [items...] } }
+  Object.keys(merchantItems).forEach(date => {
+    if (merchantItems[date] && merchantItems[date][selectedMerchant]) {
+      delete merchantItems[date][selectedMerchant];
+      if (Object.keys(merchantItems[date]).length === 0) delete merchantItems[date];
+    }
+  });
+
+  // records: structure { date: [ {merchant, items, paid, ...}, ... ] }
+  Object.keys(records).forEach(date => {
+    if (Array.isArray(records[date])) {
+      records[date] = records[date].filter(r => r.merchant !== selectedMerchant);
+      if (records[date].length === 0) delete records[date];
+    }
+  });
+
+  // paidMerchants: structure { date: [merchant, ...] }
+  Object.keys(paidMerchants).forEach(date => {
+    if (Array.isArray(paidMerchants[date])) {
+      paidMerchants[date] = paidMerchants[date].filter(m => m !== selectedMerchant);
+      if (paidMerchants[date].length === 0) delete paidMerchants[date];
+    }
+  });
+
+  // Save to localStorage
+  localStorage.setItem('merchantItems', JSON.stringify(merchantItems));
+  localStorage.setItem('records', JSON.stringify(records));
+  localStorage.setItem('paidMerchants', JSON.stringify(paidMerchants));
+
+  // Reset selection and UI
+  selectedMerchant = null;
+  selectedMerchantElement.innerHTML = '';
+  renderMerchantButtons();
+  loadAllDataForDate(datePickerElement.value);
+  updateSummary();
+
+  // Show real-time update
+  showRealTimeUpdate(`"${merchantName}" was deleted.`, true);
+});
+});
+
+// Items management
+const itemsButtons = document.getElementById('itemsButtons');
+const itemList = document.getElementById('itemList');
+const newItemInput = document.getElementById('newItemInput');
+const addNewItemBtn = document.getElementById('addNewItemBtn');
+const categoryManageList = document.getElementById('categoryManageList');
+const saveItemsBtn = document.getElementById('saveItemsBtn');
+
+let allItems = JSON.parse(localStorage.getItem('allItems')) || [];
+let merchantItems = JSON.parse(localStorage.getItem('merchantItems')) || {};
+let paidMerchants = JSON.parse(localStorage.getItem('paidMerchants')) || {};
+let records = JSON.parse(localStorage.getItem('records')) || {}; // structure date -> array of records
+
+function renderItemButtons() {
+itemsButtons.innerHTML = '';
+allItems.forEach(item => {
+const button = document.createElement('button');
+button.textContent = item;
+button.className = 'item-btn btn-small';
+button.addEventListener('click', function() {
+addItemToList(item);
+});
+itemsButtons.appendChild(button);
+});
+renderCategoryManagement();
+}
+
+function renderCategoryManagement() {
+  if (!categoryManageList) return;
+  categoryManageList.innerHTML = '';
+  allItems.forEach((category, index) => {
+    const row = document.createElement('div');
+    row.className = 'category-manage-item';
+    const label = document.createElement('span');
+    label.textContent = category;
+    const rename = document.createElement('button');
+    rename.className = 'btn-outline';
+    rename.textContent = 'Rename';
+    rename.addEventListener('click', () => {
+      const next = prompt('Rename category:', category);
+      if (next === null) return;
+      const clean = next.trim();
+      if (!clean || (clean !== category && allItems.includes(clean))) {
+        showErrorPopup('Please enter a unique, non-empty category.');
+        return;
+      }
+      allItems[index] = clean;
+      localStorage.setItem('allItems', JSON.stringify(allItems));
+      // Update saved item names without changing quantities
+      Object.keys(merchantItems).forEach(date => {
+        Object.values(merchantItems[date] || {}).forEach(items => {
+          (items || []).forEach(item => { if (item.name === category) item.name = clean; });
+        });
+      });
+      Object.keys(records).forEach(date => (records[date] || []).forEach(record => {
+        (record.items || []).forEach(item => { if (item.name === category) item.name = clean; });
+      }));
+      localStorage.setItem('merchantItems', JSON.stringify(merchantItems));
+      localStorage.setItem('records', JSON.stringify(records));
+      renderItemButtons();
+      loadAllDataForDate(datePickerElement.value);
+    });
+    const remove = document.createElement('button');
+    remove.className = 'btn-danger';
+    remove.textContent = 'Delete';
+    remove.addEventListener('click', () => {
+      if (!confirm(`Remove category "${category}" from the category list? Existing saved records will be kept.`)) return;
+      allItems = allItems.filter(item => item !== category);
+      localStorage.setItem('allItems', JSON.stringify(allItems));
+      renderItemButtons();
+    });
+    row.append(label, rename, remove);
+    categoryManageList.appendChild(row);
+  });
+}
+
+addNewItemBtn.addEventListener('click', function() {
+const newItem = newItemInput.value.trim();
+if (newItem && !allItems.includes(newItem)) {
+allItems.push(newItem);
+localStorage.setItem('allItems', JSON.stringify(allItems));
+renderItemButtons();
+newItemInput.value = '';
+// Show real-time update
+showRealTimeUpdate(`"${newItem}" category was added.`);
+}
+});
+
+// Add item to list — quantity left blank by default
+function addItemToList(itemName) {
+if (!selectedMerchant) {
+showErrorPopup('Please select a name first.');
+return;
+}
+
+const itemRow = document.createElement('div');
+itemRow.className = 'item-row';
+itemRow.dataset.item = itemName;
+
+const itemNameDiv = document.createElement('div');
+itemNameDiv.className = 'item-name';
+itemNameDiv.textContent = itemName;
+
+const quantityInput = document.createElement('input');
+quantityInput.type = 'number';
+quantityInput.min = '0';
+quantityInput.value = ''; // BLANK as requested
+quantityInput.className = 'item-quantity';
+quantityInput.placeholder = 'Quantity';
+
+const deleteBtn = document.createElement('button');
+deleteBtn.textContent = '×';
+deleteBtn.className = 'delete-btn';
+deleteBtn.title = 'Remove';
+deleteBtn.addEventListener('click', function() {
+itemRow.remove();
+// Show real-time update
+showRealTimeUpdate(`"${itemName}" was removed from this entry.`, true);
+});
+
+itemRow.appendChild(itemNameDiv);
+itemRow.appendChild(quantityInput);
+itemRow.appendChild(deleteBtn);
+itemList.appendChild(itemRow);
+}
+
+// Save items button — only save when this button is clicked
+saveItemsBtn.addEventListener('click', function() {
+if (!selectedMerchant) {
+showErrorPopup('Please select a name first.');
+return;
+}
+saveItemsForMerchant();
+updateSummary();
+showSuccessPopup('Items saved successfully.');
+// Show real-time update
+showRealTimeUpdate(`Items saved successfully.`);
+});
+
+// Save items for current merchant (also updates records)
+function saveItemsForMerchant() {
+if (!selectedMerchant) return;
+const items = getItemsFromList();
+const currentDate = datePickerElement.value;
+
+// Save to merchantItems
+if (!merchantItems[currentDate]) merchantItems[currentDate] = {};
+merchantItems[currentDate][selectedMerchant] = items;
+localStorage.setItem('merchantItems', JSON.stringify(merchantItems));
+
+// Save to records (update or add)
+if (!records[currentDate]) records[currentDate] = [];
+const existingRecordIndex = records[currentDate].findIndex(r => r.merchant === selectedMerchant);
+const isPaid = paidMerchants[currentDate] && paidMerchants[currentDate].includes(selectedMerchant);
+
+const newRecord = {
+merchant: selectedMerchant,
+items: items,
+paid: !!isPaid,
+timestamp: new Date().toISOString()
+};
+
+if (existingRecordIndex !== -1) {
+records[currentDate][existingRecordIndex] = newRecord;
+} else {
+records[currentDate].push(newRecord);
+}
+localStorage.setItem('records', JSON.stringify(records));
+
+// Refresh UI
+loadRecordsForDate(currentDate);
+renderPaymentList();
+updatePaymentStatus();
+}
+
+// Load items for merchant
+function loadItemsForMerchant(merchantName) {
+itemList.innerHTML = '';
+const currentDate = datePickerElement.value;
+if (!merchantItems[currentDate] || !merchantItems[currentDate][merchantName]) {
+return;
+}
+const items = merchantItems[currentDate][merchantName];
+items.forEach(item => {
+const itemRow = document.createElement('div');
+itemRow.className = 'item-row';
+itemRow.dataset.item = item.name;
+
+const itemNameDiv = document.createElement('div');
+itemNameDiv.className = 'item-name';
+itemNameDiv.textContent = item.name;
+
+const quantityInput = document.createElement('input');
+quantityInput.type = 'number';
+quantityInput.min = '0';
+quantityInput.value = item.quantity;
+quantityInput.className = 'item-quantity';
+quantityInput.placeholder = 'Quantity';
+
+const deleteBtn = document.createElement('button');
+deleteBtn.textContent = '×';
+deleteBtn.className = 'delete-btn';
+deleteBtn.title = 'Remove';
+deleteBtn.addEventListener('click', function() {
+itemRow.remove();
+// Show real-time update
+showRealTimeUpdate(`"${item.name}" was removed from this entry.`, true);
+});
+
+itemRow.appendChild(itemNameDiv);
+itemRow.appendChild(quantityInput);
+itemRow.appendChild(deleteBtn);
+itemList.appendChild(itemRow);
+});
+}
+
+// Get items from list
+function getItemsFromList() {
+const items = [];
+document.querySelectorAll('.item-row').forEach(row => {
+const name = row.querySelector('.item-name').textContent;
+const quantity = row.querySelector('.item-quantity').value;
+items.push({ name, quantity });
+});
+return items;
+}
+
+// Payment status buttons
+const markPaidBtn = document.getElementById('markPaidBtn');
+const markUnpaidBtn = document.getElementById('markUnpaidBtn');
+
+// Record payment status update function
+function updateRecordPaymentStatus(date, merchantName, isPaid) {
+
+  if (!records[date]) return;
+
+  records[date].forEach(record => {
+
+    if (record.merchant === merchantName) {
+      record.paid = isPaid;
+      record.timestamp = new Date().toISOString();
+    }
+
+  });
+
+  localStorage.setItem('records', JSON.stringify(records));
+
+  // Records tab refresh
+  loadRecordsForDate(date);
+}
+
+// Mark as paid
+markPaidBtn.addEventListener('click', function () {
+
+  if (!selectedMerchant) {
+    showErrorPopup('Please select a name first.');
+    return;
+  }
+
+  const currentDate = datePickerElement.value;
+
+  // Create array if not exist
+  if (!paidMerchants[currentDate]) {
+    paidMerchants[currentDate] = [];
+  }
+
+  // Add paid merchant
+  if (!paidMerchants[currentDate].includes(selectedMerchant)) {
+
+    paidMerchants[currentDate].push(selectedMerchant);
+
+    // Save paid merchants
+    localStorage.setItem(
+      'paidMerchants',
+      JSON.stringify(paidMerchants)
+    );
+
+    // Update records
+    updateRecordPaymentStatus(
+      currentDate,
+      selectedMerchant,
+      true
+    );
+
+    // Refresh UI
+    updatePaymentStatus();
+    renderPaymentList();
+    updateSummary();
+
+    // Success popup
+    showSuccessPopup(
+      `"${selectedMerchant}" marked as paid.`
+    );
+
+    // Realtime update
+    showRealTimeUpdate(
+      `"${selectedMerchant}" payment status changed to paid.`
+    );
+  }
+});
+
+// Mark as unpaid
+markUnpaidBtn.addEventListener('click', function () {
+
+  if (!selectedMerchant) {
+    showErrorPopup('Please select a name first.');
+    return;
+  }
+
+  const currentDate = datePickerElement.value;
+
+  // Check merchant exists in paid list
+  if (
+    paidMerchants[currentDate] &&
+    paidMerchants[currentDate].includes(selectedMerchant)
+  ) {
+
+    // Remove merchant
+    paidMerchants[currentDate] =
+      paidMerchants[currentDate].filter(
+        merchant => merchant !== selectedMerchant
+      );
+
+    // Remove empty array
+    if (paidMerchants[currentDate].length === 0) {
+      delete paidMerchants[currentDate];
+    }
+
+    // Save
+    localStorage.setItem(
+      'paidMerchants',
+      JSON.stringify(paidMerchants)
+    );
+
+    // Update records
+    updateRecordPaymentStatus(
+      currentDate,
+      selectedMerchant,
+      false
+    );
+
+    // Refresh UI
+    updatePaymentStatus();
+    renderPaymentList();
+    updateSummary();
+
+    // Success popup
+    showSuccessPopup(
+      `"${selectedMerchant}" marked as unpaid.`
+    );
+
+    // Realtime update
+    showRealTimeUpdate(
+      `"${selectedMerchant}" payment status changed to unpaid.`
+    );
+  }
+});
+
+// Render payment list
+function renderPaymentList() {
+const paymentListElement = document.getElementById('paymentList');
+const currentDate = datePickerElement.value;
+paymentListElement.innerHTML = '';
+
+if (!merchantItems[currentDate] || Object.keys(merchantItems[currentDate]).length === 0) {
+paymentListElement.innerHTML = '<div class="empty-message">No records for this date.</div>';
+return;
+}
+
+Object.keys(merchantItems[currentDate]).forEach(merchant => {
+const isPaid = paidMerchants[currentDate] && paidMerchants[currentDate].includes(merchant);
+const paymentItem = document.createElement('div');
+paymentItem.className = isPaid ? 'paid-item' : 'unpaid-item';
+paymentItem.innerHTML = `
+<div>${merchant}</div>
+<div>${isPaid ? '✅ Paid' : '❌ Unpaid'}</div>
+`;
+paymentListElement.appendChild(paymentItem);
+});
+}
+
+// Load all data for a specific date
+function loadAllDataForDate(date) {
+loadItemsForMerchant(selectedMerchant);
+renderPaymentList();
+loadRecordsForDate(date);
+updateSummary();
+updatePaymentStatus();
+}
+
+// Load records for a specific date
+function loadRecordsForDate(date) {
+
+  const recordsListElement =
+    document.getElementById('recordsList');
+
+  recordsListElement.innerHTML = '';
+
+  // No records
+  if (!records[date] || records[date].length === 0) {
+
+    recordsListElement.innerHTML = `
+      <div class="empty-message">
+        No records for this date.
+      </div>
+    `;
+
+    return;
+  }
+
+  // Render records
+  records[date].forEach((record, index) => {
+
+    const recordElement = document.createElement('div');
+
+    recordElement.className = 'record-item';
+
+    // Time
+    const time = new Date(
+      record.timestamp
+    ).toLocaleTimeString('en-GB', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+
+    // HTML
+    recordElement.innerHTML = `
+
+      <div class="record-header">
+
+        <div>${record.merchant}</div>
+
+        <div>${time}</div>
+
+      </div>
+
+      <div class="record-details">
+
+        <div>
+          ${record.items
+            .map(item =>
+              `${item.name} (${item.quantity})`
+            )
+            .join(', ')}
+        </div>
+
+        <div>
+          ${record.paid
+            ? '✅ Paid'
+            : '❌ Unpaid'}
+        </div>
+
+      </div>
+
+      <button
+        class="delete-record-btn"
+        data-date="${date}"
+        data-index="${index}"
+      >
+        Delete Record
+      </button>
+
+    `;
+
+    recordsListElement.appendChild(recordElement);
+
+  });
+
+  // Delete button events
+  document
+    .querySelectorAll('.delete-record-btn')
+    .forEach(btn => {
+
+      btn.addEventListener('click', function () {
+
+        const date =
+          this.getAttribute('data-date');
+
+        const index =
+          parseInt(
+            this.getAttribute('data-index')
+          );
+
+        // Merchant name
+        const merchantName =
+          records[date][index].merchant;
+
+        // Popup
+        showDeletePopup(
+          'Are you sure you want to delete this record?',
+          function () {
+
+            // Delete record
+            records[date].splice(index, 1);
+
+            // Remove empty records
+            if (records[date].length === 0) {
+              delete records[date];
+            }
+
+            // Delete merchant items
+            if (
+              merchantItems[date] &&
+              merchantItems[date][merchantName]
+            ) {
+
+              delete merchantItems[date][merchantName];
+
+              // Remove empty date
+              if (
+                Object.keys(
+                  merchantItems[date]
+                ).length === 0
+              ) {
+
+                delete merchantItems[date];
+
+              }
+            }
+
+            // Delete paid merchant
+            if (
+              paidMerchants[date] &&
+              paidMerchants[date].includes(
+                merchantName
+              )
+            ) {
+
+              paidMerchants[date] =
+                paidMerchants[date].filter(
+                  merchant =>
+                    merchant !== merchantName
+                );
+
+              // Remove empty paid list
+              if (
+                paidMerchants[date].length === 0
+              ) {
+
+                delete paidMerchants[date];
+
+              }
+            }
+
+            // Save records
+            localStorage.setItem(
+              'records',
+              JSON.stringify(records)
+            );
+
+            // Save merchant items
+            localStorage.setItem(
+              'merchantItems',
+              JSON.stringify(merchantItems)
+            );
+
+            // Save paid merchants
+            localStorage.setItem(
+              'paidMerchants',
+              JSON.stringify(paidMerchants)
+            );
+
+            // Refresh UI
+            loadRecordsForDate(date);
+
+            renderPaymentList();
+
+            updateSummary();
+
+            updatePaymentStatus();
+
+            // Real-time update
+            showRealTimeUpdate(
+              `Record for "${merchantName}" was deleted.`,
+              true
+            );
+
+          }
+        );
+
+      });
+
+    });
+
+}
+// Update summary
+function updateSummary() {
+  const currentDate = datePickerElement.value;
+  const summaryGrid = document.getElementById('summaryGrid');
+  summaryGrid.innerHTML = '';
+
+  if (!merchantItems[currentDate] || Object.keys(merchantItems[currentDate]).length === 0) {
+    summaryGrid.innerHTML = '<div class="empty-message">No records for this date.</div>';
+    return;
+  }
+
+  const totalMerchants = Object.keys(merchantItems[currentDate]).length;
+  const paidCount = paidMerchants[currentDate] ? paidMerchants[currentDate].length : 0;
+  const unpaidCount = totalMerchants - paidCount;
+
+  // Calculate total item quantity
+  let totalItemsQuantity = 0;
+  Object.values(merchantItems[currentDate]).forEach(items => {
+    items.forEach(item => {
+      totalItemsQuantity += parseInt(item.quantity) || 0;
+    });
+  });
+
+  summaryGrid.innerHTML = `
+  <div class="summary-card">
+    <div>Names</div>
+    <div class="summary-value">${totalMerchants}</div>
+  </div>
+  <div class="summary-card">
+    <div>Paid</div>
+    <div class="summary-value" style="color: var(--success);">${paidCount}</div>
+  </div>
+  <div class="summary-card">
+    <div>Unpaid</div>
+    <div class="summary-value" style="color: var(--danger);">${unpaidCount}</div>
+  </div>
+  <div class="summary-card">
+    <div>Total Quantity</div>
+    <div class="summary-value">${totalItemsQuantity}</div>
+  </div>
+  `;
+}
+
+
+// Real-time update function
+function showRealTimeUpdate(message, isDelete = false) {
+const updatesContainer = document.getElementById('realTimeUpdates');
+const updateElement = document.createElement('div');
+updateElement.className = `real-time-update ${isDelete ? 'delete' : ''}`;
+updateElement.innerHTML = `
+<span>${isDelete ? '🗑️' : '🔄'}</span>
+<span>${message}</span>
+`;
+updatesContainer.appendChild(updateElement);
+  
+// Auto remove after 5 seconds
+setTimeout(() => {
+if (updateElement.parentNode) {
+updateElement.remove();
+}
+}, 5000);
+}
+
+// Dedicated Debt Ledger (independent from daily cargo records)
+let debtEntries = JSON.parse(localStorage.getItem('cargoDebtEntries') || '[]');
+let editingDebtId = null;
+const debtForm = document.getElementById('debtForm');
+const debtNameInput = document.getElementById('debtName');
+const debtAmountInput = document.getElementById('debtAmount');
+const debtDateInput = document.getElementById('debtDate');
+const debtNoteInput = document.getElementById('debtNote');
+const debtListElement = document.getElementById('debtList');
+const debtSearchInput = document.getElementById('debtSearch');
+const debtFilterSelect = document.getElementById('debtFilter');
+const debtPaymentModal=document.getElementById('debtPaymentModal');
+const debtPaymentForm=document.getElementById('debtPaymentForm');
+let activeDebtPaymentId=null;
+function openDebtPayment(entry){
+  activeDebtPaymentId=entry.id;
+  const balance=Math.max(0,Number(entry.amount)-debtPaid(entry));
+  document.getElementById('debtPaymentBalance').textContent=`Outstanding balance: ${debtMoney(balance)}`;
+  document.getElementById('debtPaymentAmount').value='';
+  document.getElementById('debtPaymentAmount').max=String(balance);
+  document.getElementById('debtPaymentDate').value=debtToday();
+  document.getElementById('debtPaymentNote').value='';
+  debtPaymentModal.classList.add('active'); debtPaymentModal.setAttribute('aria-hidden','false');
+}
+function closeDebtPayment(){ debtPaymentModal.classList.remove('active'); debtPaymentModal.setAttribute('aria-hidden','true'); activeDebtPaymentId=null; }
+document.getElementById('debtPaymentCancel').addEventListener('click',closeDebtPayment);
+debtPaymentModal.addEventListener('click',e=>{ if(e.target===debtPaymentModal) closeDebtPayment(); });
+debtPaymentForm.addEventListener('submit',e=>{
+  e.preventDefault();
+  const entry=debtEntries.find(x=>x.id===activeDebtPaymentId); if(!entry){ showErrorPopup('Debt record could not be found.'); closeDebtPayment(); return; }
+  const balance=Math.max(0,Number(entry.amount)-debtPaid(entry));
+  const amount=Number(document.getElementById('debtPaymentAmount').value);
+  const date=document.getElementById('debtPaymentDate').value;
+  const note=document.getElementById('debtPaymentNote').value.trim();
+  if(!Number.isFinite(amount)||amount<=0||amount>balance||!date){ showErrorPopup('Enter a valid payment amount and date. Payment cannot exceed the outstanding balance.'); return; }
+  entry.payments=entry.payments||[]; entry.payments.push({amount,date,note,createdAt:new Date().toISOString()});
+  try { saveDebtEntries(); } catch(err) { showErrorPopup('Unable to save payment. Please check device storage.'); return; }
+  closeDebtPayment(); renderDebtList(); showSuccessPopup(amount===balance?'Debt fully paid. Payment saved.':'Partial payment saved. Remaining balance updated.');
+});
+const debtMoney = value => `${Math.round(Number(value)||0).toLocaleString('en-US')} MMK`;
+const debtToday = () => { const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
+function saveDebtEntries(){ localStorage.setItem('cargoDebtEntries',JSON.stringify(debtEntries)); }
+function debtPaid(entry){ return (entry.payments||[]).reduce((sum,p)=>sum+(Number(p.amount)||0),0); }
+function debtStatus(entry){ const balance=Math.max(0,Number(entry.amount)-debtPaid(entry)); return balance<=0?'settled':debtPaid(entry)>0?'partial':'open'; }
+function updateDebtSummary(){
+  const total=debtEntries.reduce((s,e)=>s+(Number(e.amount)||0),0);
+  const paid=debtEntries.reduce((s,e)=>s+debtPaid(e),0);
+  document.getElementById('debtOutstanding').textContent=debtMoney(Math.max(0,total-paid));
+  document.getElementById('debtTotalAmount').textContent=debtMoney(total);
+  document.getElementById('debtTotalPaid').textContent=debtMoney(paid);
+  document.getElementById('debtOpenCount').textContent=debtEntries.filter(e=>debtStatus(e)==='open'||debtStatus(e)==='partial').length;
+  document.getElementById('debtSettledCount').textContent=debtEntries.filter(e=>debtStatus(e)==='settled').length;
+}
+function renderDebtList(){
+  updateDebtSummary();
+  const q=(debtSearchInput.value||'').trim().toLowerCase(), filter=debtFilterSelect.value;
+  const list=debtEntries.filter(e=>`${e.name} ${e.note||''}`.toLowerCase().includes(q) && (filter==='all'||debtStatus(e)===filter)).sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+  debtListElement.innerHTML='';
+  if(!list.length){ debtListElement.innerHTML='<div class="empty-message">No matching debt records found.</div>'; return; }
+  list.forEach(entry=>{
+    const paid=debtPaid(entry), balance=Math.max(0,Number(entry.amount)-paid), status=debtStatus(entry), pct=Math.min(100,Number(entry.amount)>0?paid/Number(entry.amount)*100:0);
+    const card=document.createElement('div'); card.className='debt-card';
+    const safeName=String(entry.name||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const safeNote=String(entry.note||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const statusText=status==='settled'?'PAID':status==='partial'?'PARTIAL':'UNPAID';
+    card.innerHTML=`<div class="debt-card-top"><div style="min-width:0"><div class="debt-person">${safeName}</div><div class="debt-date">Added ${entry.date||''}</div></div><span class="debt-status ${status}">${statusText}</span></div>
+      <div class="debt-amounts"><div><small>Debt</small><strong>${debtMoney(entry.amount)}</strong></div><div><small>Paid</small><strong>${debtMoney(paid)}</strong></div><div><small>Balance</small><strong>${debtMoney(balance)}</strong></div></div>
+      <div class="debt-progress"><span style="width:${pct}%"></span></div>
+      ${safeNote?`<div class="debt-note">${safeNote}</div>`:''}
+      <div class="debt-actions"><button class="btn-success" data-action="pay" data-id="${entry.id}" ${balance<=0?'disabled':''}>＋ Payment</button><button class="btn-outline" data-action="history" data-id="${entry.id}">History</button><button class="btn-outline" data-action="edit" data-id="${entry.id}">Edit</button><button class="btn-danger" data-action="delete" data-id="${entry.id}">Delete</button></div>
+      <div class="debt-history" data-history="${entry.id}" hidden></div>`;
+    debtListElement.appendChild(card);
+  });
+}
+function resetDebtForm(){ editingDebtId=null; debtForm.reset(); debtDateInput.value=debtToday(); document.getElementById('debtFormTitle').textContent='Add Debt Record'; document.getElementById('debtSaveBtn').textContent='＋ Save Debt'; document.getElementById('debtCancelEdit').style.display='none'; }
+debtDateInput.value=debtToday();
+function saveDebtRecord(){
+  const name=debtNameInput.value.trim(), amount=Number(debtAmountInput.value), date=debtDateInput.value;
+  if(!name || !Number.isFinite(amount) || amount<=0 || !date){ showErrorPopup('Please enter a name, valid amount and date.'); return; }
+  const wasEditing=Boolean(editingDebtId);
+  if(editingDebtId){
+    const entry=debtEntries.find(x=>x.id===editingDebtId); if(!entry){ showErrorPopup('Debt record could not be found.'); return; }
+    const alreadyPaid=debtPaid(entry); if(amount<alreadyPaid){ showErrorPopup('Debt amount cannot be lower than payments already received.'); return; }
+    entry.name=name; entry.amount=amount; entry.date=date; entry.note=debtNoteInput.value.trim();
+  } else {
+    debtEntries.push({id:`debt-${Date.now()}-${Math.random().toString(36).slice(2,7)}`,name,amount,date,note:debtNoteInput.value.trim(),payments:[],createdAt:new Date().toISOString()});
+  }
+  try { saveDebtEntries(); } catch(err) { showErrorPopup('Unable to save. Please check available device storage.'); return; }
+  resetDebtForm(); renderDebtList(); showSuccessPopup(wasEditing?'Debt record updated.':'Debt record saved.');
+}
+document.getElementById('debtSaveBtn').addEventListener('click',saveDebtRecord);
+debtForm.addEventListener('submit',e=>{ e.preventDefault(); saveDebtRecord(); });
+document.getElementById('debtCancelEdit').addEventListener('click',resetDebtForm);
+debtSearchInput.addEventListener('input',renderDebtList); debtFilterSelect.addEventListener('change',renderDebtList);
+debtListElement.addEventListener('click',e=>{
+  const btn=e.target.closest('button[data-action]'); if(!btn)return; const id=btn.dataset.id, action=btn.dataset.action, entry=debtEntries.find(x=>x.id===id); if(!entry)return;
+  if(action==='pay'){
+    openDebtPayment(entry);
+  } else if(action==='history'){
+    const box=btn.closest('.debt-card').querySelector(`[data-history="${id}"]`); if(box.hidden){ const payments=entry.payments||[]; box.innerHTML=payments.length?`<strong>Payment History</strong>${payments.map(p=>`<div class="debt-history-row"><span>${p.date||''}${p.note?' · '+String(p.note).replace(/[&<>]/g,''):''}</span><strong>${debtMoney(p.amount)}</strong></div>`).join('')}`:'No payments recorded yet.'; box.hidden=false; } else box.hidden=true;
+  } else if(action==='edit'){
+    editingDebtId=id; debtNameInput.value=entry.name; debtAmountInput.value=entry.amount; debtDateInput.value=entry.date; debtNoteInput.value=entry.note||''; document.getElementById('debtFormTitle').textContent='Edit Debt Record'; document.getElementById('debtSaveBtn').textContent='Save Changes'; document.getElementById('debtCancelEdit').style.display=''; document.getElementById('debtFormTitle').scrollIntoView({behavior:'smooth',block:'center'});
+  } else if(action==='delete'){
+    showDeletePopup(`Delete debt record for "${entry.name}" including its payment history?`,()=>{debtEntries=debtEntries.filter(x=>x.id!==id);saveDebtEntries();renderDebtList();if(editingDebtId===id)resetDebtForm();});
+  }
+});
+renderDebtList();
+
+// Backup / Restore
+document.getElementById('backupBtn').addEventListener('click', function() {
+  const backupData = {};
+  ['merchants', 'allItems', 'merchantItems', 'paidMerchants', 'records', 'cargoDebtEntries'].forEach(key => {
+    backupData[key] = JSON.parse(localStorage.getItem(key) || (key === 'merchants' || key === 'allItems' || key === 'cargoDebtEntries' ? '[]' : '{}'));
+  });
+  backupData.app = 'Cargo Records';
+  backupData.backupDate = new Date().toISOString();
+  const blob = new Blob([JSON.stringify(backupData, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `cargo-records-backup-${datePickerElement.value}.json`;
+  link.click();
+  URL.revokeObjectURL(url);
+  showSuccessPopup('Backup file exported successfully.');
+});
+document.getElementById('restoreBtn').addEventListener('click', () => document.getElementById('restoreFileInput').click());
+document.getElementById('restoreFileInput').addEventListener('change', function() {
+  const file = this.files && this.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      const required = ['merchants', 'allItems', 'merchantItems', 'paidMerchants', 'records'];
+      if (!data || !required.every(key => Object.prototype.hasOwnProperty.call(data, key))) {
+        throw new Error('This is not a valid Cargo Records backup.');
+      }
+      if (!confirm('Restore this backup? Current app data will be replaced.')) return;
+      required.forEach(key => localStorage.setItem(key, JSON.stringify(data[key])));
+      if (Array.isArray(data.cargoDebtEntries)) { debtEntries = data.cargoDebtEntries; saveDebtEntries(); renderDebtList(); }
+      merchants = data.merchants || [];
+      allItems = data.allItems || [];
+      merchantItems = data.merchantItems || {};
+      paidMerchants = data.paidMerchants || {};
+      records = data.records || {};
+      selectedMerchant = null;
+      selectedMerchantElement.textContent = '';
+      renderMerchantButtons();
+      renderItemButtons();
+      loadAllDataForDate(datePickerElement.value);
+      showSuccessPopup('Backup restored successfully.');
+    } catch (error) {
+      showErrorPopup(error.message || 'Unable to restore backup.');
+    } finally {
+      this.value = '';
+    }
+  };
+  reader.readAsText(file);
+});
+
+// Initialize
+renderMerchantButtons();
+renderItemButtons();
+loadAllDataForDate(datePickerElement.value);
+
+// Button click sound functionality
+(function(){
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  let ctx = null;
+
+  function ensureCtx() {
+    if (!ctx && AudioCtx) {
+      try {
+        ctx = new AudioCtx();
+      } catch (e) {
+        ctx = null;
+      }
+    }
+  }
+
+  function playClickSound() {
+    if (!AudioCtx) return;
+    ensureCtx();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+
+    // first short tone
+    const o1 = ctx.createOscillator();
+    const g1 = ctx.createGain();
+    o1.type = 'sine';
+    o1.frequency.setValueAtTime(1200, now);
+    g1.gain.setValueAtTime(0, now);
+    g1.gain.linearRampToValueAtTime(0.18, now + 0.001);
+    g1.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
+    o1.connect(g1).connect(ctx.destination);
+    o1.start(now);
+    o1.stop(now + 0.09);
+
+    // second short tone slightly later
+    const o2 = ctx.createOscillator();
+    const g2 = ctx.createGain();
+    o2.type = 'sine';
+    o2.frequency.setValueAtTime(900, now + 0.09);
+    g2.gain.setValueAtTime(0, now + 0.09);
+    g2.gain.linearRampToValueAtTime(0.16, now + 0.091);
+    g2.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+    o2.connect(g2).connect(ctx.destination);
+    o2.start(now + 0.09);
+    o2.stop(now + 0.18);
+  }
+
+  // Catch clicks on any <button> (including dynamically created ones)
+  document.addEventListener('click', function(e){
+    if (e.target.closest && e.target.closest('button')) {
+      // resume if suspended (required on some browsers)
+      if (ctx && ctx.state === 'suspended') {
+        ctx.resume().then(playClickSound).catch(playClickSound);
+      } else {
+        playClickSound();
+      }
+    }
+  }, true);
+})();
+</script>
+</body>
+</html>
