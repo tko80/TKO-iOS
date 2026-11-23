@@ -4192,7 +4192,7 @@ document.addEventListener('DOMContentLoaded', function () {
         margin: 0 5px;
     ">🏢 C-Wise</button>
     
-    <button onclick="showNotesPopup()" style="
+    <button onclick="showNotesPopup(event)" style="
         padding: 10px 15px;
         font-size: 14px;
         font-weight: bold;
@@ -6660,7 +6660,9 @@ display: none;
 // Date-based Notes System							
 let currentNotesDate = '';							
 							
-function showNotesPopup() {
+function showNotesPopup(event) {
+    // Prevent the opening click from bubbling to the document outside-click handler.
+    if (event) event.stopPropagation();
     const __menu = document.getElementById('menu-dropdown');
     if (__menu) __menu.style.display = 'none';							
 document.getElementById('notes-popup').style.display = 'flex';							
