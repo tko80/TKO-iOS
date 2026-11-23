@@ -14748,6 +14748,34 @@ button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 <!-- TKO Calculator button/open fix: isolated to calculator only -->
 
 
+
+<style id="tko-calculator-display-contrast-fix">
+/* Calculator display only: restore readable high-contrast iPhone-style screen */
+#calculator #calc-display,
+#calculator .tko-calc-display {
+  background: #1c1c1e !important;
+  background-color: #1c1c1e !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  caret-color: #ffffff !important;
+}
+#calculator .tko-calc-display-wrap {
+  background: #1c1c1e !important;
+  border: 0 !important;
+  border-radius: 14px !important;
+  margin: 8px 0 12px !important;
+}
+#calculator #calc-display::selection {
+  background: rgba(255,159,10,.35) !important;
+  color: #fff !important;
+}
+</style>
+
 <!-- TKO Calculator isolated open/close handler -->
 <script id="tko-calculator-open-close-stable">
 (function(){
