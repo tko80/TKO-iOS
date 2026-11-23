@@ -1571,41 +1571,21 @@ li {
 .top-buttons button:nth-child(2) { background-color: #007bff; color: white; } /* New Company */
 top-buttons button:nth-child(3) { background-color: #ffc107; color: black; } /* Notes */
 /* ✅ Save Notes & Back Button ကို တစ်တန်းတည်း row အနေနဲ့ ထားမယ် */
-.notes-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-}
+
 
 
 .notes-buttons button:nth-child(2):hover {
     background-color: #c82333; /* ✅ Hover Effect */
 }
 /* ✅ Shield Box (Popup) */
-.shield-box {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
+
 
 
 
 
 
 /* ✅ Navigation Buttons */
-.company-navigation {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}
+
 
 
 
@@ -2454,12 +2434,7 @@ body.dark-mode {
 }
 
 /* ✅ Calculator Buttons Grid */
-.calc-buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    width: 100%;
-}
+
 
 /* ✅ Individual Buttons */
 .calc-buttons button {
@@ -2555,36 +2530,24 @@ body.dark-mode {
     font-weight: bold;
 }
 /* ✅ Number Buttons */
-.num-btn {
-    background-color: #007bff;
-    color: white;
-}
+
 
 .num-btn:hover {
     background-color: #0056b3;
 }
 
 /* ✅ Operator Buttons (+ − × ÷) */
-.op-btn {
-    background-color: #ff9800;
-    color: white;
-}
+
 
 
 
 /* ✅ Equal Button (=) */
-.equal-btn {
-    background-color: #4caf50;
-    color: white;
-}
+
 
 
 
 /* ✅ Clear Button (C) */
-.clear-btn {
-    background-color: #f44336;
-    color: white;
-}
+
 
 
 .num-btn {
@@ -2721,11 +2684,7 @@ table th, table td {
     cursor: pointer;
 }
 
-.tab-active {
-    background: #007bff;
-    color: white;
-    border-radius: 4px;
-}
+
 
 .popup-buttons {
     margin-top: 10px;
@@ -6552,9 +6511,7 @@ label[for="town"] {
     letter-spacing: 1.2px !important;
 }
 
-.tko-voucher-heading span:last-child {
-    text-align: right !important;
-}
+
 
 .tko-voucher-list {
     padding: 0 34px !important;
