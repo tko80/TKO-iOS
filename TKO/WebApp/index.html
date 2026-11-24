@@ -13587,7 +13587,9 @@ button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
     try{
       const modal=document.getElementById('tkoStartupReminder');
       if(!modal) return;
-      if(sessionStorage.getItem('tkoStartupReminderShown')==='1') return;
+      // Show once for each fresh app/WebView load, not once per sessionStorage session.
+      // WKWebView may preserve sessionStorage across app launches/reloads.
+      if(window.__tkoStartupReminderShownThisLoad===true) return;
       let data={tasks:[]};
       try{ data=JSON.parse(localStorage.getItem('todoData')||'{"tasks":[]}'); }catch(e){}
       const tasks=Array.isArray(data.tasks)?data.tasks:[];
@@ -13600,7 +13602,7 @@ button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
       if(list) list.innerHTML=pending.map((t,i)=>'<div class="tko-reminder-item"><span class="tko-reminder-num">'+(i+1)+'.</span>'+escapeHtml(String(t.text||'To-Do'))+'</div>').join('');
       modal.style.display='flex';
       modal.setAttribute('aria-hidden','false');
-      sessionStorage.setItem('tkoStartupReminderShown','1');
+      window.__tkoStartupReminderShownThisLoad=true;
     }catch(e){ console.warn('Startup To-Do reminder:',e); }
   };
   window.closeTodoReminderOnStartup=function(){
