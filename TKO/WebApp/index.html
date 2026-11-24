@@ -13570,7 +13570,7 @@ button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
     </div>
     <div class="tko-reminder-footer">
       <button type="button" class="tko-reminder-later" onclick="closeTodoReminderOnStartup()">Later</button>
-      <button type="button" class="tko-reminder-open" onclick="openTodoFromStartupReminder()">📝 Open To-Do</button>
+      <button type="button" class="tko-reminder-open" onclick="event.stopPropagation(); openTodoFromStartupReminder()">📝 Open To-Do</button>
     </div>
   </div>
 </div>
