@@ -26,6 +26,7 @@ final class TKOWebViewController: UIViewController,
     private let speech = AVSpeechSynthesizer()
     private var pendingRestore = false
     private var hasShownLoadError = false
+    private let deliveryStore = DeliveryStore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,7 @@ final class TKOWebViewController: UIViewController,
         contentController.add(self, name: "tkoBackup")
         contentController.add(self, name: "tkoTTS")
         contentController.add(self, name: "tkoShare")
+        contentController.add(self, name: "tkoDeliveryNote")
 
         let bridge = WKUserScript(
             source: Self.bridgeScript,
@@ -238,9 +240,27 @@ final class TKOWebViewController: UIViewController,
         case "tkoShare":
             handleShare(body)
 
+        case "tkoDeliveryNote":
+            presentDeliveryNote()
+
         default:
             break
         }
+    }
+
+    // MARK: - Delivery Note
+
+    private func presentDeliveryNote() {
+        guard presentedViewController == nil else { return }
+        let deliveryView = RootView(onClose: { [weak self] in
+            self?.dismiss(animated: true)
+        })
+        .environmentObject(deliveryStore)
+        .preferredColorScheme(.light)
+
+        let hosting = UIHostingController(rootView: deliveryView)
+        hosting.modalPresentationStyle = .fullScreen
+        present(hosting, animated: true)
     }
 
     // MARK: - Backup & Restore
@@ -502,6 +522,12 @@ final class TKOWebViewController: UIViewController,
 
         }
       }
+
+      window.TKODeliveryNote = {
+        open: function() {
+          post('tkoDeliveryNote', {action: 'open'});
+        }
+      };
 
       window.AndroidBackup = {
 
