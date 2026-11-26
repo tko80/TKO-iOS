@@ -49,6 +49,7 @@ final class TKOWebViewController: UIViewController,
         contentController.add(self, name: "tkoTTS")
         contentController.add(self, name: "tkoShare")
         contentController.add(self, name: "tkoDeliveryNote")
+        contentController.add(self, name: "tkoAunglan")
 
         let bridge = WKUserScript(
             source: Self.bridgeScript,
@@ -243,6 +244,9 @@ final class TKOWebViewController: UIViewController,
         case "tkoDeliveryNote":
             presentDeliveryNote()
 
+        case "tkoAunglan":
+            presentAunglan()
+
         default:
             break
         }
@@ -259,6 +263,18 @@ final class TKOWebViewController: UIViewController,
         .preferredColorScheme(.light)
 
         let hosting = UIHostingController(rootView: deliveryView)
+        hosting.modalPresentationStyle = .fullScreen
+        present(hosting, animated: true)
+    }
+
+    // MARK: - Aunglan
+
+    private func presentAunglan() {
+        guard presentedViewController == nil else { return }
+        let screen = TKOAunglanScreen(onClose: { [weak self] in
+            self?.dismiss(animated: true)
+        })
+        let hosting = UIHostingController(rootView: screen)
         hosting.modalPresentationStyle = .fullScreen
         present(hosting, animated: true)
     }
@@ -526,6 +542,12 @@ final class TKOWebViewController: UIViewController,
       window.TKODeliveryNote = {
         open: function() {
           post('tkoDeliveryNote', {action: 'open'});
+        }
+      };
+
+      window.TKOAunglan = {
+        open: function() {
+          post('tkoAunglan', {action: 'open'});
         }
       };
 

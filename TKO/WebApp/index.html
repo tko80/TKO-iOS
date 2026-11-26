@@ -5718,6 +5718,7 @@ button:active {
     <button onclick="location.reload()" class="btn-refresh">🔄 Refresh</button>
     <button onclick="toggleEntries()" class="btn-entries">📝 Entries</button>
     <button onclick="toggleTotals()" class="btn-totals">🌈 Totals</button>
+    <button onclick="window.TKOAunglan && window.TKOAunglan.open()" class="btn-aunglan">📍 Update</button>
 </div>
 
 <style>
@@ -5776,6 +5777,13 @@ button:active {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
 }
 
+
+.btn-aunglan {
+    background: linear-gradient(135deg, #0f766e 0%, #0891b2 100%) !important;
+    color: #fff !important;
+    box-shadow: 0 3px 8px rgba(8, 145, 178, 0.28) !important;
+    min-width: 0 !important;
+}
 .btn-totals {
     background-color: orange !important;
     color: white !important;
