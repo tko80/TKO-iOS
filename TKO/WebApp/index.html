@@ -5718,7 +5718,6 @@ button:active {
     <button onclick="location.reload()" class="btn-refresh">🔄 Refresh</button>
     <button onclick="toggleEntries()" class="btn-entries">📝 Entries</button>
     <button onclick="toggleTotals()" class="btn-totals">🌈 Totals</button>
-    <button onclick="window.TKOAunglan && window.TKOAunglan.open()" class="btn-aunglan">📍 Update</button>
 </div>
 
 <style>
@@ -5802,11 +5801,58 @@ button:active {
 <div class="action-button-row" style="display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0;">
     <button onclick="copyDailyExcel()">Today</button>
     <button onclick="copyExcelFormattedText()">Monthly</button>
-    <button onclick="copyCompanySimple()">Company</button>
     <button onclick="copyTownDetailed()">Town</button>
 </div>
-<div style="display:flex;justify-content:center;margin:6px 0 12px;">
+<style id="tko-main-action-trio-style">
+.tko-main-action-trio{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  align-items:stretch;
+  width:100%;
+  margin:6px 0 12px;
+}
+.tko-main-action-trio button{
+  width:100%!important;
+  min-width:0!important;
+  height:42px!important;
+  min-height:42px!important;
+  padding:6px 5px!important;
+  margin:0!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  font-size:clamp(10px,2.8vw,14px)!important;
+  border:0!important;
+  border-radius:8px!important;
+  font-weight:700!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  box-sizing:border-box!important;
+}
+.tko-main-action-trio .tko-google-sheet-sync-btn{
+  background:linear-gradient(135deg,#18864b,#27ae60)!important;
+  color:#fff!important;
+}
+.tko-main-action-trio .btn-aunglan{
+  background:linear-gradient(135deg,#0f766e 0%,#0891b2 100%)!important;
+  color:#fff!important;
+}
+.tko-main-action-trio .tko-company-action-btn{
+  background:linear-gradient(135deg,#2563eb,#4f46e5)!important;
+  color:#fff!important;
+}
+@media(max-width:380px){
+  .tko-main-action-trio{gap:5px}
+  .tko-main-action-trio button{font-size:10px!important;padding:5px 2px!important}
+}
+</style>
+
+<div class="tko-main-action-trio">
     <button onclick="openGoogleSheetSyncModal()" class="tko-google-sheet-sync-btn">☁️ Google Sheet Sync</button>
+    <button onclick="window.TKOAunglan && window.TKOAunglan.open()" class="btn-aunglan">📍 Update</button>
+    <button onclick="copyCompanySimple()" class="tko-company-action-btn">Company</button>
 </div>
 
 <!-- ✅ Saved Entries Box -->
