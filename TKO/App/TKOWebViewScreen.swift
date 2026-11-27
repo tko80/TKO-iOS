@@ -37,6 +37,32 @@ final class TKOWebViewController: UIViewController,
 
         setupWebView()
         loadLocalApp()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(flushWebStorageBeforeBackground),
+            name: UIApplication.willResignActiveNotification,
+            object: nil
+        )
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc private func flushWebStorageBeforeBackground() {
+        guard webView != nil else { return }
+        let script = """
+        (function(){
+          var values={};
+          try { for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k!==null)values[k]=localStorage.getItem(k);} }
+          catch(e) { return null; }
+          return values;
+        })();
+        """
+        webView.evaluateJavaScript(script) { [weak self] result, error in
+            guard error == nil, let values = result as? [String: String] else { return }
+            self?.persistWebStorage(["action": "snapshot", "data": values])
+        }
     }
 
     // MARK: - WebView Setup
@@ -46,17 +72,26 @@ final class TKOWebViewController: UIViewController,
         let contentController = WKUserContentController()
 
         contentController.add(self, name: "tkoBackup")
+        contentController.add(self, name: "tkoStorage")
         contentController.add(self, name: "tkoTTS")
         contentController.add(self, name: "tkoShare")
         contentController.add(self, name: "tkoDeliveryNote")
         contentController.add(self, name: "tkoAunglan")
+
+        let storageBootstrap = WKUserScript(
+            source: storageBootstrapScript(),
+            injectionTime: .atDocumentStart,
+            // Apply to the main page and the Cargo Records srcdoc iframe too.
+            // Cargo saves in its own JavaScript frame and must reach native storage.
+            forMainFrameOnly: false
+        )
+        contentController.addUserScript(storageBootstrap)
 
         let bridge = WKUserScript(
             source: Self.bridgeScript,
             injectionTime: .atDocumentStart,
             forMainFrameOnly: true
         )
-
         contentController.addUserScript(bridge)
 
         let configuration = WKWebViewConfiguration()
@@ -234,6 +269,9 @@ final class TKOWebViewController: UIViewController,
         case "tkoBackup":
             handleBackup(body)
 
+        case "tkoStorage":
+            persistWebStorage(body)
+
         case "tkoTTS":
             let text = body["text"] as? String ?? ""
             speak(text)
@@ -279,6 +317,116 @@ final class TKOWebViewController: UIViewController,
         present(hosting, animated: true)
     }
 
+    // MARK: - Durable Web Storage
+
+    private let webStoragePrefix = "TKO.WebStorage."
+
+    /// File-backed mirror is more reliable for larger Cargo/TKO localStorage values
+    /// than relying on WebKit's file-URL storage database alone.
+    private var webStorageFileURL: URL {
+        let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        let directory = base.appendingPathComponent("TKO", isDirectory: true)
+        try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        return directory.appendingPathComponent("WebStorage.json")
+    }
+
+    private func loadDurableWebStorage() -> [String: String] {
+        if let data = try? Data(contentsOf: webStorageFileURL),
+           let values = try? JSONDecoder().decode([String: String].self, from: data) {
+            return values
+        }
+        // One-time compatibility migration from the previous UserDefaults mirror.
+        return UserDefaults.standard.dictionaryRepresentation().reduce(into: [String: String]()) { result, item in
+            guard item.key.hasPrefix(webStoragePrefix), let value = item.value as? String else { return }
+            result[String(item.key.dropFirst(webStoragePrefix.count))] = value
+        }
+    }
+
+    private func writeDurableWebStorage(_ values: [String: String]) {
+        do {
+            let data = try JSONEncoder().encode(values)
+            try data.write(to: webStorageFileURL, options: .atomic)
+            // Keep the legacy mirror in sync for compatibility with earlier builds.
+            let defaults = UserDefaults.standard
+            let existing = defaults.dictionaryRepresentation().keys.filter { $0.hasPrefix(webStoragePrefix) }
+            existing.forEach { defaults.removeObject(forKey: $0) }
+            values.forEach { defaults.set($0.value, forKey: webStoragePrefix + $0.key) }
+            defaults.synchronize()
+        } catch {
+            print("TKO durable storage write failed:", error.localizedDescription)
+        }
+    }
+
+    private func storageBootstrapScript() -> String {
+        let snapshot = loadDurableWebStorage()
+        let data = (try? JSONSerialization.data(withJSONObject: snapshot, options: [.fragmentsAllowed])) ?? Data("{}".utf8)
+        let json = (String(data: data, encoding: .utf8) ?? "{}").replacingOccurrences(of: "</", with: "<\\/")
+        return """
+        (function(){
+          try {
+            var nativeSnapshot = \(json);
+            var storage = window.localStorage;
+            Object.keys(nativeSnapshot).forEach(function(k){
+              try { storage.setItem(k, nativeSnapshot[k]); } catch(e) { console.warn('TKO storage restore key failed:', k, e); }
+            });
+            // Migrate existing WebKit localStorage keys not yet in the native mirror.
+            var migrated = {};
+            for (var i=0; i<storage.length; i++) {
+              var key=storage.key(i);
+              if (key !== null) {
+                var value=storage.getItem(key);
+                if (!Object.prototype.hasOwnProperty.call(nativeSnapshot,key)) migrated[key]=value;
+              }
+            }
+            if (Object.keys(migrated).length) {
+              try { window.webkit.messageHandlers.tkoStorage.postMessage({action:'merge',data:migrated}); } catch(e) {}
+            }
+            var proto=Storage.prototype;
+            if (proto.__tkoDurableWrapped) return;
+            var originalSet=proto.setItem, originalRemove=proto.removeItem, originalClear=proto.clear;
+            proto.setItem=function(k,v){
+              var result=originalSet.call(this,k,v);
+              try{window.webkit.messageHandlers.tkoStorage.postMessage({action:'set',key:String(k),value:String(v)});}catch(e){}
+              return result;
+            };
+            proto.removeItem=function(k){
+              var result=originalRemove.call(this,k);
+              try{window.webkit.messageHandlers.tkoStorage.postMessage({action:'remove',key:String(k)});}catch(e){}
+              return result;
+            };
+            proto.clear=function(){
+              var result=originalClear.call(this);
+              try{window.webkit.messageHandlers.tkoStorage.postMessage({action:'clear'});}catch(e){}
+              return result;
+            };
+            Object.defineProperty(proto,'__tkoDurableWrapped',{value:true});
+          } catch(e) { console.warn('TKO durable storage bootstrap:',e); }
+        })();
+        """
+    }
+
+    private func persistWebStorage(_ body: [String: Any]) {
+        let action = body["action"] as? String ?? ""
+        var values = loadDurableWebStorage()
+        switch action {
+        case "set":
+            guard let key = body["key"] as? String, let value = body["value"] as? String else { return }
+            values[key] = value
+        case "remove":
+            guard let key = body["key"] as? String else { return }
+            values.removeValue(forKey: key)
+        case "clear":
+            values.removeAll()
+        case "merge", "snapshot":
+            guard let incoming = body["data"] as? [String: String] else { return }
+            if action == "snapshot" { values = incoming }
+            else { incoming.forEach { values[$0.key] = $0.value } }
+        default:
+            return
+        }
+        writeDurableWebStorage(values)
+    }
+
     // MARK: - Backup & Restore
 
     private func handleBackup(_ body: [String: Any]) {
@@ -301,11 +449,15 @@ final class TKOWebViewController: UIViewController,
                 .appendingPathComponent(safeName)
 
             do {
-
-                try Data(json.utf8).write(
-                    to: url,
-                    options: .atomic
-                )
+                var completeJSON = json
+                if var payload = (try? JSONSerialization.jsonObject(with: Data(json.utf8))) as? [String: Any],
+                   let deliveryData = deliveryStore.backupData(),
+                   let deliveryObject = try? JSONSerialization.jsonObject(with: deliveryData) {
+                    payload["deliveryNote"] = deliveryObject
+                    let output = try JSONSerialization.data(withJSONObject: payload, options: [.prettyPrinted, .sortedKeys])
+                    completeJSON = String(data: output, encoding: .utf8) ?? json
+                }
+                try Data(completeJSON.utf8).write(to: url, options: .atomic)
 
                 let picker = UIDocumentPickerViewController(
                     forExporting: [url],
@@ -322,6 +474,15 @@ final class TKOWebViewController: UIViewController,
                 )
             }
 
+        } else if action == "restoreDeliveryNote" {
+            guard let deliveryObject = body["data"],
+                  JSONSerialization.isValidJSONObject(deliveryObject),
+                  let deliveryJSON = try? JSONSerialization.data(withJSONObject: deliveryObject),
+                  let deliveryBackup = try? JSONDecoder.backup.decode(DeliveryBackup.self, from: deliveryJSON) else {
+                showMessage("Restore Failed", "Delivery Note backup data is invalid.")
+                return
+            }
+            deliveryStore.restore(deliveryBackup)
         } else if action == "restore" {
 
             let picker = UIDocumentPickerViewController(
@@ -564,11 +725,11 @@ final class TKOWebViewController: UIViewController,
         },
 
         openRestoreFile: function() {
+          post('tkoBackup', { action: 'restore' });
+        },
 
-          post('tkoBackup', {
-            action: 'restore'
-          });
-
+        restoreDeliveryNote: function(data) {
+          post('tkoBackup', { action: 'restoreDeliveryNote', data: data || {} });
         }
       };
 

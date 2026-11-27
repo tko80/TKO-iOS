@@ -977,15 +977,6 @@ input:focus,select:focus,textarea:focus{border-color:#2698d8!important;box-shado
 <!-- Records will be displayed here -->
 </div>
 </div>
-<div class="card">
-<h2>Backup / Restore</h2>
-<p class="backup-help">Export your data to a JSON backup file, or restore a previous backup.</p>
-<div class="backup-actions">
-<button class="btn-success" id="backupBtn">💾 Backup</button>
-<button class="btn-warning" id="restoreBtn">📂 Restore</button>
-<input type="file" id="restoreFileInput" accept=".json,application/json" hidden>
-</div>
-</div>
 </div>
 </div>
 
@@ -2068,58 +2059,6 @@ debtListElement.addEventListener('click',e=>{
   }
 });
 renderDebtList();
-
-// Backup / Restore
-document.getElementById('backupBtn').addEventListener('click', function() {
-  const backupData = {};
-  ['merchants', 'allItems', 'merchantItems', 'paidMerchants', 'records', 'cargoDebtEntries'].forEach(key => {
-    backupData[key] = JSON.parse(localStorage.getItem(key) || (key === 'merchants' || key === 'allItems' || key === 'cargoDebtEntries' ? '[]' : '{}'));
-  });
-  backupData.app = 'Cargo Records';
-  backupData.backupDate = new Date().toISOString();
-  const blob = new Blob([JSON.stringify(backupData, null, 2)], {type:'application/json'});
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = `cargo-records-backup-${datePickerElement.value}.json`;
-  link.click();
-  URL.revokeObjectURL(url);
-  showSuccessPopup('Backup file exported successfully.');
-});
-document.getElementById('restoreBtn').addEventListener('click', () => document.getElementById('restoreFileInput').click());
-document.getElementById('restoreFileInput').addEventListener('change', function() {
-  const file = this.files && this.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = () => {
-    try {
-      const data = JSON.parse(reader.result);
-      const required = ['merchants', 'allItems', 'merchantItems', 'paidMerchants', 'records'];
-      if (!data || !required.every(key => Object.prototype.hasOwnProperty.call(data, key))) {
-        throw new Error('This is not a valid Cargo Records backup.');
-      }
-      if (!confirm('Restore this backup? Current app data will be replaced.')) return;
-      required.forEach(key => localStorage.setItem(key, JSON.stringify(data[key])));
-      if (Array.isArray(data.cargoDebtEntries)) { debtEntries = data.cargoDebtEntries; saveDebtEntries(); renderDebtList(); }
-      merchants = data.merchants || [];
-      allItems = data.allItems || [];
-      merchantItems = data.merchantItems || {};
-      paidMerchants = data.paidMerchants || {};
-      records = data.records || {};
-      selectedMerchant = null;
-      selectedMerchantElement.textContent = '';
-      renderMerchantButtons();
-      renderItemButtons();
-      loadAllDataForDate(datePickerElement.value);
-      showSuccessPopup('Backup restored successfully.');
-    } catch (error) {
-      showErrorPopup(error.message || 'Unable to restore backup.');
-    } finally {
-      this.value = '';
-    }
-  };
-  reader.readAsText(file);
-});
 
 // Initialize
 renderMerchantButtons();

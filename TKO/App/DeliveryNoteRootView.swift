@@ -1,7 +1,6 @@
 import SwiftUI
-import UniformTypeIdentifiers
 
-enum AppTab: String, CaseIterable { case create="New Note", history="History", backup="Backup" }
+enum AppTab: String, CaseIterable { case create="New Note", history="History" }
 struct RootView: View {
     var onClose: (() -> Void)? = nil
     @EnvironmentObject var store: DeliveryStore
@@ -13,8 +12,6 @@ struct RootView: View {
     @State private var strokes:[SignaturePad.Stroke]=[]
     @State private var editing:UUID?
     @State private var search=""
-    @State private var showImporter=false
-    @State private var exportURL:URL?
     @State private var selected:DeliveryRecord?
     @State private var alertText=""
     @State private var showAlert=false
@@ -28,7 +25,6 @@ struct RootView: View {
                         switch tab {
                         case .create: createView
                         case .history: historyView
-                        case .backup: backupView
                         }
                     }
                     .frame(maxWidth:760)
@@ -44,12 +40,6 @@ struct RootView: View {
         .ignoresSafeArea(.container,edges:.all)
         .ignoresSafeArea(.keyboard,edges:.bottom)
         .alert("DeliveryNote",isPresented:$showAlert){Button("OK",role:.cancel){} } message:{Text(alertText)}
-        .fileImporter(isPresented:$showImporter,allowedContentTypes:[.json]) { result in
-            do { let url=try result.get();let access=url.startAccessingSecurityScopedResource();defer{if access{url.stopAccessingSecurityScopedResource()}};let data=try Data(contentsOf:url);let b=try JSONDecoder.backup.decode(DeliveryBackup.self,from:data);store.restore(b);alert("Backup restored") } catch { alert("Could not read backup file") }
-        }
-        .fileExporter(isPresented:Binding(get:{exportURL != nil},set:{if !$0{exportURL=nil}}),document:BackupDocument(data:store.backupData() ?? Data()),contentType:.json,defaultFilename:"DeliveryNote-Backup") { result in
-            if case .success = result { alert("Backup exported") }
-        }
         .sheet(item:$selected){ record in RecordDetail(record:record,onEdit:{edit(record)},onDelete:{store.delete(record);selected=nil}) }
     }
     private var bottomNavigation: some View {
@@ -110,7 +100,7 @@ struct RootView: View {
         HStack(spacing:11){Image(systemName:symbol).font(.system(size:18,weight:.semibold)).frame(width:38,height:38).background(.white.opacity(0.16),in:RoundedRectangle(cornerRadius:12));VStack(alignment:.leading,spacing:2){Text(value).font(.system(size:21,weight:.bold,design:.rounded));Text(title).font(.system(size:9,weight:.bold)).tracking(1.1).opacity(0.8)};Spacer(minLength:0)}
             .padding(12).frame(maxWidth:.infinity,alignment:.leading).background(.white.opacity(0.13),in:RoundedRectangle(cornerRadius:16))
     }
-    private func icon(_ t:AppTab)->String { switch t {case .create:"square.and.pencil";case .history:"clock.arrow.circlepath";case .backup:"externaldrive"} }
+    private func icon(_ t:AppTab)->String { switch t {case .create:"square.and.pencil";case .history:"clock.arrow.circlepath"} }
     private var createView:some View {
         VStack(alignment:.leading,spacing:15) {
             sectionTitle(editing == nil ? "Create delivery note":"Edit delivery note","Fill in the details below")
@@ -142,12 +132,6 @@ struct RootView: View {
             ForEach(filtered){r in Button{selected=r}label:{HStack(spacing:12){Image(systemName:"doc.text.fill").font(.system(size:19)).foregroundStyle(.blue).frame(width:44,height:44).background(Color.blue.opacity(0.09),in:RoundedRectangle(cornerRadius:13));VStack(alignment:.leading,spacing:4){Text(r.receiver).font(.system(size:15,weight:.bold)).foregroundStyle(.primary);Text("\(r.items.count) item(s) • \(r.date.formatted(date:.abbreviated,time:.shortened))").font(.system(size:11)).foregroundStyle(.secondary)};Spacer();Image(systemName:"chevron.right").font(.caption.bold()).foregroundStyle(.tertiary)}.padding(14).background(.white,in:RoundedRectangle(cornerRadius:16))}.buttonStyle(.plain)}
         }.padding(18)
     }
-    private var backupView:some View {
-        VStack(alignment:.leading,spacing:15){sectionTitle("Backup & restore","Your records stay on this device")
-            VStack(alignment:.leading,spacing:12){Image(systemName:"externaldrive.badge.timemachine").font(.system(size:34)).foregroundStyle(.blue);Text("Manual backup").font(.headline);Text("Export all delivery notes and receiver signatures to a JSON file. Save it in the Files app or on your computer.").font(.caption).foregroundStyle(.secondary);Button{exportURL=FileManager.default.temporaryDirectory.appendingPathComponent("DeliveryNote-Backup.json")}label:{Label("Export backup file",systemImage:"square.and.arrow.up").frame(maxWidth:.infinity).padding(14).background(Color.blue,in:RoundedRectangle(cornerRadius:13)).foregroundStyle(.white).fontWeight(.bold)};Button{showImporter=true}label:{Label("Restore from backup",systemImage:"arrow.down.doc").frame(maxWidth:.infinity).padding(14).background(Color.blue.opacity(0.09),in:RoundedRectangle(cornerRadius:13)).foregroundStyle(.blue).fontWeight(.bold)}}.card()
-            VStack(alignment:.leading,spacing:8){Label("Privacy & offline",systemImage:"lock.shield.fill").font(.headline).foregroundStyle(.green);Text("No login and no cloud sync. Data is saved locally on this iPhone. Export backups regularly, especially before reinstalling the app.").font(.caption).foregroundStyle(.secondary)}.card()
-        }.padding(18)
-    }
     private var filtered:[DeliveryRecord] { store.records.filter{search.isEmpty || $0.receiver.localizedCaseInsensitiveContains(search) || $0.items.contains{$0.name.localizedCaseInsensitiveContains(search)}} }
     private func sectionTitle(_ title:String,_ subtitle:String)->some View{VStack(alignment:.leading,spacing:4){Text(title).font(.system(size:22,weight:.bold,design:.rounded));Text(subtitle).font(.system(size:12)).foregroundStyle(.secondary)}.frame(maxWidth:.infinity,alignment:.leading)}
     private func fieldLabel(_ text:String)->some View{Text(text).font(.system(size:10,weight:.bold)).tracking(1.3).foregroundStyle(Color(red:0.32,green:0.40,blue:0.54))}
@@ -166,5 +150,4 @@ struct RecordDetail:View {
 }
 struct SignaturePreview:View{let strokes:[SignaturePad.Stroke];var body:some View{Canvas{ctx,size in for s in strokes{guard let first=s.points.first else{continue};var p=Path();p.move(to:first.cg);for v in s.points.dropFirst(){p.addLine(to:v.cg)};ctx.stroke(p,with:.color(.black),style:StrokeStyle(lineWidth:2.4,lineCap:.round,lineJoin:.round))}}.background(.white).overlay(RoundedRectangle(cornerRadius:12).stroke(.gray.opacity(0.3)))}
 }
-struct BackupDocument:FileDocument{static var readableContentTypes:[UTType]{[.json]};var data:Data;init(data:Data){self.data=data};init(configuration:ReadConfiguration)throws{data=configuration.file.regularFileContents ?? Data()};func fileWrapper(configuration:WriteConfiguration)throws->FileWrapper{FileWrapper(regularFileWithContents:data)}}
 extension View{func card()->some View{padding(16).frame(maxWidth:.infinity,alignment:.leading).foregroundStyle(Color(red:0.10,green:0.15,blue:0.24)).background(.white,in:RoundedRectangle(cornerRadius:20)).overlay(RoundedRectangle(cornerRadius:20).stroke(Color.black.opacity(0.035),lineWidth:1)).shadow(color:.black.opacity(0.035),radius:12,y:5)}}

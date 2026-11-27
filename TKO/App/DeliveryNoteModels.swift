@@ -30,15 +30,15 @@ struct DeliveryBackup: Codable { var app = "DeliveryNote"; var version = 1; var 
     }
     func delete(_ record: DeliveryRecord) { records.removeAll{$0.id == record.id}; persist() }
     func restore(_ backup: DeliveryBackup) {
-        for record in backup.records {
-            if let i = records.firstIndex(where: {$0.id == record.id}) { records[i] = record }
-            else { records.append(record) }
-        }
-        records.sort{$0.date > $1.date}; persist()
+        records = backup.records.sorted { $0.date > $1.date }
+        persist()
     }
     func backupData() -> Data? { try? JSONEncoder.pretty.encode(DeliveryBackup(records:records)) }
     private func persist() {
-        if let data = try? JSONEncoder().encode(records) { UserDefaults.standard.set(data,forKey:key) }
+        if let data = try? JSONEncoder().encode(records) {
+            UserDefaults.standard.set(data, forKey: key)
+            UserDefaults.standard.synchronize()
+        }
     }
 }
 extension JSONEncoder {
