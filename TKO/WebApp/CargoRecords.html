@@ -977,6 +977,15 @@ input:focus,select:focus,textarea:focus{border-color:#2698d8!important;box-shado
 <!-- Records will be displayed here -->
 </div>
 </div>
+<div class="card">
+<h2>Backup / Restore</h2>
+<p class="backup-help">Export your data to a JSON backup file, or restore a previous backup.</p>
+<div class="backup-actions">
+<button class="btn-success" id="backupBtn">💾 Backup</button>
+<button class="btn-warning" id="restoreBtn">📂 Restore</button>
+<input type="file" id="restoreFileInput" accept=".json,application/json" hidden>
+</div>
+</div>
 </div>
 </div>
 
@@ -1555,6 +1564,34 @@ function updateRecordPaymentStatus(date, merchantName, isPaid) {
   loadRecordsForDate(date);
 }
 
+// Ensure a merchant who pays without purchasing items still appears on Dashboard.
+// Keep any existing items; create an empty-items record only when none exists.
+function ensureMerchantDashboardRecord(date, merchantName, isPaid) {
+  if (!merchantItems[date]) merchantItems[date] = {};
+  if (!Object.prototype.hasOwnProperty.call(merchantItems[date], merchantName)) {
+    merchantItems[date][merchantName] = [];
+  }
+  localStorage.setItem('merchantItems', JSON.stringify(merchantItems));
+
+  if (!records[date]) records[date] = [];
+  const existingIndex = records[date].findIndex(record => record.merchant === merchantName);
+  if (existingIndex >= 0) {
+    records[date][existingIndex].paid = !!isPaid;
+    records[date][existingIndex].timestamp = new Date().toISOString();
+    if (!Array.isArray(records[date][existingIndex].items)) {
+      records[date][existingIndex].items = merchantItems[date][merchantName] || [];
+    }
+  } else {
+    records[date].push({
+      merchant: merchantName,
+      items: merchantItems[date][merchantName] || [],
+      paid: !!isPaid,
+      timestamp: new Date().toISOString()
+    });
+  }
+  localStorage.setItem('records', JSON.stringify(records));
+}
+
 // Mark as paid
 markPaidBtn.addEventListener('click', function () {
 
@@ -1580,6 +1617,9 @@ markPaidBtn.addEventListener('click', function () {
       'paidMerchants',
       JSON.stringify(paidMerchants)
     );
+
+    // Save a name-only dashboard record when payment is received without items.
+    ensureMerchantDashboardRecord(currentDate, selectedMerchant, true);
 
     // Update records
     updateRecordPaymentStatus(
@@ -1637,6 +1677,9 @@ markUnpaidBtn.addEventListener('click', function () {
       'paidMerchants',
       JSON.stringify(paidMerchants)
     );
+
+    // Keep name-only dashboard entries visible even when no items were added.
+    ensureMerchantDashboardRecord(currentDate, selectedMerchant, false);
 
     // Update records
     updateRecordPaymentStatus(
@@ -2060,11 +2103,121 @@ debtListElement.addEventListener('click',e=>{
 });
 renderDebtList();
 
+// Backup / Restore
+document.getElementById('backupBtn').addEventListener('click', function() {
+  const backupData = {};
+  ['merchants', 'allItems', 'merchantItems', 'paidMerchants', 'records', 'cargoDebtEntries'].forEach(key => {
+    backupData[key] = JSON.parse(localStorage.getItem(key) || (key === 'merchants' || key === 'allItems' || key === 'cargoDebtEntries' ? '[]' : '{}'));
+  });
+  backupData.app = 'Cargo Records';
+  backupData.backupDate = new Date().toISOString();
+  const blob = new Blob([JSON.stringify(backupData, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `cargo-records-backup-${datePickerElement.value}.json`;
+  link.click();
+  URL.revokeObjectURL(url);
+  showSuccessPopup('Backup file exported successfully.');
+});
+document.getElementById('restoreBtn').addEventListener('click', () => document.getElementById('restoreFileInput').click());
+document.getElementById('restoreFileInput').addEventListener('change', function() {
+  const file = this.files && this.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      const required = ['merchants', 'allItems', 'merchantItems', 'paidMerchants', 'records'];
+      if (!data || !required.every(key => Object.prototype.hasOwnProperty.call(data, key))) {
+        throw new Error('This is not a valid Cargo Records backup.');
+      }
+      if (!confirm('Restore this backup? Current app data will be replaced.')) return;
+      required.forEach(key => localStorage.setItem(key, JSON.stringify(data[key])));
+      if (Array.isArray(data.cargoDebtEntries)) { debtEntries = data.cargoDebtEntries; saveDebtEntries(); renderDebtList(); }
+      merchants = data.merchants || [];
+      allItems = data.allItems || [];
+      merchantItems = data.merchantItems || {};
+      paidMerchants = data.paidMerchants || {};
+      records = data.records || {};
+      selectedMerchant = null;
+      selectedMerchantElement.textContent = '';
+      renderMerchantButtons();
+      renderItemButtons();
+      loadAllDataForDate(datePickerElement.value);
+      showSuccessPopup('Backup restored successfully.');
+    } catch (error) {
+      showErrorPopup(error.message || 'Unable to restore backup.');
+    } finally {
+      this.value = '';
+    }
+  };
+  reader.readAsText(file);
+});
+
 // Initialize
 renderMerchantButtons();
 renderItemButtons();
 loadAllDataForDate(datePickerElement.value);
 
+// Button click sound functionality
+(function(){
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  let ctx = null;
+
+  function ensureCtx() {
+    if (!ctx && AudioCtx) {
+      try {
+        ctx = new AudioCtx();
+      } catch (e) {
+        ctx = null;
+      }
+    }
+  }
+
+  function playClickSound() {
+    if (!AudioCtx) return;
+    ensureCtx();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+
+    // first short tone
+    const o1 = ctx.createOscillator();
+    const g1 = ctx.createGain();
+    o1.type = 'sine';
+    o1.frequency.setValueAtTime(1200, now);
+    g1.gain.setValueAtTime(0, now);
+    g1.gain.linearRampToValueAtTime(0.18, now + 0.001);
+    g1.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
+    o1.connect(g1).connect(ctx.destination);
+    o1.start(now);
+    o1.stop(now + 0.09);
+
+    // second short tone slightly later
+    const o2 = ctx.createOscillator();
+    const g2 = ctx.createGain();
+    o2.type = 'sine';
+    o2.frequency.setValueAtTime(900, now + 0.09);
+    g2.gain.setValueAtTime(0, now + 0.09);
+    g2.gain.linearRampToValueAtTime(0.16, now + 0.091);
+    g2.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+    o2.connect(g2).connect(ctx.destination);
+    o2.start(now + 0.09);
+    o2.stop(now + 0.18);
+  }
+
+  // Catch clicks on any <button> (including dynamically created ones)
+  document.addEventListener('click', function(e){
+    if (e.target.closest && e.target.closest('button')) {
+      // resume if suspended (required on some browsers)
+      if (ctx && ctx.state === 'suspended') {
+        ctx.resume().then(playClickSound).catch(playClickSound);
+      } else {
+        playClickSound();
+      }
+    }
+  }, true);
+})();
 </script>
 </body>
 </html>
