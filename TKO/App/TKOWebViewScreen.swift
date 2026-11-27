@@ -419,8 +419,10 @@ final class TKOWebViewController: UIViewController,
             values.removeAll()
         case "merge", "snapshot":
             guard let incoming = body["data"] as? [String: String] else { return }
-            if action == "snapshot" { values = incoming }
-            else { incoming.forEach { values[$0.key] = $0.value } }
+            // A lifecycle snapshot must never erase an already durable native copy.
+            // Merge incoming values instead; this protects data if WebKit returns
+            // a partial/empty snapshot while the app is transitioning to background.
+            incoming.forEach { values[$0.key] = $0.value }
         default:
             return
         }

@@ -32,6 +32,10 @@ private struct TKOAunglanWebView: UIViewRepresentable {
 
     func makeUIView(context: Context) -> WKWebView {
         let configuration = WKWebViewConfiguration()
+        // Keep Aunglan website storage isolated from TKO local-file WebView storage.
+        // This prevents the separately hosted Update page from sharing or affecting
+        // the persistent WebsiteDataStore used by TKO and Cargo Records.
+        configuration.websiteDataStore = .nonPersistent()
         configuration.allowsInlineMediaPlayback = true
 
         let webView = WKWebView(frame: .zero, configuration: configuration)
