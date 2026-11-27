@@ -5718,7 +5718,6 @@ button:active {
     <button onclick="location.reload()" class="btn-refresh">🔄 Refresh</button>
     <button onclick="toggleEntries()" class="btn-entries">📝 Entries</button>
     <button onclick="toggleTotals()" class="btn-totals">🌈 Totals</button>
-    <button onclick="window.TKOAunglan && window.TKOAunglan.open()" class="btn-aunglan">📍 Update</button>
 </div>
 
 <style>
@@ -5805,8 +5804,9 @@ button:active {
     <button onclick="copyCompanySimple()">Company</button>
     <button onclick="copyTownDetailed()">Town</button>
 </div>
-<div style="display:flex;justify-content:center;margin:6px 0 12px;">
+<div class="tko-main-action-trio" style="display:flex;align-items:center;gap:8px;width:100%;margin:6px 0 12px;">
     <button onclick="openGoogleSheetSyncModal()" class="tko-google-sheet-sync-btn">☁️ Google Sheet Sync</button>
+    <button onclick="window.TKOAunglan && window.TKOAunglan.open()" class="btn-aunglan">📍 Update</button>
 </div>
 
 <!-- ✅ Saved Entries Box -->
@@ -13912,7 +13912,9 @@ button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
     b.innerHTML='🔎 Company / Date';
     b.title='Search by Year → Month → Company Name → Date';
     b.onclick=window.tkoOpenCompanyMonthDateSearch;
-    syncBtn.insertAdjacentElement('afterend',b);
+    const updateBtn=syncBtn.parentElement && syncBtn.parentElement.querySelector('.btn-aunglan');
+    if(updateBtn) updateBtn.insertAdjacentElement('afterend',b);
+    else syncBtn.insertAdjacentElement('afterend',b);
   }
 
   function createModal(){
@@ -14674,3 +14676,20 @@ button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 })();
 </script>
 
+
+
+<style id="tko-main-three-button-row">
+/* Google Sheet Sync | Update | Company / Date — one equal-width row */
+.tko-main-action-trio{display:flex!important;flex-wrap:nowrap!important;align-items:stretch!important;gap:7px!important;width:100%!important;}
+.tko-main-action-trio .tko-google-sheet-sync-btn,
+.tko-main-action-trio .btn-aunglan,
+.tko-main-action-trio .tko-company-date-search-btn{
+  display:flex!important;flex:1 1 0!important;min-width:0!important;max-width:none!important;
+  width:0!important;height:42px!important;min-height:42px!important;
+  margin:0!important;padding:6px 3px!important;box-sizing:border-box!important;
+  align-items:center!important;justify-content:center!important;
+  text-align:center!important;white-space:nowrap!important;
+  overflow:hidden!important;text-overflow:ellipsis!important;
+  font-size:clamp(9px,2.8vw,12px)!important;line-height:1.1!important;
+}
+</style>
